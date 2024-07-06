@@ -324,7 +324,8 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #47D3E5;
+			color: #2114ccd2;
+			font-weight: 400;
 		}
 
 	strong, b {
@@ -7117,7 +7118,7 @@ input, select, textarea {
 			-ms-transition: opacity 0.25s ease;
 			transition: opacity 0.25s ease;
 			-moz-transition-delay: 0.5s;
-			-webkit-transition-delay: 0.5s;
+			-webkit-transition-delay: 0.5s
 			-ms-transition-delay: 0.5s;
 			transition-delay: 0.5s;
 			content: '';
@@ -8729,4 +8730,158 @@ footer p {
 /* Optional: Add some padding to make the text look better */
 footer {
     padding: 1em 10px;
+}
+
+
+/* Cards CSS*/
+
+.cards {
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    max-width: 100%;
+	background-color: #ffffff;
+	height: 90%;
+}
+.card--1 .card__img, .card--1 .card__img--hover {
+    background-image: url('../../images/Projects/StudentDataViz/Finals1.jpeg');
+}
+
+.card--2 .card__img, .card--2 .card__img--hover {
+    background-image: url('../../images/Projects/ChurnPrevention/Cover1.png');
+	position: center;
+}
+
+.card--3 .card__img, .card--3 .card__img--hover {
+    background-image: url('../../images/StudentDataViz/Finals3.jpeg');
+}
+
+.card__like {
+    width: 18px;
+}
+
+.card__clock {
+    width: 15px;
+  vertical-align: middle;
+    fill: #AD7D52;
+}
+.card__time {
+    font-size: 12px;
+    color: #AD7D52;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.card__clock-info {
+    float: right;
+}
+
+.card__img {
+  visibility: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 235px;
+  border-top-left-radius: 12px;
+border-top-right-radius: 12px;
+  
+}
+
+.card__info-hover {
+    position: absolute;
+    padding: 16px;
+  width: 100%;
+  opacity: 0;
+  top: 0;
+}
+
+.card__img--hover {
+  transition: 0.2s all ease-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+  position: absolute;
+    height: 235px;
+  border-top-left-radius: 12px;
+border-top-right-radius: 12px;
+top: 0;
+  
+}
+.card {
+  margin-right: 50px;
+  transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+  background-color: #ffffff;
+    width: 200px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+}
+.card:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
+    transform: scale(1.10, 1.10);
+}
+
+.card__info {
+z-index: 2;
+  background-color: #fff;
+  border-bottom-left-radius: 12px;
+border-bottom-right-radius: 12px;
+   padding: 16px 24px 24px 24px;
+}
+
+.card__category {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+  color: #868686;
+}
+
+.card__title {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.card__by {
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+.card__author {
+    font-weight: 600;
+	font-size: 9pt;
+    text-decoration: none;
+    color: #AD7D52;
+}
+
+.card:hover .card__img--hover {
+    height: 100%;
+    opacity: 0.3;
+}
+
+.card:hover .card__info {
+    background-color: transparent;
+    position: relative;
+}
+
+.card:hover .card__info-hover {
+    opacity: 1;
+}
+	.cards.style1 {
+		padding: 2rem 3.5rem 2rem 3.5rem ;
+		background-color: #dce7a9cc;
+		border-radius: 1rem;
+		margin: 0 auto;
+		max-width: 100%;
+		position: relative;
+		width: 95%;
+		z-index: 1;
 }
