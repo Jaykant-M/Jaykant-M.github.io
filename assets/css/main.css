@@ -25,6 +25,7 @@ section, summary, time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;}
 
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
@@ -274,6 +275,18 @@ input, select, textarea {
 		border-bottom: solid 1px;
 		margin: 2.5rem 0;
 	}
+	
+	div.name{
+            color: rgb(255, 255, 255);
+			width: 20%;
+            font-size: 20px;
+			float: left;
+			padding-left: 20px;
+			font-weight: 700;
+			font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+			
+        }
+         
 
 		hr.major {
 			margin: 3.5rem 0;
@@ -2881,6 +2894,7 @@ input, select, textarea {
 		cursor: default;
 		list-style: none;
 		padding-left: 0;
+		padding-top: 8px;
 	}
 
 		ul.icons li {
@@ -8629,6 +8643,8 @@ body {
     margin: 2 auto;
 }
 
+
+
 /* Top Navigation Bar */
 .top-nav {
     background-color: #333;
@@ -8637,12 +8653,16 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 0.5em 0;
+	padding-top: 10px;
+	padding: 10px;
+    float: right;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .top-nav .container {
     display: flex;
+	padding-right: 20px;
+	width: 80%;
     justify-content: right;
 }
 
@@ -8877,7 +8897,7 @@ border-bottom-right-radius: 12px;
 }
 	.cards.style1 {
 		padding: 2rem 3.5rem 2rem 3.5rem ;
-		background-color: #dce7a9cc;
+		background-color: #cdd3c9;
 		border-radius: 1rem;
 		margin: 0 auto;
 		max-width: 100%;
