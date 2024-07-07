@@ -2630,14 +2630,14 @@ input, select, textarea {
 	}
 
 	a.icon.style2:hover:before {
-		box-shadow: inset 0 0 0 1px #47D3E5;
-		color: #47D3E5;
+		box-shadow: inset 0 0 0 1px #310bd8d2;
+		color: #310bd8d2;
 	}
 
 	a.icon.style2:active:before {
 		background-color: rgba(71, 211, 229, 0.1);
-		box-shadow: inset 0 0 0 1px #47D3E5;
-		color: #47D3E5;
+		box-shadow: inset 0 0 0 1px #310bd8d2;
+		color: #310bd8d2;
 	}
 
 /* Image */
@@ -2691,9 +2691,21 @@ input, select, textarea {
 			width: 100%;
 		}
 
-			.image.main img {
-				width: 100%;
-			}
+		.image.main img {
+			width: 100%;
+		}
+		
+		.image-container {
+			width: 100%; /* Adjust width as needed */
+			height: 300px; /* Adjust height as needed */
+			overflow: hidden; /* Ensures the image does not overflow the container */
+		}
+		
+		.image-container img {
+			width: 100%; /* Ensures the image takes up 100% of the container's width */
+			height: auto; /* Allows the image to scale proportionally */
+			display: block; /* Ensures the image behaves like a block element */
+		}
 
 /* List */
 
@@ -5085,15 +5097,15 @@ input, select, textarea {
 				-ms-object-position: center;
 				object-position: center;
 				display: block;
-				width: 100%;
-				height: 100%;
+				width: 20%;
+				height: 20%;
 				border-radius: 100%;
 			}
 
 		@media screen and (max-width: 1680px) {
 
 			.spotlight.style2 {
-				padding: 5rem 5rem 3rem 5rem ;
+				padding: 0rem 2rem 0rem 3rem ;
 			}
 
 		}
@@ -8905,3 +8917,59 @@ border-bottom-right-radius: 12px;
 		width: 95%;
 		z-index: 1;
 }
+
+
+/* tableauPlaceholder */
+.tableauPlaceholder {
+    width: 100%;
+	height: 975px;
+    height: auto;
+    position: relative;
+}
+
+.tableauPlaceholder object {
+    width: 100%;
+    height: 100%;
+    min-width: 100%; /* Ensures the object takes up full width in smaller containers */
+    max-width: 100%; /* Ensures the object does not exceed container width */
+}
+
+/* Project head*/
+
+.projecthead.left {
+	display: flex;
+	justify-content: left;
+    background-color: #e5dcdc63;
+    color: rgb(0, 0, 0);
+    position: relative;
+    top: 78px;
+	height: 320px;
+    width: 25%;
+    z-index: 10;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding: 20px;
+	float: left;
+}
+
+.projecthead.right {
+	display: flex;
+	justify-content: left;
+    background-color: #e5dcdc63;
+    color: rgb(0, 0, 0);
+    position: relative;
+    top: 78px;
+	height: 320px;
+    width: 75%;
+    z-index: 10;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding: 20px;
+	float: right;
+}
+
+div.topbanner{
+	height: 400px;
+	width: 100%;
+}
+
