@@ -13,7 +13,7 @@ pre, a, abbr, acronym, address, big, cite,
 code, del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b,
 u, i, center, dl, dt, dd, ol, ul, li, fieldset,
-form, label, legend, table, caption, tbody,
+form, label, legend, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
@@ -49,7 +49,9 @@ blockquote, q {
 
 table {
 	border-collapse: collapse;
-	border-spacing: 0;
+	border-spacing: 9%;
+	align-content: center;
+	border-width: 3%;
 }
 
 body {
@@ -189,7 +191,7 @@ input, select, textarea {
 	}
 
 		p.major {
-			font-size: 1.25rem;
+			font-size: 1rem;
 		}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -275,17 +277,6 @@ input, select, textarea {
 		border-bottom: solid 1px;
 		margin: 2.5rem 0;
 	}
-	
-	div.name{
-            color: rgb(255, 255, 255);
-			width: 20%;
-            font-size: 20px;
-			float: left;
-			padding-left: 20px;
-			font-weight: 700;
-			font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-			
-        }
          
 
 		hr.major {
@@ -3037,7 +3028,9 @@ input, select, textarea {
 		}
 
 	table th {
-		color: #000000;
+		color: #ffffff;
+		align-content: center;
+    text-align: center;
 	}
 
 	table thead {
@@ -4889,7 +4882,7 @@ input, select, textarea {
 	}
 
 		.spotlight.style1 .content {
-			padding: 7rem 7rem 5rem 7rem ;
+			padding: 1rem 1rem 1rem 1rem ;
 			-moz-align-self: center;
 			-webkit-align-self: center;
 			-ms-align-self: center;
@@ -5045,7 +5038,7 @@ input, select, textarea {
 /* Spotlight (style2) */
 
 	.spotlight.style2 {
-		padding: 7rem 7rem 5rem 7rem ;
+		padding: 1rem 3rem 1rem 3rem ;
 		-moz-align-items: center;
 		-webkit-align-items: center;
 		-ms-align-items: center;
@@ -8664,18 +8657,46 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+	height: 65px;
     z-index: 1000;
-	padding-top: 10px;
+	padding-top: 3px;
 	padding: 10px;
     float: right;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+div.name{
+	display: flex;
+	color: rgb(255, 255, 255);
+	width: 30%;
+	height: 80%;
+	font-size: 20px;
+	float: left;
+	padding-left: 20px;
+	padding-top: 3px;
+	font-weight: 700;
+	font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	
+}
+div.carousel{
+	display: flex;
+	color: rgb(255, 255, 255);
+	width: 50%;
+	font-size: 20px;
+	float: center;
+	padding-left: 20px;
+	padding-top: 3px;
+	font-weight: 700;
+	font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	
+}
 .top-nav .container {
     display: flex;
+	float: right;
 	padding-right: 20px;
-	width: 80%;
+	width: 20%;
     justify-content: right;
+	font-weight: 700;
+	font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .nav-links {
@@ -8692,13 +8713,33 @@ body {
     color: white;
     text-decoration: none;
     font-size: 1em;
-    padding: 0.5em 1em;
+    padding: 0.5em ;
     border-radius: 5px;
-    transition: background-color 0.3s;
+	font-weight: 700;
+	font-family: sans-serif,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: background-color 0.9s;
 }
 
 .nav-links a:hover {
-    background-color: #575757;
+    background-color: #cfcfcfbe;
+}
+.carousel {
+    position: relative;
+    height: 5px; /* Adjust based on your content */
+}
+
+.carousel-item {
+    display: none;
+	align-items: left;
+	align-content: center;
+    font-size: 1em;
+	color: white;
+	padding-left: 1%;
+    margin: 1px 0;
+}
+
+.carousel-item.active {
+    display: block;
 }
 
 /* Header styles */
@@ -8720,7 +8761,7 @@ main {
 }
 
 section {
-    margin-bottom: 2em;
+    margin-bottom: 0.1em;
 }
 
 h2 {
@@ -8939,37 +8980,331 @@ border-bottom-right-radius: 12px;
 .projecthead.left {
 	display: flex;
 	justify-content: left;
-    background-color: #e5dcdc63;
+    background-color: aliceblue;
     color: rgb(0, 0, 0);
     position: relative;
-    top: 78px;
-	height: 320px;
+	height: 350px;
     width: 25%;
     z-index: 10;
 	padding-top: 10px;
-	padding-bottom: 10px;
-	padding: 20px;
 	float: left;
 }
 
 .projecthead.right {
 	display: flex;
 	justify-content: left;
-    background-color: #e5dcdc63;
+    background-color: aliceblue;
     color: rgb(0, 0, 0);
     position: relative;
-    top: 78px;
-	height: 320px;
+	height: 350px;
     width: 75%;
     z-index: 10;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding: 20px;
 	float: right;
 }
 
 div.topbanner{
-	height: 400px;
+	height: 450px;
 	width: 100%;
 }
 
+/* About Me Section */
+#about .about-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    background-image: url('../../images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#about .about-content {
+    flex: 1;
+    padding: 1em;
+}
+
+#about .about-text-box {
+    background: rgba(255, 255, 255, 0.8); /* Transparent background */
+    padding: 1em;
+	max-width: 95%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about .about-image-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+#about .about-image-box img {
+    border: 5px solid #ffffff;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about .about-image-box1 img {
+    border: 5px solid #ffffff;
+    border-radius: 10px;
+    max-width: 60%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#about .inner {
+    margin-top: 1em;
+}
+
+#about .icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+#about .icons li {
+    margin: 0 0.5em;
+}
+
+#about .icons li a {
+    color: #333;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+#about .icons li a:hover {
+    color: #007bff;
+}
+
+#about .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+
+.about-me-section {
+    text-align: center;
+    margin: 50px;
+}
+
+#top-banner {
+	position: relative;
+	width: 100%;
+	height: 100%; /* Adjust height as needed */
+	overflow: hidden;
+	padding-top: 60px;
+}
+.about-image-box img {
+	width: 65%;
+	height: 60%;
+	display: block;
+}
+.projecthead {
+	position: absolute;
+	top: 75%;
+	width: 60%;
+	background: rgba(255, 255, 255, 0.884);
+	text-align: center;
+	padding: 10px 0;
+}
+
+/*Project*/
+/* main.css */
+
+/* main.css */
+
+.container-project {
+    display: flex;  /* Enables flexbox layout */
+    justify-content: space-between; /* Distributes space between the children */
+    align-items: center; /* Aligns children vertically in the middle */
+    padding: 20px; /* Adds some padding around the container */
+}
+
+.box-project {
+    flex: 1;  /* Each box will take up equal space */
+    margin: 10px; /* Adds some space around each box */
+}
+
+.image-box-project {
+    display: flex;
+	height: auto;
+	width: 40%;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.image-box img {
+    max-width: 100%; /* Ensures the image is responsive and does not overflow its container */
+    height: auto; /* Keeps the image aspect ratio intact */
+}
+
+.content-box-project {
+    padding: 20px; /* Adds padding inside the content box for spacing */
+    text-align: left; /* Aligns text to the left */
+}
+
+.info-section {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.info-container {
+    display: flex;
+	width: 50%;
+    flex-direction: column;
+}
+.info-container-right {
+    display: flex;
+	width: 50%;
+    flex-direction: column;
+}
+
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info-item img {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    margin-right: 20px;
+}
+
+.info-item p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.project-left-content
+{width: 85%;
+	text-align: justify;
+}
+.project-right-content
+{width: 85%;
+	text-align: justify;
+	align-items: center;
+}
+
+body {
+	font-family: Arial, sans-serif;
+}
+table-project {
+	width: 100%;
+	border-collapse: collapse;
+}
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+th {
+	background-color: #000;
+	color: white;
+}
+td.advantage {
+	background-color: #d4edda;
+}
+td.disadvantage {
+	background-color: #f8d7da;
+}
+
+.main-section {
+	width: 100%;	
+    padding: 0% 2% 0% 2%;
+}
+
+.main-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-div{
+    flex: 1;
+    max-width: 45%;
+    box-sizing: border-box;
+    padding: 0% 1% 0% 1%;
+	text-align: justify;
+}
+.right-div {
+    flex: 1;
+    max-width: 55%;
+    box-sizing: border-box;
+    padding: 0% 1% 0% 1%;
+	text-align: justify;
+}
+.left-div1{
+    flex: 1;
+    max-width: 30%;
+    box-sizing: border-box;
+    padding: 10% 1% 0% 1%;
+	text-align: justify;
+}
+.right-div1 {
+    flex: 1;
+    max-width: 70%;
+    box-sizing: border-box;
+    padding: 0% 1% 0% 1%;
+	text-align: justify;
+}
+
+.responsive-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.quote-box {
+    background-color: rgb(255, 255, 255);
+    padding: 1% 0% 1% 0%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.quote-box.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.color-block {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+}
+
+.content-div {
+	flex: 1 1 70%;
+	max-width: 70%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 8px;
+}
+.list-item {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+.list-item img {
+	width: 100px;
+	height: 100px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
