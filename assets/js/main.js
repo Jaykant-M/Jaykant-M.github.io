@@ -354,3 +354,30 @@ document.addEventListener('DOMContentLoaded', () => {
     items[currentIndex].classList.add('active');
     setInterval(showNextItem, 3000); // Change item every 3 seconds
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const quoteBoxes = document.querySelectorAll('.quote-box');
+
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function handleScroll() {
+        quoteBoxes.forEach(quoteBox => {
+            if (isInViewport(quoteBox)) {
+                quoteBox.classList.add('visible');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger the scroll handler once to check the initial position
+});
+
+
