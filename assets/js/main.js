@@ -95,6 +95,7 @@
 
 				})();
 
+				
 	// Smooth scroll.
 		$('.smooth-scroll').scrolly();
 		$('.smooth-scroll-middle').scrolly({ anchor: 'middle' });
@@ -379,5 +380,11 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Trigger the scroll handler once to check the initial position
 });
+
+function resetZoom() {
+    document.body.style.zoom = "100%";
+}
+
+window.onload = resetZoom;
 
 
