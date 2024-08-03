@@ -8612,9 +8612,6 @@ input, select, textarea {
 			background-color: #6ba78c;
 		}
 
-		#wrapper.divided > * {
-			box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.075);
-		}
 
 			#wrapper.divided > *:first-child {
 				box-shadow: none !important;
@@ -9329,4 +9326,220 @@ img {
 	height: 100px;
 	margin-right: 10px;
 	border-radius: 50%;
+}
+.imgbox {
+	width: 130%;
+	height: auto;
+	display: block;
+	border-radius: 8px;
+}
+
+/* Timeline*/
+
+.timeline-container {
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    height: 400px;
+	
+    width: 100%;
+    white-space: nowrap;
+    position: relative;
+}
+
+.timeline {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: max-content;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 5%;
+	right: 5%;
+    width: 90%;
+    height: 2px;
+    z-index: 0;
+    background-color: #000000;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 4.75s ease;
+}
+
+.timeline-item {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 40px;
+    opacity: 0;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.timeline-item.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.timeline-item .content {
+    background-color: #fff;
+    padding: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 150px;
+}
+
+
+.timeline-item .imagebox {
+    position: relative;
+    width: 140px;
+    height: 100px;
+    background-color: #ffffff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 175px;
+    z-index: 1;
+}
+.timeline-item .imageboxtop {
+    position: relative;
+	top: 10%;
+    width: 140px;
+    height: 100px;
+    background-color: #ffffff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 200px;
+    z-index: 1;
+}
+.timeline-item .imageboxbottom {
+    position: relative;
+    width: 140px;
+    height: 100px;
+    background-color: #ffffff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+    z-index: 1;
+}
+
+
+
+
+.timeline-item .square {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.timeline-container.scrolled .timeline::before {
+    transform: scaleX(1);
+}
+
+/* Flex container for side-by-side layout */
+.content-tab {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    margin: 20px 0;
+}
+
+/* 30% width for the image container */
+.timeline-image {
+    flex: 0 0 30%;
+    max-width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px; /* Space between image and content */
+}
+
+/* Ensure the image fits well within its container */
+.timeline-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover; /* Ensure the image covers the container proportionally */
+}
+
+/* 70% width for the content */
+.timeline-content {
+    flex: 0 0 70%;
+    max-width: 70%;
+}
+
+/* Additional styling for content */
+.timeline-content h2,
+.timeline-content h3,
+.timeline-content h4,
+.timeline-content p {
+    margin: 0;
+}
+
+.timeline-content h2 {
+    margin-bottom: 10px;
+}
+
+.timeline-content h3 {
+    margin-bottom: 5px;
+}
+
+.timeline-content h4 {
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+
+
+
+/* Existing styles... */
+
+.content-tab {
+    display: none;
+}
+
+#dynamic-content {
+    margin-top: 5px;
+    padding: 2%;
+    border-top: 2px solid #000000;
+	
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#dynamic-content h2, #dynamic-content h4 {
+    margin: 0;
+    color: #333;
+}
+
+#dynamic-content h4 {
+    margin-top: 5px;
+    color: #000000;
+}
+
+#dynamic-content p {
+    margin-top: 10px;
+    line-height: 1.6;
 }
