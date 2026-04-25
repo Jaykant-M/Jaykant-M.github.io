@@ -9030,6 +9030,11 @@ div.topbanner{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+#about .about-text-box p {
+	margin-bottom: 1.1rem;
+	line-height: 1.65;
+  }
+
 #about .about-image-box {
     flex: 1;
     display: flex;
@@ -9217,6 +9222,7 @@ div.topbanner{
 body {
 	font-family: Arial, sans-serif;
 }
+
 table-project {
 	width: 100%;
 	border-collapse: collapse;
