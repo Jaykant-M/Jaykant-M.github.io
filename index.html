@@ -1,622 +1,1135 @@
-<!DOCTYPE HTML>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Portfolio - Jaykant Mendapara</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaykant Mendapara – Data Analyst</title>
 
-	<!-- Google Tag Manager -->
-	<script>(function (w, d, s, l, i) {
-			w[l] = w[l] || []; w[l].push({
-				'gtm.start':
-					new Date().getTime(), event: 'gtm.js'
-			}); var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-TF3V8RN');</script>
-	<!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
 
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-V54TXLXLMD"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-		gtag('config', 'G-V54TXLXLMD');
-	</script>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --dark:       #0d1117;
+      --dark-card:  #161b22;
+      --dark-border:#21262d;
+      --accent:     #3b82f6;
+      --accent-soft:#1d4ed8;
+      --light-bg:   #f9fafb;
+      --light-card: #ffffff;
+      --text-light: #f0f6fc;
+      --text-muted: #8b949e;
+      --text-dark:  #111827;
+      --text-gray:  #4b5563;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg:  0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    /* ─── Nav ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+
+    .nav-brand {
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-light);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ─── Intro viewport wrapper ───────────────────────────────── */
+    .intro-viewport {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .intro-viewport #about {
+      flex: 1;
+    }
+
+    /* ─── Hero / About ─────────────────────────────────────────── */
+    #about {
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      padding: 90px 0.5rem 3rem;
+    }
+
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--text-light);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-text .role {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text .bio {
+      color: #9ca3af;
+      font-size: 1.2rem;
+      line-height: 1.75;
+      max-width: 750px;
+    }
+
+    .hero-text .bio + .bio {
+      margin-top: 0.75rem;
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--dark-border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .social-link:hover {
+      color: var(--text-light);
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.08);
+    }
+
+    .hero-photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .hero-photo-wrap img {
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 8px rgba(59,130,246,0.15);
+    }
+
+    /* ─── Quote banner ─────────────────────────────────────────── */
+    .quote-banner {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .quote-banner blockquote {
+      max-width: 80%;
+      margin: 0 auto;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: #9ca3af;
+      line-height: 1.7;
+    }
+
+    /* ─── Section Shell ────────────────────────────────────────── */
+    .section {
+      padding: 4rem 0.5rem;
+    }
+
+    .section--dark {
+      background: var(--dark);
+      border-top: 1px solid var(--dark-border);
+    }
+
+    .section--light {
+      background: var(--light-bg);
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .section-inner {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
+
+    .section--dark .section-title { color: var(--text-light); }
+    .section--light .section-title { color: var(--text-dark); }
+
+    /* ─── Timeline ─────────────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding: 1rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--dark-border);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 0 0 2.5rem 0;
+      position: relative;
+    }
+
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--dark-card);
+      border: 2px solid var(--dark-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.2s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      border-color: var(--accent);
+    }
+
+    .timeline-dot img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .timeline-body {
+      flex: 1;
+      padding-top: 0.35rem;
+    }
+
+    /* ─── Experience Cards ─────────────────────────────────────── */
+    .exp-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .exp-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .exp-logo-panel {
+      flex-shrink: 0;
+      width: 150px;
+      height: 150px;
+      align-self: center;
+      background: #ffffff;
+      border-radius: 8px;
+      margin: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .exp-logo-panel img {
+      width: 100%;
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .exp-content {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exp-meta { margin-bottom: 0.85rem; }
+
+    .exp-meta .exp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-meta h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .exp-meta .location {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .exp-meta .role {
+      font-size: 1.05rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .exp-meta .date {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .exp-body {
+      color: #9ca3af;
+      font-size: 1rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .exp-body p + p { margin-top: 0.6rem; }
+
+    .exp-body strong {
+      color: #c9d1d9;
+      font-weight: 500;
+    }
+
+    /* ─── Education Cards ──────────────────────────────────────── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 1.25rem;
+    }
+
+    .edu-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      display: flex;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .edu-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .edu-logo-panel {
+      flex-shrink: 0;
+      width: 150px;
+      height: 150px;
+      align-self: center;
+      background: #ffffff;
+      border-radius: 8px;
+      margin: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .edu-logo-panel img {
+      width: 100%;
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .edu-content {
+      flex: 1;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .edu-card .location {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .edu-degree {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+
+    .edu-degree-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-degree-item .edu-field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .edu-degree-item p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    .edu-degree-item .edu-date {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    .edu-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      background: #eff6ff;
+      color: var(--accent-soft);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── Projects ─────────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .project-card-thumb {
+      height: 180px;
+      background: linear-gradient(135deg, #1e3a5f, #2563eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .project-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-tag {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      background: rgba(59,130,246,0.12);
+      color: var(--accent);
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .project-card-body h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card-body p {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .project-card-footer {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .wip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(251,191,36,0.1);
+      color: #fbbf24;
+      border: 1px solid rgba(251,191,36,0.25);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Skills ───────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem 1.25rem 0.75rem;
+    }
+
+    .skill-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .skill-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0 1.25rem;
+    }
+
+    .skill-tag {
+      font-size: 0.875rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(255,255,255,0.05);
+      color: #9ca3af;
+      border-radius: 5px;
+      border: 1px solid var(--dark-border);
+    }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--dark-border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--dark-border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .footer-socials a:hover {
+      color: var(--text-light);
+      border-color: var(--accent);
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ─── Scroll reveal utility ────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-photo-wrap {
+        order: -1;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-photo-wrap img {
+        width: 260px;
+        height: 260px;
+      }
+
+      .hero-socials {
+        justify-content: center;
+      }
+
+      .nav-links { display: none; }
+
+      .exp-header { flex-direction: column; }
+    }
+  </style>
 </head>
 
-
-<body class="is-preload">
-
-
-	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0"
-			style="display:none;visibility:hidden"></iframe></noscript>
-	<!-- End Google Tag Manager (noscript) -->
-
-
-
-	<!-- Top Navigation Bar -->
-	<nav class="top-nav">
-		<div class='name'>Jaykant Mendapara</div>
-
-		<div class="container">
-
-
-			<ul class="nav-links">
-				<li><a href="#about" onclick="scrollToElement(event,'about')">About</a></li>
-				<li><a href="#workex" onclick="scrollToElement(event,'workex')">Experience</a></li>
-				<li><a href="#education" onclick="scrollToElement(event,'education')">Education</a></li>
-				<li><a href="#projects" onclick="scrollToElement(event,'projects')">Projects</a></li>
-				<li><a href="#skills" onclick="scrollToElement(event,'skills')">Skills</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<!-- Main Content -->
-	<main>
-
-
-		<div id="wrapper" class="divided">
-
-			<!-- About Me -->
-			<section id="about">
-				<div
-					class="banner style1 orient-left content-align-left image-position-center fullscreen onload-image-fade-in onload-content-fade-right">
-					<div class="about-container">
-
-						<div class="about-content">
-							<div class="about-me-section">
-								<div class="about-text-box">
-
-									<p class="major" style="text-align: justify;">
-										Analytically skilled and results-driven data professional with 4+ years of
-										experience in data analysis, visualization, and management. Proficient in SQL,
-										Python, and Power BI, with strong expertise in automating analytical processes
-										to improve efficiency and productivity.Currently working as a Customer & CRM
-										Analyst at H&M, driving data-driven decision-making across customer acquisition,
-										retention, and omnichannel performance.
-
-									</p>
-
-									<p class="major" style="text-align: justify;">
-										With a strong foundation in mathematics and statistics, I build scalable
-										dashboards, develop forecasting frameworks, and uncover customer behavior
-										insights that support informed business decisions and improve performance.
-										Multilingual and collaborative, with experience working across cross-functional
-										teams to translate data into clear business narratives. Recognized for attention
-										to detail, structured problem-solving, and a continuous drive for improvement.
-									</p>
-									<div class="inner">
-										<ul class="icons">
-											<li><a href="https://github.com/Jaykant-M/"
-													class="icon brands style2 major fa-github"><span
-														class="label">GitHub</span></a></li>
-											<li><a href="https://public.tableau.com/app/profile/jaykant.mendapara"
-													class="icon solid style2 major fa-chart-bar"><span
-														class="label">Tableau</span></a></li>
-											<li><a href="https://www.linkedin.com/in/jaykantmendapara/"
-													class="icon brands style2 major fa-linkedin-in"><span
-														class="label">LinkedIn</span></a></li>
-											<li><a href="mailto:mendaparajaykant@gmail.com"
-													class="icon style2 major fa-envelope"><span
-														class="label">Email</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="about-image-box">
-							<img src="images/Jaykant.jpg" alt="Jaykant Mendapara" />
-						</div>
-					</div>
-
-				</div>
-
-			</section>
-
-
-
-			<!-- Belief -->
-			<div class="quote-box">
-				<hr>
-				<h3>
-					<strong><em>“I believe the ability to harness information and organize it in a meaningful
-							way
-							has the power to radically transform every aspect of real world advancement,
-							from personal growth to growth of businesses across the globe.”</em></strong>
-				</h3>
-				<hr>
-			</div>
-
-
-			<div class="timeline-container">
-				<div class="timeline">
-					<div class="timeline-item" data-content="SRM">
-						<div class="imageboxtop">
-							<a href="#SRM" onclick="scrollToElement(event,'SRM')"><img class="imgbox"
-									src="images/Logo/SRM_logo.png" alt="University Logo"></a>
-						</div>
-
-						<div class="square">
-							2013
-						</div>
-					</div>
-					<div class="timeline-item" data-content="TCS">
-						<div class="imageboxbottom">
-							<a href="#TCS" onclick="scrollToElement(event,'TCS')"><img class="imgbox"
-									src="images/Logo/TCS.png" alt="University Logo"></a>
-						</div>
-
-						<div class="square">
-							2017
-						</div>
-					</div>
-					<div class="timeline-item" data-content="EDHEC1">
-						<div class="imageboxtop">
-							<a href="EDHEC" onclick="scrollToElement(event,'EDHEC')"><img class="imgbox"
-									src="images/Logo/Edhec_logo.jpg" alt="University Logo"></a>
-						</div>
-
-						<div class="square">
-							2020
-						</div>
-					</div>
-					<div class="timeline-item" data-content="OW">
-						<div class="imageboxbottom">
-							<a href="#OW" onclick="scrollToElement(event,'OW')"><img class="imgbox"
-									src="images/Logo/OW.png" alt="University Logo"></a>
-						</div>
-
-						<div class="square">
-							2021
-						</div>
-					</div>
-					<div class="timeline-item" data-content="AKS">
-						<div class="imageboxbottom">
-							<a href="#AKS" onclick="scrollToElement(event,'AKS')"><img class="imgbox"
-									src="images/Logo/AS.png" alt="University Logo"></a>
-						</div>
-
-
-						<div class="square">
-							2022
-						</div>
-					</div>
-					<div class="timeline-item" data-content="EDHEC2">
-						<div class="imageboxtop">
-							<a href="#EDHEC" onclick="scrollToElement(event,'EDHEC')"><img class="imgbox"
-									src="images/Logo/Edhec_logo.jpg" alt="University Logo"></a>
-						</div>
-
-						<div class="square">
-							2023
-						</div>
-					</div>
-					<div class="timeline-item" data-content="ESPRIT">
-						<div class="imageboxbottom">
-							<a href="#ESPRIT" onclick="scrollToElement(event,'ESPRIT')"><img class="imgbox"
-									src="images/Logo/ESPRIT.png" alt="Company Logo"></a>
-						</div>
-
-						<div class="square">
-							2023
-						</div>
-					</div>
-					<div class="timeline-item" data-content="ESPRIT">
-						<div class="imageboxbottom">
-							<a href="#H&M" onclick="scrollToElement(event,'H&M')"><img class="imgbox"
-									src="images/Logo/H&M.png" alt="Company Logo"></a>
-						</div>
-
-						<div class="square">
-							2024
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Workex -->
-			<section id="workex">
-
-
-				<section id="H&M" class="spotlight style1 orient-left content-align-left image-position-center
-					onscroll-image-fade-in">
-					<div class="content">
-						<h3><strong>H&M - Hamburg, Germany</strong></h3>
-						<h4 style="display: flex; justify-content: space-between;">
-							<span><strong>Customer & CRM Analyst</strong></span>
-							<span>November 24 - Present</span>
-						</h4>
-						<p><strong>» Primary Focus:</strong> Deliver actionable insights through data analysis,
-							supporting customer growth, engagement, and overall commercial performance. Act as a key
-							link between business and analytics, leveraging data to inform strategic and operational
-							decisions across the customer lifecycle.<br>
-							<br><strong>» Daily Challenges:</strong> Conduct periodic reviews of customer base
-							performance, campaign and deal analysis, and set forecasts and targets for key customer
-							metrics. Develop dashboards for broader business use, perform in-depth analyses to uncover
-							customer trends, and apply segmentation techniques to support CRM initiatives and improve
-							customer engagement.
-						</p>
-					</div>
-					<div class="image">
-						<a href="https://www2.hm.com/de_de/index.html">
-							<img src="images/H&M.png" alt="" />
-						</a>
-					</div>
-				</section>
-				<hr>
-
-				<section id="ESPRIT" class="spotlight style1 orient-left content-align-left image-position-center
-					onscroll-image-fade-in">
-					<div class="content">
-						<h2><strong>Professional experience</strong></h2><br>
-						<h3><strong>ESPRIT Europe GmbH - Ratingen, Germany</strong></h3>
-						<h4 style="display: flex; justify-content: space-between;">
-							<span><strong>Business Insight Manager</strong></span>
-							<span>December 23 - October 24</span>
-						</h4>
-						<p><strong>» Primary Focus:</strong> Collaborate with CRM, Site Merchandising, and Commercial
-							Sales teams, providing actionable insights through segmented data analysis.
-							Point of liason for Data Engineering, Data Science, and E-Commerce team, leveraging data and
-							transforming it into strategic business decisions.<br>
-							<br><strong>» Daily Challenges:</strong> Tackling data quality issues to designing efficient
-							database schemas and materialised views. Dynamic dashboards creation, for enhancing
-							operational visibility.
-							Continuously monitor and analyze online shop performance to drive improvements.
-						</p>
-					</div>
-					<div class="image">
-						<a href="https://esprit.com/">
-							<img src="images/ESPRIT.png" alt="" />
-						</a>
-					</div>
-				</section>
-				<hr>
-
-				<section id="AKS" class="spotlight style1 orient-left content-align-left image-position-center
-					onscroll-image-fade-in">
-					<div class="content">
-						<h3><strong>Ankorstore - Paris, France</strong></h3>
-						<h4 style="display: flex; justify-content: space-between;">
-							<span><strong>Operations Strategy & Performance Data Analyst</strong></span>
-							<span>January 22 - July 22</span>
-						</h4>
-						<p><strong>» Primary Focus:</strong> Work closely with leadership team, BI, BS, and CS team
-							manager to provide segmented-data analysis and analytical reports.
-							Integrate operational changes in the existing performance reports to have a clear visibility
-							of Impact on the business.<br>
-							<br><strong>» Daily Challenges:</strong> Develop and deploy dashboards for monitoring KPIs
-							and provide data analysis to address the pain points and aid decision making.
-							Optimise/Enhance ELT processes on GCP using BigQuery to perform real-time analytics and to
-							have a single source of truth for all KPI & KR reporting.
-						</p>
-					</div>
-					<div class="image">
-						<a href="https://www.ankorstore.com/">
-							<img src="images/AS.png" alt="" />
-						</a>
-					</div>
-				</section>
-
-				<hr>
-				<section id="OW" class="spotlight style1 orient-center content-align-left image-position-center
-					onscroll-image-fade-in">
-					<div class="content">
-						<h3><strong>Optimal Ways - Lille, France</strong></h3>
-						<h4 style="display: flex; justify-content: space-between;">
-							<span><strong>Digital Data Analyst</strong></span>
-							<span>June 22 - December 22</span>
-						</h4>
-						<p><strong>» Primary Focus:</strong> Help and support consultants in implementing web tracking
-							solutions and enabling various clients in the E-Commerce and Retail sector to enhance
-							digital marketing across web platforms leveraging live data, based on user behavior.<br>
-							<br><strong>» Daily Challenges:</strong> Analysing business requirements to optimize marking
-							needs, generate tagging plan, implement digital transformation solutions.
-							Analyse user behavior for segmentation, advertising campaigns, and aid in conversion rate
-							optimization.
-						</p>
-
-					</div>
-					<div class="image">
-						<a href="https://www.optimalways.com/en/">
-							<img src="images/OW.png" alt="" />
-						</a>
-					</div>
-				</section>
-				<hr>
-				<section id="TCS"
-					class="spotlight style1 orient-center content-align-left image-position-center onscroll-image-fade-in">
-					<div class="content">
-						<h3><strong>Tata Consultancy Services - Pune, India</strong></h3>
-						<h4 style="display: flex; justify-content: space-between;">
-							<span><strong>Systems Engineer - Software Development and Enablement</strong></span>
-							<span>June 17 - August 19</span>
-						</h4>
-						<p><strong>» Primary Focus:</strong> Understand user requirements to provide real-time solutions
-							by inculcating, improvising, and implementing the most appropriate approach to improve the
-							efficiency of business operations.
-							<br><br><strong>» Daily Challenges:</strong> Scrum meetings, user connect, retrospective,
-							sprint planning along with deployment calls and weekly executive meetings with stakeholders
-							and client executives.
-						</p>
-					</div>
-					<div class="image">
-						<a href="https://www.tcs.com/">
-							<img src="images/TCS.png" alt="" />
-						</a>
-					</div>
-				</section>
-				<hr>
-			</section>
-
-
-			<!-- Education -->
-			<section id="education">
-				<section id="EDHEC" class="spotlight style1 orient-right content-align-left image-position-center
-					onscroll-image-fade-in" id="first">
-					<div class="content">
-						<h2><strong>Education</strong></h2>
-						<h3 style="font-size: 1.5em;"><strong>EDHEC Business School</strong> - Lille, France</h3>
-						<h4><strong>Master of Science</strong></h4>
-						<p style="display: flex; justify-content: space-between;">
-							<span>Data Analytics & Artificial Intelligence - Data Science Specialisation</span>
-							<span>September 22 - March 23</span>
-						</p>
-						<br>
-						<h4><strong>Master in Management</strong></h4>
-						<p style="display: flex; justify-content: space-between;">
-							<span>Business Management </span>
-							<span>September 20 - April 21</span>
-						</p>
-					</div>
-
-					<div class="image">
-						<img src="images/Edhec_logo.jpg" alt="EDHEC Business School Logo" />
-					</div>
-				</section>
-				<hr>
-				<section id="SRM"
-					class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in"
-					id="first">
-					<div class="content">
-						<h3 style="font-size: 1.5em;"><strong>SRM University</strong> - Chennai, India</h3>
-						<h4><strong>Bachelor of Technology</strong></h4>
-						<p style="display: flex; justify-content: space-between;">
-							<span>Electrical and Electronics Engineering</span>
-							<span>June 13 - April 17</span>
-						</p>
-					</div>
-
-					<div class="image">
-						<img src="images/SRM_logo.png" alt="SRM University Logo" />
-					</div>
-				</section>
-				<hr>
-			</section>
-
-
-
-
-
-
-			<hr>
-
-
-			<!-- Blog -->
-			<div class="blogpost">
-				<section id="projects">
-					<section
-						class="spotlight style1 orient-center content-align-center image-position-center onscroll-image-fade-in">
-						<div class="content">
-							<h2>Projects - <strong>🚧This section is WIP🚧</strong></h2>
-						</div>
-					</section>
-					<section>
-
-						<div class="blog">
-
-							<section class="cards style1">
-
-								<!-- Card 1 -->
-								<article class="card card--1">
-
-									<!-- Like Button-->
-
-									<div class="card__info-hover">
-										<!--<svg class="card__like"  viewBox="0 0 24 24">
-									<path fill="#000450" d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z" />
-									</svg>-->
-
-										<!-- Clock icon-->
-										<div class="card__clock-info">
-											<svg class="card__clock" viewBox="0 0 24 24">
-												<path
-													d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-											</svg><span class="card__time">5 min</span>
-										</div>
-									</div>
-
-									<div class="card__img"></div>
-									<a href="Projects/Tableau/dataviz.html" class="card_link">
-										<div class="card__img--hover"></div>
-									</a>
-									<div class="card__info">
-										<span class="card__category"> #EDHEC #UNICEF</span>
-										<h3 class="card__title"><a href="Projects/Tableau/dataviz.html"> Tableau DataViz
-												Challenge</a></h3>
-
-									</div>
-								</article>
-
-								<!-- Card 2 -->
-								<article class="card card--2">
-
-									<!-- Like Button-->
-
-									<div class="card__info-hover">
-
-										<!-- Clock icon-->
-										<div class="card__clock-info">
-											<svg class="card__clock" viewBox="0 0 24 24">
-												<path
-													d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
-											</svg><span class="card__time">8-10 min</span>
-										</div>
-									</div>
-
-									<div class="card__img"></div>
-									<a href="Projects/Customer Churn/EcommerceCustomerChurn.html" class="card_link">
-										<div class="card__img--hover"></div>
-									</a>
-									<div class="card__info">
-										<span class="card__category"> #ECommerce</span>
-										<h3 class="card__title"><a
-												href="Projects/Customer Churn/EcommerceCustomerChurn.html">Customer
-												Churn in Ecommerce </a></h3>
-										<!--<span class="card__by"><a href="#" class="card__author" title="author">Read More</a></span>-->
-									</div>
-								</article>
-
-
-
-
-							</section>
-						</div>
-			</div>
-
-			<hr>
-
-			<!-- Skills -->
-			<section id="skills">
-				<section
-					class="spotlight style1 orient-left content-align-center image-position-center onscroll-image-fade-in">
-
-					<div class="content">
-						<h2><strong>Tools & Skills</strong></h2>
-					</div>
-
-				</section>
-				<section>
-
-					<!-- Gallery -->
-					<div
-						class="gallery style2 Medium content-align-center image-position-center lightbox onscroll-fade-in">
-						<article>
-							<!-- Add an image for elaboration <a href="images/excel.jpg" class="image"> -->
-							<a class="image">
-								<img src="images/DV.png" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Data Analysis & Visualisation</strong></h3>
-								<p><strong>Tableau, Salesforce, Power BI, <br>Microsoft Excel, Looker Studio,<br> VBA
-										Macros, Tibco Spotfire</strong></p>
-							</div>
-						</article>
-						<article>
-							<a class="image">
-								<img src="images/DBMS.png" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Database/Big Data Management</strong></h3>
-								<p><strong>SQL, BigQuery, Snowflake,<br> Databricks, dbt,<br> SAP Webi, Tibco
-										MDM</strong></p>
-							</div>
-						</article>
-						<article>
-							<a class="image">
-								<img src="images/PP.png" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Python & Data Science</strong></h3>
-								<p><strong>Pandas, NumPy, PySpark,<br> Matplotlib, Seaborn,Scikit‑Learn,<br> TensorFlow,
-										Selenium</strong></p>
-							</div>
-						</article>
-						<article>
-							<a class="image">
-								<img src="images/WA.png" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Web & Digital Analytics</strong></h3>
-								<p><strong>GTM, GA, Tealium CDP, <br> Hightouch, Adobe Analytics,<br> Hotjar,
-										JavaScript,
-										HTML, CSS</strong></p>
-							</div>
-						</article>
-						<article>
-							<a class="image">
-								<img src="images/PM.png" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Project management</strong></h3>
-								<p><strong>GitHub, Microsoft Projects, Jira,<br> Asana, Zendesk, Bitbucket</strong></p>
-								<!-- <ul class="actions fixed">
-										<li><span class="button small">Certifications</span></li>
-									</ul> -->
-							</div>
-						</article>
-						<article>
-							<a class="image">
-								<img src="images/lan.jpg" alt="" />
-							</a>
-							<div class="caption">
-								<h3><strong>Languages</strong></h3>
-								<p><strong>English (Bilingual), German (Beginner),<br> French (Intermediate), Gujarati
-										(Native)</strong></p>
-								<!-- <ul class="actions fixed">
-										<li><span class="button small">Certifications</span></li>
-									</ul> -->
-							</div>
-						</article>
-
-
-					</div>
-				</section>
-			</section>
-		</div>
-
-		<hr>
-		<div>
-			<!-- Footer -->
-			<footer class="wrapper style3 align-center">
-				<div>
-					<ul class="icons">
-						<li><a href="https://github.com/Jaykant-M/" class="icon brands style2 fa-github"><span
-									class="label">Twitter</span></a></li>
-						<li><a href="https://public.tableau.com/app/profile/jaykant.mendapara"
-								class="icon solid style2 fa-chart-bar"><span class="label">Tableau</span></a></li>
-						<li><a href="https://www.linkedin.com/in/jaykantmendapara/"
-								class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-						<li><a href="mailto: mendaparajaykant@gmail.com" class="icon style2 fa-envelope"><span
-									class="label">Email</span></a></li>
-					</ul>
-					<p>&copy; Digital CV - Jaykant Mendapara</p>
-				</div>
-			</footer>
-		</div>
-
-	</main>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav>
+    <a href="#about" class="nav-brand">Jaykant Mendapara</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero + Quote = full viewport on load ──────────────── -->
+  <div class="intro-viewport">
+
+  <!-- ── Hero / About ───────────────────────────────────────── -->
+  <section id="about">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="role">Data Analyst &amp; CRM Specialist</p>
+        <h1>Jaykant<br>Mendapara</h1>
+        <p class="bio">
+          Analytically skilled and results-driven data professional with 4+ years of experience in data
+          analysis, visualization, and management. Proficient in SQL, Python, and Power BI, with strong
+          expertise in automating analytical processes to improve efficiency and productivity.
+        </p>
+        <p class="bio">
+          Currently working as a Customer &amp; CRM Analyst at H&amp;M, driving data-driven
+          decision-making across customer acquisition, retention, and omnichannel performance.
+        </p>
+        <div class="hero-socials">
+          <a href="https://github.com/Jaykant-M/" class="social-link" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+          <a href="https://public.tableau.com/app/profile/jaykant.mendapara" class="social-link" target="_blank" rel="noopener">
+            <i class="fa-solid fa-chart-bar"></i> Tableau
+          </a>
+          <a href="https://www.linkedin.com/in/jaykantmendapara/" class="social-link" target="_blank" rel="noopener">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+          </a>
+          <a href="mailto:mendaparajaykant@gmail.com" class="social-link">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="images/Jaykant.jpg" alt="Jaykant Mendapara" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quote ──────────────────────────────────────────────── -->
+  <div class="quote-banner" id="quote">
+    <blockquote>
+      "I believe the ability to harness information and organize it in a meaningful way has the power to
+      radically transform every aspect of real world advancement — from personal growth to growth of
+      businesses across the globe."
+    </blockquote>
+  </div>
+
+  </div><!-- end .intro-viewport -->
+
+  <!-- ── Experience ─────────────────────────────────────────── -->
+  <section id="experience" class="section section--dark">
+    <div class="section-inner">
+      <p class="section-heading">Work History</p>
+      <h2 class="section-title">Professional Experience</h2>
+
+      <!-- H&M -->
+      <div class="exp-card reveal">
+        <div class="exp-logo-panel"><img src="images/Logo/H&M.png" alt="H&M" /></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <div class="exp-row"><h3>H&amp;M</h3><span class="location">Hamburg, Germany</span></div>
+            <div class="exp-row"><p class="role">Customer &amp; CRM Analyst</p><span class="date">November 2024 – Present</span></div>
+          </div>
+          <div class="exp-body">
+            <p><strong>Primary Focus:</strong> Deliver actionable insights through data analysis, supporting customer growth, engagement, and overall commercial performance. Act as a key link between business and analytics, leveraging data to inform strategic and operational decisions across the customer lifecycle.</p>
+            <p><strong>Daily Challenges:</strong> Conduct periodic reviews of customer base performance, campaign and deal analysis, and set forecasts and targets for key customer metrics. Develop dashboards for broader business use, perform in-depth analyses to uncover customer trends, and apply segmentation techniques to support CRM initiatives.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESPRIT -->
+      <div class="exp-card reveal">
+        <div class="exp-logo-panel"><img src="images/Logo/ESPRIT.png" alt="ESPRIT" /></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <div class="exp-row"><h3>ESPRIT Europe GmbH</h3><span class="location">Ratingen, Germany</span></div>
+            <div class="exp-row"><p class="role">Business Insight Manager</p><span class="date">December 2023 – October 2024</span></div>
+          </div>
+          <div class="exp-body">
+            <p><strong>Primary Focus:</strong> Collaborate with CRM, Site Merchandising, and Commercial Sales teams, providing actionable insights through segmented data analysis. Point of liaison for Data Engineering, Data Science, and E-Commerce team, leveraging data and transforming it into strategic business decisions.</p>
+            <p><strong>Daily Challenges:</strong> Tackling data quality issues to designing efficient database schemas and materialised views. Dynamic dashboard creation for enhancing operational visibility. Continuously monitor and analyze online shop performance to drive improvements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ankorstore -->
+      <div class="exp-card reveal">
+        <div class="exp-logo-panel"><img src="images/Logo/AS.png" alt="Ankorstore" /></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <div class="exp-row"><h3>Ankorstore</h3><span class="location">Paris, France</span></div>
+            <div class="exp-row"><p class="role">Operations Strategy &amp; Performance Data Analyst</p><span class="date">January 2022 – July 2022</span></div>
+          </div>
+          <div class="exp-body">
+            <p><strong>Primary Focus:</strong> Work closely with leadership team, BI, BS, and CS team managers to provide segmented data analysis and analytical reports. Integrate operational changes in existing performance reports to have clear visibility of impact on the business.</p>
+            <p><strong>Daily Challenges:</strong> Develop and deploy dashboards for monitoring KPIs and provide data analysis to address pain points and aid decision making. Optimise ELT processes on GCP using BigQuery to perform real-time analytics and maintain a single source of truth for all KPI &amp; KR reporting.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Optimal Ways -->
+      <div class="exp-card reveal">
+        <div class="exp-logo-panel"><img src="images/Logo/OW.png" alt="Optimal Ways" /></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <div class="exp-row"><h3>Optimal Ways</h3><span class="location">Lille, France</span></div>
+            <div class="exp-row"><p class="role">Digital Data Analyst</p><span class="date">June 2022 – December 2022</span></div>
+          </div>
+          <div class="exp-body">
+            <p><strong>Primary Focus:</strong> Help and support consultants in implementing web tracking solutions, enabling clients in E-Commerce and Retail to enhance digital marketing across web platforms leveraging live data based on user behavior.</p>
+            <p><strong>Daily Challenges:</strong> Analysing business requirements to optimize marketing needs, generate tagging plans, implement digital transformation solutions. Analyse user behavior for segmentation, advertising campaigns, and aid conversion rate optimization.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TCS -->
+      <div class="exp-card reveal">
+        <div class="exp-logo-panel"><img src="images/Logo/TCS.png" alt="TCS" /></div>
+        <div class="exp-content">
+          <div class="exp-meta">
+            <div class="exp-row"><h3>Tata Consultancy Services</h3><span class="location">Pune, India</span></div>
+            <div class="exp-row"><p class="role">Systems Engineer – Software Development &amp; Enablement</p><span class="date">June 2017 – August 2019</span></div>
+          </div>
+          <div class="exp-body">
+            <p><strong>Primary Focus:</strong> Understand user requirements to provide real-time solutions by inculcating, improvising, and implementing the most appropriate approach to improve business operations.</p>
+            <p><strong>Daily Challenges:</strong> Scrum meetings, user connect, retrospective, sprint planning alongside deployment calls and weekly executive meetings with stakeholders and client executives.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Education ──────────────────────────────────────────── -->
+  <section id="education" class="section section--dark">
+    <div class="section-inner">
+      <p class="section-heading">Academic Background</p>
+      <h2 class="section-title">Education</h2>
+      <div class="edu-grid">
+
+        <!-- EDHEC -->
+        <div class="edu-card reveal">
+          <div class="edu-logo-panel"><img src="images/Logo/Edhec_logo.jpg" alt="EDHEC Business School" /></div>
+          <div class="edu-content">
+            <div class="edu-row"><h3>EDHEC Business School</h3><span class="location">Lille, France</span></div>
+            <div class="edu-degree">
+              <div class="edu-degree-item">
+                <h4>Master of Science</h4>
+                <div class="edu-field-row"><p>Data Analytics &amp; Artificial Intelligence — Data Science Specialisation</p><span class="edu-date">Sep 2022 – Mar 2023</span></div>
+              </div>
+              <div class="edu-degree-item">
+                <h4>Master in Management</h4>
+                <div class="edu-field-row"><p>Business Management</p><span class="edu-date">Sep 2020 – Apr 2021</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SRM -->
+        <div class="edu-card reveal">
+          <div class="edu-logo-panel"><img src="images/Logo/SRM_logo.png" alt="SRM University" /></div>
+          <div class="edu-content">
+            <div class="edu-row"><h3>SRM University</h3><span class="location">Chennai, India</span></div>
+            <div class="edu-degree">
+              <div class="edu-degree-item">
+                <h4>Bachelor of Technology</h4>
+                <div class="edu-field-row"><p>Electrical and Electronics Engineering</p><span class="edu-date">Jun 2013 – Apr 2017</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ─────────────────────────────────────────────── -->
+  <section id="skills" class="section section--dark">
+    <div class="section-inner">
+      <p class="section-heading">Technical Toolkit</p>
+      <h2 class="section-title">Tools &amp; Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Data Analysis &amp; Visualisation</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Looker Studio</span>
+            <span class="skill-tag">Excel</span>
+            <span class="skill-tag">VBA Macros</span>
+            <span class="skill-tag">Salesforce</span>
+            <span class="skill-tag">Tibco Spotfire</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
+            <h3>Database &amp; Big Data</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">BigQuery</span>
+            <span class="skill-tag">Snowflake</span>
+            <span class="skill-tag">Databricks</span>
+            <span class="skill-tag">dbt</span>
+            <span class="skill-tag">SAP Webi</span>
+            <span class="skill-tag">Tibco MDM</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+            <h3>Python &amp; Data Science</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">PySpark</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Seaborn</span>
+            <span class="skill-tag">Scikit-Learn</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">Selenium</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3>Web &amp; Digital Analytics</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">GTM</span>
+            <span class="skill-tag">GA4</span>
+            <span class="skill-tag">Adobe Analytics</span>
+            <span class="skill-tag">Tealium CDP</span>
+            <span class="skill-tag">Hightouch</span>
+            <span class="skill-tag">Hotjar</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-solid fa-list-check"></i></div>
+            <h3>Project Management</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Asana</span>
+            <span class="skill-tag">MS Projects</span>
+            <span class="skill-tag">Zendesk</span>
+            <span class="skill-tag">Bitbucket</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-header">
+            <div class="skill-icon"><i class="fa-solid fa-language"></i></div>
+            <h3>Languages</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag">English (Bilingual)</span>
+            <span class="skill-tag">French (Intermediate)</span>
+            <span class="skill-tag">German (Beginner)</span>
+            <span class="skill-tag">Gujarati (Native)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ───────────────────────────────────────────── -->
+  <section id="projects" class="section section--dark">
+    <div class="section-inner">
+      <p class="section-heading">Selected Work</p>
+      <h2 class="section-title">Projects</h2>
+      <div class="wip-badge">
+        <i class="fa-solid fa-triangle-exclamation"></i> This section is a work in progress
+      </div>
+      <div class="projects-grid">
+
+        <!-- Card 1 -->
+        <a href="Projects/Tableau/dataviz.html" class="project-card reveal">
+          <div class="project-card-thumb">📊</div>
+          <div class="project-card-body">
+            <div class="project-tags">
+              <span class="project-tag">EDHEC</span>
+              <span class="project-tag">UNICEF</span>
+              <span class="project-tag">Tableau</span>
+            </div>
+            <h3>Tableau DataViz Challenge</h3>
+            <p>Visual storytelling project exploring UNICEF data through interactive Tableau dashboards, created as part of the EDHEC Data Analytics programme.</p>
+            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="Projects/Customer Churn/EcommerceCustomerChurn.html" class="project-card reveal">
+          <div class="project-card-thumb">🔄</div>
+          <div class="project-card-body">
+            <div class="project-tags">
+              <span class="project-tag">E-Commerce</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">ML</span>
+            </div>
+            <h3>Customer Churn in E-Commerce</h3>
+            <p>End-to-end analysis and predictive modelling to identify at-risk customers in an e-commerce context, using Python and machine learning techniques.</p>
+            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-socials">
+      <a href="https://github.com/Jaykant-M/" target="_blank" rel="noopener" title="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener" title="Tableau">
+        <i class="fa-solid fa-chart-bar"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener" title="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a href="mailto:mendaparajaykant@gmail.com" title="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+    </div>
+    <p>&copy; 2025 Jaykant Mendapara</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('visible');
+          observer.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Nav active state
+    const sections = document.querySelectorAll('section[id], #about');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text-light)' : '';
+      });
+    });
+  </script>
 </body>
-
 </html>

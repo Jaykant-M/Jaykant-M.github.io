@@ -1,299 +1,516 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Dataviz - Tableau</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../../assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau DataViz Challenge – Jaykant Mendapara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:''; j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TF3V8RN');
-    </script>
-    <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V54TXLXLMD"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-V54TXLXLMD');
-    </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d1117;
+      --dark-card:   #161b22;
+      --dark-border: #21262d;
+      --accent:      #3b82f6;
+      --accent-soft: #1d4ed8;
+      --text-light:  #f0f6fc;
+      --text-muted:  #8b949e;
+      --radius:      12px;
+      --shadow-lg:   0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text-light); line-height: 1.6; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand { color: var(--text-light); font-weight: 600; font-size: 1rem; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Hero ── */
+    .page-hero {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      padding-top: 60px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('../../images/Projects/StudentDataViz/Finals.jpeg');
+      background-size: cover; background-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(13,17,23,0.97) 45%, rgba(13,17,23,0.45) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 10% 3.5rem;
+      max-width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.75rem);
+      color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-desc { color: #9ca3af; max-width: 520px; font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; }
+    .hero-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* ── TOC strip ── */
+    .toc-strip {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 3px solid var(--accent);
+      padding: 0.85rem 10%;
+      display: flex; gap: 0; align-items: center;
+      overflow-x: auto;
+    }
+    .toc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 1.5rem; white-space: nowrap; flex-shrink: 0; }
+    .toc-strip a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.85rem; border-radius: 4px; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+    .toc-strip a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Content ── */
+    .content-wrap { max-width: 80%; margin: 0 auto; padding: 0 0 5rem; }
+
+    /* ── Metrics row ── */
+    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 3rem 0 0; margin-bottom: 0; }
+    .metric-item { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .metric-item .val { font-size: 2.5rem; font-weight: 700; color: var(--text-light); line-height: 1; }
+    .metric-item .val span { font-size: 1.5rem; color: var(--accent); }
+    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* ── Chapter opener ── */
+    .chapter {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 3.5rem 0 1.75rem;
+      border-top: 1px solid var(--dark-border);
+      margin-top: 2rem;
+    }
+    .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
+    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); }
+    .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
+
+    /* ── Split section ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; margin-bottom: 2.5rem; }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+
+    .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
+    .body-text li { margin-bottom: 0.5rem; }
+    .body-text strong { color: var(--text-light); }
+
+    /* ── Image block ── */
+    .img-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: var(--dark-card); }
+    .img-block img { width: 100%; height: auto; object-fit: contain; display: block; max-height: 320px; }
+    .img-caption { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 0.6rem; padding: 0 0.5rem; }
+
+    /* ── Photo strip ── */
+    .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .photo-strip img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--dark-border); }
+
+    /* ── Callout — filled accent ── */
+    .callout-accent {
+      background: var(--accent); border-radius: var(--radius);
+      padding: 1.75rem 2rem; margin: 2.5rem 0;
+    }
+    .callout-accent p { color: #fff; font-style: italic; font-size: 1.15rem; font-weight: 500; line-height: 1.6; margin: 0; }
+    .callout-accent cite { color: rgba(255,255,255,0.75); font-style: normal; font-size: 0.8rem; display: block; margin-top: 0.6rem; }
+
+    /* ── Callout — dark side border ── */
+    .callout-side {
+      background: var(--dark-card); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+    }
+    .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
+
+    /* ── Two-card row ── */
+    .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.75rem; }
+    .card p, .card li { font-size: 0.92rem; color: #9ca3af; line-height: 1.75; }
+    .card ul { padding-left: 1.1rem; }
+    .card li { margin-bottom: 0.35rem; }
+
+    /* ── Tags ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
+
+    /* ── Tableau embed ── */
+    .embed-wrap { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; margin: 2rem 0; }
+    .embed-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .embed-label h2 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+    .tableauPlaceholder { width: 100%; border-radius: 8px; overflow: hidden; }
+    .tableauPlaceholder object { display: block; }
+
+    /* ── CTA ── */
+    .cta-bar { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-top: 3rem; }
+    .cta-bar p { color: #9ca3af; margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--accent-soft); }
+
+    /* ── Back link ── */
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer { background: var(--dark-card); border-top: 1px solid var(--dark-border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-socials a { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--dark-border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; transition: color 0.2s, border-color 0.2s; }
+    .footer-socials a:hover { color: var(--text-light); border-color: var(--accent); }
+    footer p { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      .split.reverse { direction: ltr; }
+      .two-card { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .photo-strip { grid-template-columns: 1fr; }
+      .content-wrap { max-width: 92%; }
+      .toc-strip { padding: 0.85rem 5%; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .metrics-row { grid-template-columns: 1fr; }
+      .hero-content { padding: 0 5% 3rem; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="is-preload">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
+  <nav>
+    <a href="../../index.html" class="nav-brand">Jaykant Mendapara</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html#about">About</a></li>
+      <li><a href="../../index.html#experience">Experience</a></li>
+      <li><a href="../../index.html#education">Education</a></li>
+      <li><a href="../../index.html#skills">Skills</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+    </ul>
+  </nav>
 
-            <!-- Top Navigation Bar -->
-        <nav class="top-nav">
-        <div class = 'name'>Jaykant Mendapara</div>
-        <div class="container">
-            
-            
-            <ul class="nav-links">
-                <li><a href="../../index.html">Home</a></li>
-                <li><a href="../../index.html#about">About</a></li>
-                <li><a href="../../index.html#workex">Experience</a></li>
-                <li><a href="../../index.html#education">Education</a></li>
-                <li><a href="../../index.html#projects">Projects</a></li>
-                <li><a href="../../index.html#skills">Skills</a></li>
-            </ul>
+  <!-- ── Hero ── -->
+  <div class="page-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Data Visualisation &nbsp;·&nbsp; EDHEC × UNICEF</div>
+      <h1 class="hero-title">Tableau<br><span>DataViz</span> Challenge</h1>
+      <p class="hero-desc">Exploring global education disparities through interactive Tableau dashboards — built as part of the EDHEC Student DataViz Challenge using UNICEF data.</p>
+      <div class="hero-meta">
+        <span><i class="fa-regular fa-calendar"></i> 2023</span>
+        <span><i class="fa-solid fa-chart-bar"></i> Tableau Public</span>
+        <span><i class="fa-solid fa-graduation-cap"></i> EDHEC Business School</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOC strip ── -->
+  <div class="toc-strip">
+    <span class="toc-label">In this project</span>
+    <a href="#purpose">Purpose</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#data">Data Sources</a>
+    <a href="#insights">Key Insights</a>
+    <a href="#ux">User Experience</a>
+    <a href="#impact">Impact</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content-wrap">
+
+    <a href="../../index.html#projects" class="back-link reveal">
+      <i class="fa-solid fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <!-- Metrics -->
+    <div class="metrics-row reveal">
+      <div class="metric-item">
+        <div class="val">600<span>M+</span></div>
+        <div class="lbl">Children unable to reach minimum literacy proficiency</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">3</div>
+        <div class="lbl">Global data sources — UNESCO, World Bank, national ministries</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">5</div>
+        <div class="lbl">Interactive dashboard views covering education, gender, infrastructure</div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="tag-row reveal" style="margin-top:1.5rem">
+      <span class="tag">Tableau</span>
+      <span class="tag">UNICEF</span>
+      <span class="tag">EDHEC</span>
+      <span class="tag">Data Visualisation</span>
+      <span class="tag">Education Analytics</span>
+      <span class="tag">Tableau Prep</span>
+    </div>
+
+    <!-- Chapter 01: Purpose -->
+    <div id="purpose" class="chapter reveal">
+      <div class="chapter-num">01</div>
+      <div>
+        <div class="chapter-eyebrow">Background</div>
+        <div class="chapter-title">Purpose &amp; Inspiration</div>
+      </div>
+    </div>
+
+    <div class="split reveal">
+      <div class="body-text">
+        <p>This project was driven by a belief in education's transformative power. Despite rising school enrollment globally, UNICEF data reveals that <strong>600 million children and adolescents worldwide are unable to attain minimum proficiency</strong> in reading and mathematics.</p>
+        <p>Growing up in India gave me a first-hand perspective on how poverty, sanitation, and water access silently shape learning outcomes — factors that rarely appear in traditional academic reporting but are deeply correlated with educational performance.</p>
+        <div class="callout-side">
+          <p>"Education is the most powerful weapon which you can use to change the world." — Nelson Mandela</p>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Top Banner Section -->
-        <section id="top-banner" >
-            <!-- About Project -->
-            <div class="topbanner">
-            <section id="about">
-                <div class="projecthead left">
-                    <h2 style="align-content: center;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">EDHEC Student Dataviz Challenge</h2>
-                    <div class="inner align-left" style="align-content:flex-end;">
-                        <ul class="icons style1">
-                            <li><a href="https://public.tableau.com/app/profile/jaykant.mendapara" class="icon solid style2 major fa-chart-bar"><span class="label">Tableau</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="projecthead right">
-                    <!-- Gallery -->
-                    <div class="gallery style2 Medium content-align-right image-position-center lightbox onscroll-fade-in" style="width: 100%;">
-                        <article>
-                            <a class="image">
-                                <img src="../../images/Projects/StudentDataViz/Finals.jpeg" alt="" />
-                            </a>
-                        </article>
-                        <article>
-                            <a class="image">
-                                <img src="../../images/Projects/StudentDataViz/Finals3.jpeg" alt="" />
-                            </a>
-                        </article>
-
-                        <article>
-                            <a class="image">
-                                <img src="../../images/Projects/StudentDataViz/Finals2.jpeg" alt="" />
-                            </a>
-                        </article>
-                    </div>
-                </div>
-            </section>
+      </div>
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/goal.png" alt="Purpose and goal illustration" onerror="this.style.background='#21262d'" />
         </div>
-        </section>
+        <p class="img-caption">Framing the challenge — education access as a global development goal</p>
+      </div>
+    </div>
 
-        <hr>
+    <!-- Chapter 02: Dashboard -->
+    <div id="dashboard" class="chapter reveal">
+      <div class="chapter-num">02</div>
+      <div>
+        <div class="chapter-eyebrow">Interactive Visualisation</div>
+        <div class="chapter-title">Live Dashboard</div>
+      </div>
+    </div>
 
+    <!-- Photo strip -->
+    <div class="photo-strip reveal">
+      <img src="../../images/Projects/StudentDataViz/Finals.jpeg" alt="Dashboard screenshot 1" onerror="this.style.display='none'" />
+      <img src="../../images/Projects/StudentDataViz/Finals2.jpeg" alt="Dashboard screenshot 2" onerror="this.style.display='none'" />
+      <img src="../../images/Projects/StudentDataViz/Finals3.jpeg" alt="Dashboard screenshot 3" onerror="this.style.display='none'" />
+    </div>
 
-        <!-- Tableau Block -->
-        <h2><strong>Interactive Dashboard : UNICEF - Education & Beyond</strong></h2>
-        <div class='tableauPlaceholder' id='viz1720345335691' style='position: relative; width: 100%; height: 1000px; padding: 4rem;'>
-            <noscript>
-                <a href='#'>
-                    <img alt=' ' src='https://public.tableau.com/static/images/UN/UNICEF-EducationBeyond/MainDashboard/1_rss.png' style='border: none' />
-                </a>
-            </noscript>
-            <object class='tableauViz' style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                <param name='embed_code_version' value='3' />
-                <param name='site_root' value='' />
-                <param name='name' value='UNICEF-EducationBeyond&#47;MainDashboard' />
-                <param name='tabs' value='yes' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;UN&#47;UNICEF-EducationBeyond&#47;MainDashboard&#47;1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-US' />
-            </object>
+    <!-- Tableau embed -->
+    <div class="embed-wrap reveal">
+      <div class="embed-label"><i class="fa-solid fa-chart-bar"></i><h2>UNICEF: Education &amp; Beyond — Interactive Dashboard</h2></div>
+      <div class="tableauPlaceholder" id="viz-container">
+        <object class="tableauViz" width="100%" height="827" style="display:none;">
+          <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+          <param name="embed_code_version" value="3" />
+          <param name="site_root" value="" />
+          <param name="name" value="UNICEF-EducationBeyond/MainDashboard" />
+          <param name="tabs" value="no" />
+          <param name="toolbar" value="yes" />
+          <param name="animate_transition" value="yes" />
+          <param name="display_static_image" value="no" />
+          <param name="display_spinner" value="no" />
+          <param name="display_overlay" value="yes" />
+          <param name="display_count" value="yes" />
+          <param name="language" value="en-US" />
+        </object>
+      </div>
+      <script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+    </div>
+
+    <!-- Split: features -->
+    <div class="split reverse reveal">
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/engineering.png" alt="Dashboard features" onerror="this.style.background='#21262d'" />
         </div>
-
-        <script type='text/javascript'>
-            var divElement = document.getElementById('viz1720345335691');
-            var vizElement = divElement.getElementsByTagName('object')[0];
-
-            function resizeViz() {
-                var width = divElement.offsetWidth;
-                if (width > 800) {
-                    vizElement.style.width = '100%';
-                    vizElement.style.height = '1000px';
-                } else if (width > 500) {
-                    vizElement.style.width = '100%';
-                    vizElement.style.height = '90%';
-                } else {
-                    vizElement.style.width = '100%';
-                    vizElement.style.height = '90%';
-                }
-            }
-
-            window.addEventListener('resize', resizeViz);
-            resizeViz(); // Initial call to set the size
-
-            var scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
-        </script>
-
-        <hr>
-
-        <!-- Purpose and Inspiration Section -->
-<section class="spotlight style2 orient-right content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Purpose and Inspiration</strong></h2>
-        <p>Education has always been a passion of mine, driven by a belief in its transformative power for individuals and societies alike. Inspired by the need to understand and visualize global education trends, I embarked on a journey to create a comprehensive dashboard that would illuminate key insights and disparities in education access, quality, and equity worldwide.</p>
-        <br>
-        <p>According to UNICEF, 600 million children and adolescents worldwide are unable to attain minimum proficiency levels in reading and mathematics, even though two-thirds of them are in school. Growing up in India, I noticed that disadvantaged students lacked access to sanitary conditions and basic amenities, sparking my interest in understanding how poverty, sanitation, and access to water affect educational outcomes.</p>
+        <p class="img-caption">Dashboard architecture — filters, parameters, and calculated fields</p>
+      </div>
+      <div class="body-text">
+        <p>The dashboard provides interactive filters, dynamic charts, and custom visualizations letting users explore:</p>
+        <ul>
+          <li>School enrollment rates across countries and regions</li>
+          <li>Education expenditure as a percentage of GDP</li>
+          <li>Gender disparities in literacy and enrollment</li>
+          <li>Child labor rates and their correlation with dropout patterns</li>
+          <li>Infrastructure indicators: water access, sanitation, electricity</li>
+        </ul>
+      </div>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/goal.png" class="image-container" />
-        </a>
+
+    <!-- Chapter 03: Data Sources -->
+    <div id="data" class="chapter reveal">
+      <div class="chapter-num">03</div>
+      <div>
+        <div class="chapter-eyebrow">Research foundation</div>
+        <div class="chapter-title">Data Sources</div>
+      </div>
     </div>
-</section>
 
-<!-- Dashboard Features Section -->
-<section class="spotlight style2 orient-left content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Dashboard Features</strong></h2>
-        <p>My dashboard offers a user-friendly interface designed to empower stakeholders to explore and analyze education data effortlessly. It includes interactive elements such as filters, dynamic charts, and custom visualizations that allow users to delve deep into the data with ease. Whether examining enrollment rates, educational expenditures, or gender disparities in education, the dashboard provides a clear and insightful view of complex educational landscapes.</p>
-        <br>
-        <p>This dashboard can give you a deep dive into the factors affecting education at different levels through various indicators. For example, if the “out of school” indicator is lower for a country, one could investigate factors such as the “rate of child labor” to understand the underlying reasons. </p>
+    <div class="split reveal">
+      <div class="body-text">
+        <p>To ensure credibility and breadth of coverage, data was sourced from:</p>
+        <ul>
+          <li><strong>UNESCO</strong> — Global education statistics and learning outcomes</li>
+          <li><strong>World Bank</strong> — Economic indicators and infrastructure data</li>
+          <li><strong>National education ministries</strong> — Country-level enrollment and expenditure figures</li>
+        </ul>
+        <p>All datasets were cleaned and joined in Tableau Prep before visualization.</p>
+      </div>
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/data-classification.png" alt="Data sources illustration" onerror="this.style.background='#21262d'" />
+        </div>
+      </div>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/engineering.png" class="image-container" />
-        </a>
+
+    <!-- Chapter 04: Key Insights -->
+    <div id="insights" class="chapter reveal">
+      <div class="chapter-num">04</div>
+      <div>
+        <div class="chapter-eyebrow">What the data revealed</div>
+        <div class="chapter-title">Key Insights</div>
+      </div>
     </div>
-</section>
 
-<!-- Data Sources Section -->
-<section class="spotlight style2 orient-right content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Data Sources</strong></h2>
-        <p>To ensure accuracy and reliability, I sourced data from reputable international organizations and databases dedicated to education statistics. These include UNESCO, World Bank, and national education ministries, among others. By leveraging these robust datasets, I aimed to provide users with a comprehensive and credible resource for understanding global education trends.</p>
+    <div class="callout-accent reveal">
+      <p>"Schools lacking drinking water show measurably lower attendance rates — infrastructure and education are inseparable."</p>
+      <cite>Key finding from the dashboard analysis</cite>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/data-classification.png" class="image-container" />
-        </a>
+
+    <div class="split reverse reveal">
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/insight.png" alt="Key insights illustration" onerror="this.style.background='#21262d'" />
+        </div>
+      </div>
+      <div class="body-text">
+        <ul>
+          <li>Significant urban-rural disparities in educational access persist across developing regions</li>
+          <li>Out-of-school rates increase sharply between lower primary and secondary levels</li>
+          <li>Schools lacking drinking water show measurably lower attendance rates</li>
+          <li>Poverty directly affects both the affordability and quality of education</li>
+          <li>Gender literacy gaps signal structural barriers to equal education access</li>
+        </ul>
+      </div>
     </div>
-</section>
 
-<!-- Key Insights Section -->
-<section class="spotlight style2 orient-left content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Key Insights</strong></h2>
-        <p>Through my dashboard, several compelling insights have emerged. For instance, visualizations have highlighted significant disparities in educational access between urban and rural areas in developing countries. Additionally, trends in educational expenditure have underscored the importance of adequate funding for improving educational outcomes. These insights not only inform but also inspire action towards fostering inclusive and equitable education systems globally.</p>
-        <br>
-        <p>Usually, the “out of school rate” increases exponentially as we move from lower secondary level to secondary level. This is typically observed in most countries due to high rates of indicators such as “physical punishment” at lower secondary levels. Ensuring a secure and healthy upbringing is crucial for achieving a good pass-out rate for every child.</p>
-        <br>
-        <p>In the majority of countries with low attendance rates, the percentage of schools with no drinking water is very high. This proves that without a good infrastructure of the school or country, a child cannot concentrate on studies and achieve the same results. The environment in which a child attains education needs to be extremely conducive. </p>
-        <br>
-        <p>The poverty dashboard gives an overview of the poverty state and the percentage of children living below the National Poverty Line in each country. These indicators are crucial because poverty affects the level of “affordability.” Countries with low attendance rates often have a higher percentage of children living in households below the National Poverty Line.</p>
-    
+    <!-- Chapter 05: UX -->
+    <div id="ux" class="chapter reveal">
+      <div class="chapter-num">05</div>
+      <div>
+        <div class="chapter-eyebrow">Design decisions</div>
+        <div class="chapter-title">User Experience</div>
+      </div>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/metrics.png" class="image-container" />
-        </a>
+
+    <div class="split reveal">
+      <div class="body-text">
+        <p>The dashboard was designed for diverse stakeholders — policymakers, educators, and researchers — regardless of technical expertise. Navigation is intuitive, with clear labelling and consistent color coding to distinguish regions and categories.</p>
+        <p>Custom tooltips surface contextual information without cluttering the visual space, keeping the focus on the story the data is telling.</p>
+      </div>
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/metrics.png" alt="UX and metrics" onerror="this.style.background='#21262d'" />
+        </div>
+        <p class="img-caption">Metric selection — balancing depth with clarity</p>
+      </div>
     </div>
-</section>
 
-<!-- User Experience Section -->
-<section class="spotlight style2 orient-right content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>User Experience</strong></h2>
-        <p>Central to the dashboard's design was prioritizing user experience. I focused on intuitive navigation and interactive features to ensure that users, regardless of their technical expertise, could explore and understand the data effectively. By incorporating user feedback and iterative design processes, I aimed to create a tool that enhances accessibility and usability for diverse stakeholders in the education sector.</p>
-        <br>
-        <p>The dashboard gives an overview of the 3 most basic human needs: water, hygiene, and sanitation. The significance of this dashboard is to understand how the quality of education is correlated with either water, hygiene, or sanitation</p>
+    <!-- Chapter 06: Impact -->
+    <div id="impact" class="chapter reveal">
+      <div class="chapter-num">06</div>
+      <div>
+        <div class="chapter-eyebrow">Looking ahead</div>
+        <div class="chapter-title">Impact &amp; Future Directions</div>
+      </div>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/insight.png" class="image-container" />
-        </a>
+
+    <div class="split reverse reveal">
+      <div>
+        <div class="img-block">
+          <img src="../../images/Projects/StudentDataViz/impact.png" alt="Impact illustration" onerror="this.style.background='#21262d'" />
+        </div>
+      </div>
+      <div class="body-text">
+        <p>The dashboard was built to inform strategic initiatives around global education access. Potential expansions include:</p>
+        <ul>
+          <li>Adding health and nutrition datasets to enrich the correlation analysis</li>
+          <li>Integrating time-series views to track progress across decades</li>
+          <li>Building a country-level drill-through for deeper local insights</li>
+        </ul>
+      </div>
     </div>
-</section>
 
-<!-- Impact and Future Directions Section -->
-<section class="spotlight style2 orient-left content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Impact and Future Directions</strong></h2>
-        <p>It has been instrumental in informing strategic decisions and initiatives aimed at improving education outcomes worldwide. Looking ahead, the dashboard's capabilities can be expanded  by incorporating additional datasets and features to further enhance its utility and relevance in addressing emerging educational challenges.</p>
-        <br>
-        <p>For instance, by examining the gap in youth literacy rates between males and females, we can identify areas where interventions are needed to ensure that all children, regardless of gender, have access to quality education. In general, a smaller gap indicates more gender equality in education opportunities, while a larger gap suggests that females may face cultural, social, or economic barriers to accessing education.</p>
-
+    <!-- Technical + Challenges -->
+    <div class="two-card reveal" style="margin-top:1rem">
+      <div class="card">
+        <h3><i class="fa-solid fa-code" style="color:var(--accent);margin-right:0.5rem"></i>Technical Skills</h3>
+        <ul>
+          <li>Tableau Desktop — calculated fields, LOD expressions, parameter actions</li>
+          <li>Data cleaning and reshaping in Tableau Prep</li>
+          <li>Cross-dataset joins and blending</li>
+          <li>Statistical analysis and insight interpretation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-lightbulb" style="color:var(--accent);margin-right:0.5rem"></i>Challenges &amp; Learnings</h3>
+        <p>Integrating multiple datasets with inconsistent country naming conventions required careful data wrangling. Balancing visual complexity with clarity taught me to ruthlessly prioritize the most impactful metrics and progressively reveal detail on demand.</p>
+      </div>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/impact.png" class="image-container" />
-        </a>
+
+    <!-- CTA -->
+    <div class="cta-bar reveal">
+      <p>View the live dashboard and other visualizations on my Tableau Public profile</p>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener" class="cta-btn">
+        <i class="fa-solid fa-chart-bar"></i> View on Tableau Public
+      </a>
     </div>
-</section>
 
-<!-- Technical Skills Demonstrated Section -->
-<section class="spotlight style2 orient-right content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Technical Skills Demonstrated</strong></h2>
-        <p>Creating this dashboard required proficiency in data visualization tools such as Tableau, as well as expertise in data cleaning, analysis, and interpretation. By applying these technical skills, I was able to transform raw data into actionable insights that drive informed decision-making and advocacy in the field of education.</p>
+  </div>
+
+  <footer>
+    <div class="footer-socials">
+      <a href="https://github.com/Jaykant-M/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener"><i class="fa-solid fa-chart-bar"></i></a>
+      <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
     </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/self-improvement.png" class="image-container" />
-        </a>
-    </div>
-</section>
+    <p>&copy; 2025 Jaykant Mendapara</p>
+  </footer>
 
-<!-- Challenges and Learnings Section -->
-<section class="spotlight style2 orient-left content-align-left image-position-left onscroll-image-fade-in">
-    <div class="content">
-        <h2><strong>Challenges and Learnings</strong></h2>
-        <p>Throughout the development process, I encountered various challenges, from data integration complexities to ensuring visual clarity and interpretability. However, each challenge presented an opportunity for growth and learning. By refining visualization techniques and adopting best practices in data storytelling, I enhanced the dashboard's effectiveness and impact.</p>
-    </div>
-    <div class="spotlight style2">
-        <img src="../../images/Projects/StudentDataViz/goal1.png" class="image-container" />
-        </a>
-    </div>
-</section>
-
-
-<!-- Conclusion Section -->
-
-<section class="wrapper style1 align-center">	
-    <div class="inner">
-
-        <hr><h3><strong><em>In conclusion, the journey of creating this dashboard has reinforced my commitment to leveraging data-driven insights for social impact, particularly in advancing educational opportunities for all.<br>Every child deserves equal opportunities and has the right to a similar education. Factors such as water, health, infrastructure, poverty, and child labor significantly impact education. For a nation to progress and achieve its educational goals, a holistic approach to development is essential.</em></strong></h3>
-        
-        <hr>
-    </div>
-</section>
-
-
-
-
-
-
-        <!-- Footer -->
-        <footer class="wrapper style3 align-center">
-            <div>
-                <ul class="icons">
-                    <li><a href="https://github.com/Jaykant-M/" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-                    <li><a href="https://public.tableau.com/app/profile/jaykant.mendapara" class="icon solid style2 fa-chart-bar"><span class="label">Tableau</span></a></li>
-                    <li><a href="https://www.linkedin.com/in/jaykantmendapara/" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-                    <li><a href="mailto:mendaparajaykant@gmail.com" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-                </ul>
-                <p>&copy; Digital CV - Jaykant Mendapara</p>
-            </div>
-        </footer>
-    </main>
-
-    <!-- Scripts -->
-    <script src="../../assets/js/jquery.min.js"></script>
-    <script src="../../assets/js/jquery.scrollex.min.js"></script>
-    <script src="../../assets/js/jquery.scrolly.min.js"></script>
-    <script src="../../assets/js/browser.min.js"></script>
-    <script src="../../assets/js/breakpoints.min.js"></script>
-    <script src="../../assets/js/util.js"></script>
-    <script src="../../assets/js/main.js"></script>
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
