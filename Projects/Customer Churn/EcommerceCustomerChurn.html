@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -24,7 +24,6 @@
       --text-light:  #f0f6fc;
       --text-muted:  #8b949e;
       --radius:      12px;
-      --shadow-lg:   0 8px 40px rgba(0,0,0,0.3);
     }
 
     html { scroll-behavior: smooth; }
@@ -43,35 +42,38 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
     .nav-links a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
 
-    /* ── Hero ── */
+    /* ── Hero - split layout ── */
     .page-hero {
-      position: relative;
-      min-height: 480px;
       display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-      padding-top: 60px;
+      align-items: center;
+      min-height: 320px;
+      padding: 60px 10% 0;
+      background: var(--dark);
+      border-bottom: 1px solid var(--dark-border);
+      gap: 3rem;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background-image: url('../../images/Projects/ChurnPrevention/Cover.png');
-      background-size: cover; background-position: center;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(13,17,23,0.97) 45%, rgba(13,17,23,0.45) 100%);
-    }
-    .hero-content {
-      position: relative; z-index: 2;
-      padding: 0 10% 3.5rem;
-      max-width: 100%;
+    .hero-text-col {
+      flex: 1;
+      padding: 3rem 0;
+      display: flex; flex-direction: column; justify-content: center;
     }
     .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 3.75rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
     .hero-title span { color: var(--accent); }
-    .hero-desc { color: #9ca3af; max-width: 520px; font-size: 1rem; line-height: 1.75; margin-bottom: 1.5rem; }
-    .hero-meta { display: flex; gap: 1.5rem; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; }
-    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+    .hero-desc { color: #9ca3af; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.25rem; max-width: 420px; }
+    .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero-intro-col {
+      flex: 0 0 60%;
+      padding: 1.5rem 1.75rem;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      margin: 2.5rem 0;
+    }
+    .hero-intro-col p { color: #9ca3af; font-size: 0.9rem; line-height: 1.8; margin-bottom: 0.75rem; }
+    .hero-intro-col p:last-child { margin-bottom: 0; }
+    .hero-intro-col strong { color: var(--text-light); }
 
     /* ── TOC strip ── */
     .toc-strip {
@@ -79,8 +81,7 @@
       border-top: 1px solid var(--dark-border);
       border-bottom: 3px solid var(--accent);
       padding: 0.85rem 10%;
-      display: flex; align-items: center;
-      overflow-x: auto;
+      display: flex; align-items: center; overflow-x: auto;
     }
     .toc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 1.5rem; white-space: nowrap; flex-shrink: 0; }
     .toc-strip a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.85rem; border-radius: 4px; white-space: nowrap; transition: color 0.2s, background 0.2s; }
@@ -89,12 +90,23 @@
     /* ── Content ── */
     .content-wrap { max-width: 80%; margin: 0 auto; padding: 0 0 5rem; }
 
-    /* ── Metrics row ── */
-    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 3rem 0 0; }
-    .metric-item { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
-    .metric-item .val { font-size: 2.5rem; font-weight: 700; color: var(--text-light); line-height: 1; }
-    .metric-item .val span { font-size: 1.5rem; color: var(--accent); }
-    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
+    /* ── Insight cards (top 3) ── */
+    .insights-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 3rem 0 0; }
+    .insight-card {
+      background: var(--dark-card); border: 1px solid var(--dark-border);
+      border-radius: var(--radius); padding: 1.5rem;
+      border-top: 3px solid var(--accent);
+      transition: border-color 0.2s;
+    }
+    .insight-card:hover { border-color: rgba(59,130,246,0.6); }
+    .insight-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 0.85rem; }
+    .insight-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .insight-title { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.5rem; line-height: 1.3; }
+    .insight-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── Tags ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
 
     /* ── Chapter opener ── */
     .chapter { display: flex; align-items: center; gap: 1.25rem; padding: 3.5rem 0 1.75rem; border-top: 1px solid var(--dark-border); margin-top: 2rem; }
@@ -107,43 +119,82 @@
     .split.reverse { direction: rtl; }
     .split.reverse > * { direction: ltr; }
 
+    /* ── Body text ── */
     .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
     .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
     .body-text li { margin-bottom: 0.5rem; }
     .body-text strong { color: var(--text-light); }
 
-    /* ── Image block ── */
+    /* ── Image block - dark bg ── */
     .img-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: var(--dark-card); }
     .img-block img { width: 100%; height: auto; object-fit: contain; display: block; max-height: 320px; }
     .img-caption { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 0.6rem; padding: 0 0.5rem; }
 
-    /* ── Photo strip ── */
-    .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
-    .photo-strip img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--dark-border); }
+    /* ── Image block - light bg (for white-background infographics) ── */
+    .img-block-light { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: #ffffff; }
+    .img-block-light img { width: 100%; height: auto; object-fit: contain; display: block; max-height: 340px; padding: 0.75rem; }
 
-    /* ── Callout — filled accent ── */
-    .callout-accent { background: var(--accent); border-radius: var(--radius); padding: 1.75rem 2rem; margin: 2.5rem 0; }
-    .callout-accent p { color: #fff; font-style: italic; font-size: 1.15rem; font-weight: 500; line-height: 1.6; margin: 0; }
-    .callout-accent cite { color: rgba(255,255,255,0.75); font-style: normal; font-size: 0.8rem; display: block; margin-top: 0.6rem; }
+    /* ── Image block - crop black sidelines ── */
+    .img-block-crop { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: var(--dark-card); }
+    .img-block-crop img { width: 100%; height: 260px; object-fit: cover; object-position: center; display: block; }
 
-    /* ── Callout — dark side border ── */
+    /* ── Full-width image ── */
+    .img-full { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: #ffffff; margin: 1.5rem 0; }
+    .img-full img { width: 100%; height: auto; object-fit: contain; display: block; padding: 1rem; max-height: 400px; }
+
+    /* ── Callout - filled accent ── */
+    .callout-accent { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
+    .callout-accent p { color: #9ca3af; font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
+    .callout-accent cite { color: var(--text-muted); font-style: normal; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
+
+    /* ── Callout - dark side border ── */
     .callout-side { background: var(--dark-card); border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
     .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
     .callout-side cite { color: var(--text-muted); font-style: normal; font-size: 0.8rem; display: block; margin-top: 0.4rem; }
 
-    /* ── Challenge pills ── */
-    .pills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; margin: 1.5rem 0; }
-    .pill { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 0.9rem 1rem; display: flex; align-items: center; gap: 0.65rem; transition: border-color 0.2s; }
+    /* ── Challenge pills - 3×3 grid ── */
+    .pills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+    .pill { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; transition: border-color 0.2s; }
     .pill:hover { border-color: rgba(59,130,246,0.4); }
-    .pill i { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
-    .pill span { font-size: 0.875rem; font-weight: 500; color: var(--text-light); }
+    .pill i { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; width: 20px; text-align: center; }
+    .pill span { font-size: 0.9rem; font-weight: 500; color: var(--text-light); }
 
-    /* ── Metrics evaluation grid ── */
+    /* ── Performance evaluation grid ── */
     .eval-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
     .eval-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
     .eval-card:hover { border-color: rgba(59,130,246,0.4); }
-    .eval-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.4rem; }
+    .eval-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.3rem; }
+    .eval-card .formula { font-size: 0.78rem; color: var(--accent); font-family: 'Georgia', serif; font-style: italic; margin-bottom: 0.4rem; display: block; letter-spacing: 0.01em; }
     .eval-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+    /* ── Preprocessing & comparison tables ── */
+    .prep-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 1.5rem 0; border-radius: var(--radius); overflow: hidden; }
+    .prep-table th { padding: 0.7rem 1rem; text-align: left; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: var(--dark-card); color: var(--text-muted); border-bottom: 2px solid var(--accent); }
+    .prep-table td { padding: 0.8rem 1rem; border-top: 1px solid var(--dark-border); vertical-align: middle; font-size: 0.875rem; }
+    .prep-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    .prep-table .step-num { font-weight: 700; color: var(--accent); width: 36px; }
+    .prep-table .step-name { font-weight: 700; color: var(--text-light); white-space: nowrap; }
+    .prep-table .step-desc { color: #9ca3af; }
+    .prep-table .cell-green { background: rgba(22,163,74,0.15); color: #4ade80; font-weight: 600; text-align: center; white-space: nowrap; }
+    .prep-table .cell-red   { background: rgba(239,68,68,0.12); color: #f87171; font-weight: 600; text-align: center; white-space: nowrap; }
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin: 1.5rem 0; border-radius: var(--radius); overflow: hidden; }
+    .cmp-table th { padding: 0.8rem 1rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid var(--dark-border); }
+    .cmp-table th:first-child { background: #1f2937; color: var(--text-muted); }
+    .cmp-table th.th-be  { background: rgba(59,130,246,0.2); color: #93c5fd; text-align: center; }
+    .cmp-table th.th-pca { background: rgba(168,85,247,0.2); color: #c4b5fd; text-align: center; }
+    .cmp-table td { padding: 0.75rem 1rem; border: 1px solid var(--dark-border); vertical-align: middle; }
+    .cmp-table td:first-child { font-weight: 600; color: var(--text-light); }
+    .cmp-table .cell-green { background: rgba(22,163,74,0.15); color: #4ade80; text-align: center; font-size: 0.82rem; }
+    .cmp-table .cell-red   { background: rgba(239,68,68,0.12); color: #f87171; text-align: center; font-size: 0.82rem; }
+    .cmp-table tr:nth-child(even) td:first-child { background: rgba(255,255,255,0.02); }
+
+    /* ── Recommendation grid 2x5 ── */
+    .reco-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin: 1.5rem 0; }
+    .reco-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.1rem 1.25rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s; }
+    .reco-card:hover { border-color: rgba(59,130,246,0.45); }
+    .reco-card-icon { flex-shrink: 0; width: 36px; height: 36px; background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 0.95rem; margin-top: 2px; }
+    .reco-card-body strong { display: block; font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.2rem; }
+    .reco-card-body p { margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
 
     /* ── Segmentation grid ── */
     .seg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
@@ -153,17 +204,27 @@
     .seg-card h4 i { color: var(--accent); }
     .seg-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
 
+    /* ── Model cards 2×3 grid ── */
+    .model-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
+    .model-card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.25rem 1.5rem; border-left: 3px solid var(--accent); transition: border-color 0.2s, transform 0.2s; }
+    .model-card:hover { border-color: rgba(59,130,246,0.7); transform: translateY(-2px); }
+    .model-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.35rem; }
+    .model-card p { font-size: 0.83rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    /* 4-classifier grid table */
+    .clf-grid-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 1.5rem 0 2rem; border-radius: var(--radius); overflow: hidden; }
+    .clf-grid-table th { padding: 0.85rem 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 700; background: var(--dark-card); color: var(--text-light); border: 1px solid var(--dark-border); }
+    .clf-grid-table td { padding: 0.65rem 0.75rem; text-align: center; font-size: 0.82rem; border: 1px solid var(--dark-border); line-height: 1.4; }
+    .clf-grid-table td.adv { background: rgba(22,163,74,0.12); color: #86efac; }
+    .clf-grid-table td.dis { background: rgba(239,68,68,0.1); color: #fca5a5; }
+
     /* ── Recommendations ── */
     .reco-list { list-style: none; padding: 0; margin: 1.5rem 0; }
     .reco-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.1rem 1.25rem; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); margin-bottom: 0.75rem; transition: border-color 0.2s; }
     .reco-item:hover { border-color: rgba(59,130,246,0.4); }
-    .reco-num { flex-shrink: 0; width: 30px; height: 30px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+    .reco-num { flex-shrink: 0; width: 30px; height: 30px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; margin-top: 2px; }
     .reco-body strong { color: var(--text-light); display: block; font-size: 0.9rem; margin-bottom: 0.2rem; }
     .reco-body p { margin: 0; font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
-
-    /* ── Tags ── */
-    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
 
     /* ── Back link ── */
     .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
@@ -181,18 +242,20 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 900px) {
+      .page-hero { grid-template-columns: 1fr; }
+      .hero-img-col { height: 260px; }
       .split { grid-template-columns: 1fr; }
       .split.reverse { direction: ltr; }
-      .metrics-row { grid-template-columns: 1fr 1fr; }
-      .photo-strip { grid-template-columns: 1fr; }
+      .insights-row { grid-template-columns: 1fr; }
+      .pills-grid { grid-template-columns: repeat(2, 1fr); }
       .content-wrap { max-width: 92%; }
+      .hero-text-col { padding: 3rem 5% 2rem; }
       .toc-strip { padding: 0.85rem 5%; }
     }
     @media (max-width: 600px) {
       .nav-links { display: none; }
-      .metrics-row { grid-template-columns: 1fr; }
+      .pills-grid { grid-template-columns: 1fr; }
       .seg-grid { grid-template-columns: 1fr; }
-      .hero-content { padding: 0 5% 3rem; }
     }
   </style>
 </head>
@@ -212,18 +275,17 @@
     </ul>
   </nav>
 
-  <!-- ── Hero ── -->
+  <!-- ── Hero - text left, image right ── -->
   <div class="page-hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Machine Learning &nbsp;·&nbsp; E-Commerce &nbsp;·&nbsp; Python</div>
+    <div class="hero-text-col">
       <h1 class="hero-title">Customer <span>Churn</span><br>in E-Commerce</h1>
-      <p class="hero-desc">An end-to-end analysis of customer churn prediction — from data acquisition challenges to model selection, segmentation, and actionable business recommendations.</p>
-      <div class="hero-meta">
+    </div>
+    <div class="hero-intro-col">
+      <p>An end-to-end analysis of customer churn prediction - from data acquisition challenges to model selection, segmentation, and actionable business recommendations.</p>
+      <div class="hero-meta" style="margin-top:1.25rem;">
         <span><i class="fa-brands fa-python"></i> Python</span>
         <span><i class="fa-solid fa-brain"></i> Machine Learning</span>
-        <span><i class="fa-solid fa-users"></i> CRM & Segmentation</span>
+        <span><i class="fa-solid fa-users"></i> CRM &amp; Segmentation</span>
       </div>
     </div>
   </div>
@@ -246,24 +308,8 @@
       <i class="fa-solid fa-arrow-left"></i> Back to Projects
     </a>
 
-    <!-- Metrics -->
-    <div class="metrics-row reveal">
-      <div class="metric-item">
-        <div class="val">6</div>
-        <div class="lbl">ML classifiers evaluated — from logistic regression to neural networks</div>
-      </div>
-      <div class="metric-item">
-        <div class="val">4</div>
-        <div class="lbl">Customer segmentation types — geographic, demographic, psychographic, behavioral</div>
-      </div>
-      <div class="metric-item">
-        <div class="val">10</div>
-        <div class="lbl">Actionable business recommendations derived from the analysis</div>
-      </div>
-    </div>
-
     <!-- Tags -->
-    <div class="tag-row reveal" style="margin-top:1.5rem">
+    <div class="tag-row reveal">
       <span class="tag">Python</span>
       <span class="tag">Machine Learning</span>
       <span class="tag">Scikit-Learn</span>
@@ -271,6 +317,12 @@
       <span class="tag">CRM</span>
       <span class="tag">Segmentation</span>
       <span class="tag">PCA</span>
+    </div>
+
+    <!-- Opening quote - before intro -->
+    <div class="callout-accent reveal">
+      <p>"You can have data without information, but you cannot have information without data."</p>
+      <cite>- Daniel Keys Moran</cite>
     </div>
 
     <!-- Chapter 01: Introduction -->
@@ -282,30 +334,12 @@
       </div>
     </div>
 
-    <div class="split reveal">
-      <div class="body-text">
-        <p>Customer churn — the rate at which customers cease doing business with a company over time — is one of the most critical metrics in e-commerce. In a fiercely competitive landscape, customers switch platforms with minimal friction: better pricing, preferred payment methods, or a single poor service experience can drive them away permanently.</p>
-        <p>Data science enables churn prediction by analysing customer interaction patterns and training machine learning models to identify at-risk customers <strong>before they leave</strong> — enabling proactive, cost-effective retention rather than expensive re-acquisition.</p>
-        <div class="callout-side">
-          <p>"You can have data without information, but you cannot have information without data."</p>
-          <cite>— Daniel Keys Moran</cite>
-        </div>
-      </div>
-      <div>
-        <div class="img-block">
-          <img src="../../images/Projects/ChurnPrevention/Cover1.png" alt="Customer churn overview" onerror="this.style.background='#21262d'" />
-        </div>
-      </div>
+    <div class="body-text reveal">
+      <p>Customer churn - the rate at which customers cease doing business with a company over time - is one of the most critical metrics in e-commerce. In a fiercely competitive landscape, customers switch platforms with minimal friction: better pricing, preferred payment methods, or a single poor service experience can drive them away permanently.</p>
+      <p>Data science enables churn prediction by analysing customer interaction patterns and training machine learning models to identify at-risk customers <strong>before they leave</strong> - enabling proactive, cost-effective retention rather than expensive re-acquisition.</p>
     </div>
 
-    <!-- Photo strip -->
-    <div class="photo-strip reveal">
-      <img src="../../images/Projects/ChurnPrevention/Customer Churn.png" alt="Churn overview" onerror="this.style.display='none'" />
-      <img src="../../images/Projects/ChurnPrevention/CS.png" alt="Customer segments" onerror="this.style.display='none'" />
-      <img src="../../images/Projects/ChurnPrevention/Strategy.png" alt="Retention strategy" onerror="this.style.display='none'" />
-    </div>
-
-    <!-- Chapter 02: Challenges -->
+    <!-- Chapter 02: Data Challenges -->
     <div id="challenges" class="chapter reveal">
       <div class="chapter-num">02</div>
       <div>
@@ -315,9 +349,10 @@
     </div>
 
     <div class="body-text reveal">
-      <p>Building a reliable churn prediction model starts with obtaining quality data — a process riddled with real-world obstacles:</p>
+      <p>Building a reliable churn prediction model starts with obtaining quality data - a process riddled with real-world obstacles. Integrating data from CRM, billing, shipping, customer service, and marketing systems introduces consistency issues. Class imbalance - where churners are a small minority - introduces bias that must be addressed through resampling or cost-sensitive learning.</p>
     </div>
 
+    <!-- 3×3 grid -->
     <div class="pills-grid reveal">
       <div class="pill"><i class="fa-solid fa-database"></i><span>Data Availability</span></div>
       <div class="pill"><i class="fa-solid fa-circle-exclamation"></i><span>Data Completeness</span></div>
@@ -330,10 +365,6 @@
       <div class="pill"><i class="fa-solid fa-chart-line"></i><span>Competitive Risk</span></div>
     </div>
 
-    <div class="body-text reveal">
-      <p>Integrating data from CRM, billing, shipping, customer service, and marketing systems introduces consistency issues. Class imbalance — where churners are a small minority — introduces bias that must be addressed through resampling or cost-sensitive learning.</p>
-    </div>
-
     <!-- Chapter 03: Pre-Processing -->
     <div id="preprocessing" class="chapter reveal">
       <div class="chapter-num">03</div>
@@ -343,42 +374,93 @@
       </div>
     </div>
 
-    <div class="split reveal">
-      <div class="body-text">
-        <p>Clean data increases productivity, improves model performance, and produces more reliable business insights. The preprocessing pipeline was guided by five principles:</p>
-        <ul>
-          <li><strong>Validity</strong> — Ensure values conform to defined rules and formats</li>
-          <li><strong>Accuracy</strong> — Correct or remove values that misrepresent reality</li>
-          <li><strong>Completeness</strong> — Impute or flag missing values appropriately</li>
-          <li><strong>Consistency</strong> — Resolve conflicting values across joined datasets</li>
-          <li><strong>Uniformity</strong> — Standardise units, date formats, and categorical encodings</li>
-        </ul>
-      </div>
-      <div>
-        <div class="img-block">
-          <img src="../../images/Projects/ChurnPrevention/Data PreProcessing.png" alt="Data pre-processing pipeline" onerror="this.style.background='#21262d'" />
-        </div>
-        <p class="img-caption">Data pre-processing pipeline — from raw data to model-ready features</p>
-      </div>
+    <div class="body-text reveal">
+      <p>The preprocessing pipeline was guided by five core principles. Each step ensures the dataset is clean, consistent, and model-ready before any algorithm is applied.</p>
     </div>
 
-    <div class="callout-accent reveal">
-      <p>"No data is clean, but most is useful."</p>
-      <cite>— Dean Abbott</cite>
+    <table class="prep-table reveal">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th style="width:140px">Principle</th>
+          <th>What it means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="step-num">01</td>
+          <td class="step-name">Validity</td>
+          <td class="step-desc">Values conform to defined domain rules and formats (e.g. no negative ages, valid date ranges)</td>
+        </tr>
+        <tr>
+          <td class="step-num">02</td>
+          <td class="step-name">Accuracy</td>
+          <td class="step-desc">Incorrect or misleading values are corrected or removed to ensure true representation</td>
+        </tr>
+        <tr>
+          <td class="step-num">03</td>
+          <td class="step-name">Completeness</td>
+          <td class="step-desc">Missing values are imputed using mean/median or flagged - no column left unaddressed</td>
+        </tr>
+        <tr>
+          <td class="step-num">04</td>
+          <td class="step-name">Consistency</td>
+          <td class="step-desc">Conflicting values across joined datasets resolved - e.g. duplicate customer records reconciled</td>
+        </tr>
+        <tr>
+          <td class="step-num">05</td>
+          <td class="step-name">Uniformity</td>
+          <td class="step-desc">Units, date formats, and categorical encodings standardised across all data sources</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Multicollinearity + PCA vs BE -->
+    <div class="body-text reveal" style="margin-top:2rem">
+      <p>When predictor variables are highly correlated, isolating their individual effects becomes unreliable. Two feature selection approaches were evaluated to handle multicollinearity before model training.</p>
     </div>
 
-    <div class="split reverse reveal">
-      <div>
-        <div class="img-block">
-          <img src="../../images/Projects/ChurnPrevention/MC.png" alt="Multicollinearity analysis" onerror="this.style.background='#21262d'" />
-        </div>
-        <p class="img-caption">Correlation matrix — identifying and resolving multicollinearity</p>
-      </div>
-      <div class="body-text">
-        <p>When predictor variables are highly correlated, isolating their individual effects becomes unreliable — producing unstable coefficient estimates that reduce model interpretability and predictive performance.</p>
-        <p><strong>Principal Component Analysis (PCA)</strong> transforms correlated variables into uncorrelated components, reducing dimensionality while retaining the variance that matters. The result: more stable, efficient, and interpretable models.</p>
-      </div>
-    </div>
+    <table class="cmp-table reveal">
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th class="th-be">Backward Elimination</th>
+          <th class="th-pca">Principal Component Analysis (PCA)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Original features preserved</td>
+          <td class="cell-green">✓ Yes - retains interpretable predictors</td>
+          <td class="cell-red">✗ No - transforms into components</td>
+        </tr>
+        <tr>
+          <td>Interpretability</td>
+          <td class="cell-green">✓ High - coefficients remain meaningful</td>
+          <td class="cell-red">✗ Low - components lack direct meaning</td>
+        </tr>
+        <tr>
+          <td>Handles multicollinearity</td>
+          <td class="cell-green">✓ Removes correlated predictors</td>
+          <td class="cell-green">✓ Eliminates via orthogonal transformation</td>
+        </tr>
+        <tr>
+          <td>Dimensionality reduction</td>
+          <td class="cell-red">✗ Limited - only removes insignificant vars</td>
+          <td class="cell-green">✓ Strong - compresses many features into fewer components</td>
+        </tr>
+        <tr>
+          <td>Computational cost</td>
+          <td class="cell-green">✓ Low - iterative p-value checks</td>
+          <td class="cell-red">✗ Higher - requires eigenvalue decomposition</td>
+        </tr>
+        <tr>
+          <td>Best suited for</td>
+          <td class="cell-green">✓ Small-to-mid feature sets needing transparency</td>
+          <td class="cell-green">✓ High-dimensional data with heavy correlation</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Chapter 04: Model Selection -->
     <div id="models" class="chapter reveal">
@@ -389,52 +471,101 @@
       </div>
     </div>
 
-    <div class="split reveal">
-      <div class="body-text">
-        <p>No single model is universally superior. The right choice depends on the business context — whether the priority is minimising false positives (unnecessary retention spend) or maximising true positives (catching every at-risk customer).</p>
-        <p>Models evaluated:</p>
-        <ul>
-          <li>Logistic Regression — interpretable baseline</li>
-          <li>Decision Trees — explainable rules for stakeholder communication</li>
-          <li>Random Forests — robust ensemble with feature importance</li>
-          <li>Gradient Boosting Machines (GBM) — high accuracy on tabular data</li>
-          <li>Support Vector Machines (SVM) — effective in high-dimensional spaces</li>
-          <li>Neural Networks — captures complex non-linear patterns</li>
-        </ul>
+    <div class="body-text reveal">
+      <p>No single model is universally superior. The right choice depends on the business context - whether the priority is minimising false positives (unnecessary retention spend) or maximising true positives (catching every at-risk customer).</p>
+    </div>
+
+    <div class="model-grid reveal">
+      <div class="model-card">
+        <h4>Logistic Regression</h4>
+        <p>Interpretable baseline - clear probability outputs for each customer</p>
       </div>
-      <div>
-        <div class="img-block">
-          <img src="../../images/Projects/ChurnPrevention/Classifiers.png" alt="Classifier comparison" onerror="this.style.background='#21262d'" />
-        </div>
-        <p class="img-caption">Classifier performance comparison across key evaluation metrics</p>
+      <div class="model-card">
+        <h4>Decision Trees</h4>
+        <p>Explainable rules for stakeholders - easy to visualise and communicate</p>
+      </div>
+      <div class="model-card">
+        <h4>Random Forests</h4>
+        <p>Robust ensemble with feature importance - reduces overfitting through averaging</p>
+      </div>
+      <div class="model-card">
+        <h4>AdaBoost</h4>
+        <p>Adapts to misclassified samples - iteratively focuses on harder-to-predict cases</p>
+      </div>
+      <div class="model-card">
+        <h4>Stacking Classifier</h4>
+        <p>Combines multiple models for improved generalisation across diverse patterns</p>
+      </div>
+      <div class="model-card">
+        <h4>Support Vector Machines</h4>
+        <p>Effective in high-dimensional spaces - strong boundary separation for complex data</p>
       </div>
     </div>
 
-    <!-- Performance metrics -->
-    <div class="eval-grid reveal">
-      <div class="eval-card">
-        <h4>Accuracy Score</h4>
-        <p>Frequency of correct predictions. Most useful when class distributions are balanced.</p>
+    <!-- 4-classifier characteristics grid -->
+    <table class="clf-grid-table reveal">
+      <thead>
+        <tr>
+          <th>Decision Tree Classifier</th>
+          <th>AdaBoost Classifier</th>
+          <th>Random Forest Classifier</th>
+          <th>Stacking Classifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="adv">Interpretability</td><td class="adv">Improved Performance</td><td class="adv">Robustness</td><td class="adv">Improved Predictive Accuracy</td></tr>
+        <tr><td class="adv">Feature Selection</td><td class="adv">Adaptivity</td><td class="adv">Flexibility</td><td class="adv">Flexibility</td></tr>
+        <tr><td class="adv">Nonlinear Relationships</td><td class="adv">Feature Importance</td><td class="adv">Feature Importance</td><td class="adv">Model Combination</td></tr>
+        <tr><td class="adv">Minimal Data Preprocessing</td><td class="adv">Versatility</td><td class="adv">Parallelization</td><td class="adv">Adaptability</td></tr>
+        <tr><td class="dis">Overfitting</td><td class="dis">Sensitivity to Noisy Data &amp; Outliers</td><td class="adv">Ensemble Learning</td><td class="adv">Improved Generalization</td></tr>
+        <tr><td class="dis">Lack of Robustness</td><td class="dis">Computational Complexity</td><td class="dis">Interpretability</td><td class="dis">Complexity</td></tr>
+        <tr><td class="dis">Limited Generalization</td><td class="dis">Risk of Overfitting</td><td class="dis">Computational Complexity</td><td class="dis">Potential Overfitting</td></tr>
+        <tr><td class="dis">Bias Towards Dominant Classes</td><td class="dis">Dependence on Weak Learners</td><td class="dis">Hyperparameter Tuning</td><td class="dis">Interpretability</td></tr>
+      </tbody>
+    </table>
+    <p class="img-caption reveal" style="text-align:center; margin-bottom:1.5rem">Key characteristics across the four evaluated classifiers - green rows indicate strengths, red rows indicate limitations</p>
+
+    <!-- Confusion matrix + metrics -->
+    <div class="split reveal" style="grid-template-columns: 3fr 2fr; align-items: start;">
+      <div>
+        <div class="img-block-light" style="padding: 0;">
+          <img src="../../images/Projects/ChurnPrevention/CF1.png" alt="Confusion matrix explained" style="width:100%; height:auto; max-height:none; padding:0.5rem; object-fit:contain;" />
+        </div>
+        <p class="img-caption">Confusion matrix - TP, TN, FP, FN with derived evaluation formulas</p>
       </div>
-      <div class="eval-card">
-        <h4>Precision Score</h4>
-        <p>Accuracy of positive predictions. Valuable when the cost of false alarms is high.</p>
-      </div>
-      <div class="eval-card">
-        <h4>Sensitivity / Recall</h4>
-        <p>How many actual churners were correctly identified. High recall reduces customer loss.</p>
-      </div>
-      <div class="eval-card">
-        <h4>Specificity Score</h4>
-        <p>Correct identification of non-churners — prevents wasted retention spend on loyal customers.</p>
-      </div>
-      <div class="eval-card">
-        <h4>F1-Score</h4>
-        <p>Harmonic mean of precision and recall. Ideal for imbalanced datasets.</p>
-      </div>
-      <div class="eval-card">
-        <h4>ROC AUC Score</h4>
-        <p>The model's ability to distinguish between outcomes across all classification thresholds.</p>
+      <div>
+        <div class="eval-grid" style="grid-template-columns: 1fr; gap: 0.65rem;">
+          <div class="eval-card">
+            <h4>Accuracy</h4>
+            <span class="formula">(TP + TN) / (TP + TN + FP + FN)</span>
+            <p>Frequency of correct predictions. Most reliable when classes are balanced.</p>
+          </div>
+          <div class="eval-card">
+            <h4>Precision</h4>
+            <span class="formula">TP / (TP + FP)</span>
+            <p>Accuracy of positive predictions. High when cost of false alarms is critical.</p>
+          </div>
+          <div class="eval-card">
+            <h4>Sensitivity (Recall)</h4>
+            <span class="formula">TP / (TP + FN)</span>
+            <p>Actual churners correctly identified. High recall = fewer customers lost.</p>
+          </div>
+          <div class="eval-card">
+            <h4>Specificity</h4>
+            <span class="formula">TN / (TN + FP)</span>
+            <p>Correct non-churner identification - prevents wasted retention spend.</p>
+          </div>
+          <div class="eval-card">
+            <h4>F1-Score</h4>
+            <span class="formula">2 × (Precision × Recall) / (Precision + Recall)</span>
+            <p>Harmonic mean of precision and recall. Ideal for imbalanced datasets.</p>
+          </div>
+          <div class="eval-card">
+            <h4>ROC AUC</h4>
+            <span class="formula">Area under the ROC curve</span>
+            <p>Model's ability to distinguish outcomes across all classification thresholds.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -472,7 +603,7 @@
 
     <div class="callout-accent reveal">
       <p>"When the customer comes first, the customer will last."</p>
-      <cite>— Robert Half</cite>
+      <cite>- Robert Half</cite>
     </div>
 
     <!-- Chapter 06: Recommendations -->
@@ -488,52 +619,74 @@
       <p>Accurate predictions are only valuable when paired with actionable strategies. Ten key recommendations derived from this analysis:</p>
     </div>
 
-    <ol class="reco-list reveal">
-      <li class="reco-item">
-        <div class="reco-num">1</div>
-        <div class="reco-body"><strong>Leverage insights from loyal customers</strong><p>Analyse loyal customer profiles to identify which incentives resonate — then apply those patterns to at-risk segments.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">2</div>
-        <div class="reco-body"><strong>Offer targeted incentives to retain customers</strong><p>Provide rewards, loyalty points, and limited-time coupons targeted at high-risk and long-term customers.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">3</div>
-        <div class="reco-body"><strong>Enhance delivery and payment options</strong><p>Improve fulfilment speed and expand payment methods to reduce friction at key conversion points.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">4</div>
-        <div class="reco-body"><strong>Form strategic partnerships</strong><p>Collaborate with banks and financial partners for exclusive discounts on card-based purchases.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">5</div>
-        <div class="reco-body"><strong>Provide excellent customer service</strong><p>Ensure fast, efficient issue resolution — poor support is one of the top churn drivers.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">6</div>
-        <div class="reco-body"><strong>Enhance the mobile experience</strong><p>Build mobile-first platforms with push notification capabilities to maintain engagement across channels.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">7</div>
-        <div class="reco-body"><strong>Drive meaningful communication &amp; engagement</strong><p>Use email, social media, and in-app notifications to share personalised product and promotion content.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">8</div>
-        <div class="reco-body"><strong>Collect and act on customer feedback</strong><p>Systematically gather feedback and feed it into product and service improvement cycles.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">9</div>
-        <div class="reco-body"><strong>Continuously monitor and adapt</strong><p>Refine models and segmentation as customer behaviour evolves — static models degrade over time.</p></div>
-      </li>
-      <li class="reco-item">
-        <div class="reco-num">10</div>
-        <div class="reco-body"><strong>Address pain points proactively</strong><p>Use the model's risk scores to trigger outreach before customers decide to leave, not after.</p></div>
-      </li>
-    </ol>
+    <div class="reco-grid reveal">
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <div class="reco-card-body"><strong>Leverage loyal customer insights</strong><p>Analyse loyal customer profiles to identify which incentives resonate - then apply those patterns to at-risk segments.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-gift"></i></div>
+        <div class="reco-card-body"><strong>Offer targeted incentives</strong><p>Provide rewards, loyalty points, and limited-time coupons targeted at high-risk and long-term customers.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="reco-card-body"><strong>Enhance delivery &amp; payment options</strong><p>Improve fulfilment speed and expand payment methods to reduce friction at key conversion points.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-handshake"></i></div>
+        <div class="reco-card-body"><strong>Form strategic partnerships</strong><p>Collaborate with banks and financial partners for exclusive discounts on card-based purchases.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-headset"></i></div>
+        <div class="reco-card-body"><strong>Provide excellent customer service</strong><p>Ensure fast, efficient issue resolution - poor support is one of the top churn drivers.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div class="reco-card-body"><strong>Enhance the mobile experience</strong><p>Build mobile-first platforms with push notification capabilities to maintain engagement across channels.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+        <div class="reco-card-body"><strong>Drive meaningful engagement</strong><p>Use email, social media, and in-app notifications to share personalised product and promotion content.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-comment-dots"></i></div>
+        <div class="reco-card-body"><strong>Collect and act on feedback</strong><p>Systematically gather feedback and feed it into product and service improvement cycles.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-rotate"></i></div>
+        <div class="reco-card-body"><strong>Continuously monitor and adapt</strong><p>Refine models and segmentation as customer behaviour evolves - static models degrade over time.</p></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-card-icon"><i class="fa-solid fa-bell"></i></div>
+        <div class="reco-card-body"><strong>Address pain points proactively</strong><p>Use the model's risk scores to trigger outreach before customers decide to leave, not after.</p></div>
+      </div>
+    </div>
+
+    <!-- Key insights -->
+    <div class="insights-row reveal" style="margin-top:3rem">
+      <div class="insight-card">
+        <div class="insight-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+        <div class="insight-label">Business Impact</div>
+        <div class="insight-title">Retain beats re-acquire</div>
+        <div class="insight-desc">Proactive ML-driven retention is significantly more cost-effective than re-acquisition - early scoring enables targeted outreach before customers decide to leave.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="insight-label">Model Finding</div>
+        <div class="insight-title">Ensemble methods to cover the loss</div>
+        <div class="insight-desc">Random Forest and Stacking Classifier consistently outperform single classifiers - delivering the strongest precision-recall balance for churn detection.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon"><i class="fa-solid fa-user-clock"></i></div>
+        <div class="insight-label">Value creation</div>
+        <div class="insight-title">Proactiveness rewards in long-term</div>
+        <div class="insight-desc">Shaping customer behavior at early lifecycle stage helps in creating longterm trust and improved CLV</div>
+      </div>
+    </div>
 
     <!-- Conclusion -->
     <div class="callout-side reveal" style="margin-top:3rem">
-      <p>Customer acquisition requires substantial investment — but sustainable growth is built on retention. Churn prediction enables proactive intervention, allowing businesses to redirect resources toward high-risk customers with personalised, timely outreach. Continuous refinement of models based on evolving customer behaviour ensures sustained competitive advantage in an increasingly data-driven industry.</p>
+      <p>Customer acquisition requires substantial investment - but sustainable growth is built on retention. Churn prediction enables proactive intervention, allowing businesses to redirect resources toward high-risk customers with personalised, timely outreach. Continuous refinement of models based on evolving customer behaviour ensures sustained competitive advantage in an increasingly data-driven industry.</p>
     </div>
 
   </div>
