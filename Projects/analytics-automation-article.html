@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automation in Analytics: A Decision, Not a Default — Jaykant Mendapara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d1117;
+      --dark-card:   #161b22;
+      --dark-border: #21262d;
+      --accent:      #3b82f6;
+      --accent-soft: #1d4ed8;
+      --text-light:  #f0f6fc;
+      --text-muted:  #8b949e;
+      --radius:      12px;
+      --shadow-lg:   0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text-light); line-height: 1.6; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand { color: var(--text-light); font-weight: 600; font-size: 1rem; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Hero ── */
+    .page-hero {
+      display: flex;
+      align-items: center;
+      min-height: 320px;
+      padding: 60px 10% 0;
+      background: var(--dark);
+      border-bottom: 1px solid var(--dark-border);
+      gap: 3rem;
+    }
+    .hero-text-col {
+      flex: 1;
+      padding: 3rem 0;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-intro-col {
+      flex: 0 0 60%;
+      padding: 1.5rem 1.75rem;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      margin: 2.5rem 0;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── TOC strip ── */
+    .toc-strip {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 3px solid var(--accent);
+      padding: 0.85rem 10%;
+      display: flex; gap: 0; align-items: center;
+      overflow-x: auto;
+    }
+    .toc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 1.5rem; white-space: nowrap; flex-shrink: 0; }
+    .toc-strip a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.85rem; border-radius: 4px; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+    .toc-strip a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Content ── */
+    .content-wrap { max-width: 90%; margin: 0 auto; padding: 0 0 5rem; }
+
+    /* ── Metrics row ── */
+    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 3rem 0 0; margin-bottom: 0; }
+    .metric-item { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .metric-item .val { font-size: 2.5rem; font-weight: 700; color: var(--text-light); line-height: 1; }
+    .metric-item .val span { font-size: 1.5rem; color: var(--accent); }
+    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* ── Chapter opener ── */
+    .chapter {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 3.5rem 0 1.75rem;
+      border-top: 1px solid var(--dark-border);
+      margin-top: 2rem;
+    }
+    .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
+    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
+    .chapter-title i { font-size: 1.2rem; color: var(--accent); font-family: 'Font Awesome 6 Free'; }
+    .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
+
+    /* ── Split section ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; margin-bottom: 2.5rem; }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+
+    .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
+    .body-text li { margin-bottom: 0.5rem; }
+    .body-text strong { color: var(--text-light); }
+
+    /* ── Illustration panel ── */
+    .illus-panel { border-radius: var(--radius); border: 1px solid var(--dark-border); background: var(--dark-card); padding: 2rem; display: flex; align-items: center; justify-content: center; }
+    .illus-panel svg { width: 100%; height: auto; max-height: 260px; }
+
+    /* ── Image block ── */
+    .img-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: var(--dark-card); }
+    .img-block img { width: 100%; height: auto; object-fit: contain; display: block; max-height: 320px; }
+    .img-caption { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 0.6rem; padding: 0 0.5rem; }
+
+    /* ── Icon display block ── */
+    .icon-display { display: flex; align-items: center; justify-content: center; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); min-height: 220px; }
+    .icon-display i { font-size: 5rem; color: var(--accent); opacity: 0.55; }
+
+    /* ── Callout - filled accent ── */
+    .callout-accent { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
+    .callout-accent p { color: #9ca3af; font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
+    .callout-accent cite { color: var(--text-muted); font-style: normal; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
+
+    /* ── Callout - dark side border ── */
+    .callout-side {
+      background: var(--dark-card); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+    }
+    .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
+
+    /* ── Two-card row ── */
+    .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.75rem; }
+    .card p, .card li { font-size: 0.92rem; color: #9ca3af; line-height: 1.75; }
+    .card p { margin-bottom: 0.6rem; }
+    .card p:last-child { margin-bottom: 0; }
+    .card ul { padding-left: 1.1rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .card .card-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--dark-border); padding-top: 0.7rem; margin-top: 0.2rem; }
+
+    /* ── Tags ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
+
+    /* ── CTA ── */
+    .cta-bar { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-top: 3rem; }
+    .cta-bar p { color: #9ca3af; margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--accent-soft); }
+
+    /* ── Back link ── */
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer { background: var(--dark-card); border-top: 1px solid var(--dark-border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-socials a { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--dark-border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; transition: color 0.2s, border-color 0.2s; }
+    .footer-socials a:hover { color: var(--text-light); border-color: var(--accent); }
+    footer p { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
+      .hero-intro-col { flex: 1 1 auto; }
+      .split { grid-template-columns: 1fr; }
+      .split.reverse { direction: ltr; }
+      .two-card { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .content-wrap { max-width: 92%; }
+      .toc-strip { padding: 0.85rem 5%; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .metrics-row { grid-template-columns: 1fr; }
+      .hero-intro-col { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">Jaykant Mendapara</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#education">Education</a></li>
+      <li><a href="../index.html#skills">Skills</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <div class="page-hero">
+    <div class="hero-text-col">
+      <div class="hero-eyebrow">Analytics &nbsp;·&nbsp; Thought Leadership</div>
+      <h1 class="hero-title">Automation in Analytics:<br>A Decision, <span>Not a Default</span></h1>
+      <p class="hero-desc">Not everything that can be automated should be. As AI reshapes the analyst's toolkit faster than governance can follow - a practitioner's case for keeping judgment at the centre of the workflow.</p>
+      <div class="hero-meta">
+        <span><i class="fa-solid fa-clock"></i> 7 min read</span>
+        <span><i class="fa-solid fa-lightbulb"></i> Thought Leadership</span>
+        <span><i class="fa-solid fa-calendar"></i> July 2025</span>
+      </div>
+    </div>
+    <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">72<span>%</span></div>
+        <div class="lbl">of analytics teams now prioritise AI-assisted coding - yet only 24% invest equally in governance and validation.</div>
+      </div>
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">71<span>%</span></div>
+        <div class="lbl">are concerned about hallucinated or incorrect data reaching stakeholders in an AI-accelerated workflow.</div>
+      </div>
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">40<span>%+</span></div>
+        <div class="lbl">of agentic AI projects are expected to be cancelled by 2027 over cost, unclear value, or poor controls (Gartner).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOC strip ── -->
+  <div class="toc-strip">
+    <span class="toc-label">In this article</span>
+    <a href="#default">The Wrong Default</a>
+    <a href="#why">Why We Automate</a>
+    <a href="#failures">Three Failure Modes</a>
+    <a href="#framework">The Decision Framework</a>
+    <a href="#never">What to Never Automate</a>
+    <a href="#ai">The AI Inflection Point</a>
+    <a href="#capacity">Automation as Capacity</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content-wrap">
+
+    <a href="../index.html#projects" class="back-link reveal">
+      <i class="fa-solid fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <!-- Tags -->
+    <div class="tag-row reveal" style="margin-top:1.5rem">
+      <span class="tag">Analytics Automation</span>
+      <span class="tag">Agentic AI</span>
+      <span class="tag">Python</span>
+      <span class="tag">GCP</span>
+      <span class="tag">dbt</span>
+      <span class="tag">BigQuery</span>
+      <span class="tag">Data Governance</span>
+      <span class="tag">Thought Leadership</span>
+    </div>
+
+    <!-- Chapter 01: The Wrong Default -->
+    <div id="default" class="chapter reveal">
+      <div class="chapter-num">01</div>
+      <div>
+        <div class="chapter-eyebrow">Introduction</div>
+        <div class="chapter-title"><i class="fa-solid fa-triangle-exclamation"></i>The Wrong Default</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>There's a specific kind of silence that follows a broken automated report. No error message. No failed job alert. Just a dashboard quietly showing last month's numbers as if they were today's, and a stakeholder making decisions on stale data while you're working on something else entirely.</p>
+      <p>I've been in that position. And it taught me something most analytics content glosses over: automation is not a productivity strategy. It's a design decision - and like any design decision, it can be made well or badly.</p>
+      <p>This matters more now than ever. The dbt Labs 2026 State of Analytics Engineering report - the most comprehensive pulse-check of the field published this year - opens with a blunt finding: <strong>AI is scaling analytics output faster than governance can follow.</strong> The teams and tools are moving. The controls haven't kept pace. That gap is exactly where poor automation decisions live.</p>
+    </div>
+
+    <!-- Chapter 02: Why We Automate -->
+    <div id="why" class="chapter reveal">
+      <div class="chapter-num">02</div>
+      <div>
+        <div class="chapter-eyebrow">Context</div>
+        <div class="chapter-title"><i class="fa-solid fa-bolt"></i>Why Analysts Default to Automation</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The instinct makes sense. Repetitive tasks feel like a waste of analytical capacity. If you've built a segmented deal analysis three Mondays in a row, the natural response is to script it, schedule it, and reclaim those hours for something more strategic. Tools like Python, BigQuery, dbt, and cloud schedulers make this easier than ever.</p>
+      <p>The tooling landscape has accelerated sharply. The Fivetran and dbt Labs merger - announced October 2025 and completed in 2026 - created a combined analytics infrastructure business approaching $600M in revenue. Snowflake's native dbt integration lets teams run transformation pipelines directly inside the warehouse without separate containers or VMs. What once required a dedicated data engineering setup is now a few clicks away.</p>
+      <p>But <strong>"I can automate this" is a different question from "I should automate this."</strong> The first is about capability. The second is about judgment - and judgment is exactly what automation cannot replace. When tooling lowers the cost of automating something, it also lowers the friction that used to force analysts to think carefully about whether they should.</p>
+    </div>
+
+    <div class="metrics-row reveal">
+      <div class="metric-item">
+        <div class="val">72<span>%</span></div>
+        <div class="lbl">of practitioners now prioritise AI-assisted coding in their development process (dbt Labs, 2026).</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">24<span>%</span></div>
+        <div class="lbl">invest equally in AI-assisted pipeline management - testing, observability, quality controls.</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">$600<span>M</span></div>
+        <div class="lbl">combined revenue of the Fivetran–dbt Labs entity - transformation automation is now enterprise infrastructure.</div>
+      </div>
+    </div>
+
+    <!-- Chapter 03: Three Failure Modes -->
+    <div id="failures" class="chapter reveal">
+      <div class="chapter-num">03</div>
+      <div>
+        <div class="chapter-eyebrow">Risk</div>
+        <div class="chapter-title"><i class="fa-solid fa-circle-xmark"></i>Three Ways Automation Fails</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Automation fails in three reliably distinct ways - and all three are avoidable with foresight. The market is currently producing data on all of them simultaneously.</p>
+    </div>
+
+    <div class="two-card reveal" style="grid-template-columns: 1fr;">
+      <div class="card">
+        <h3><i class="fa-solid fa-1" style="color:var(--accent);margin-right:0.5rem"></i>The logic changes, but the automation doesn't</h3>
+        <p>Business rules shift constantly. Loyalty tier definitions change. Campaign structures get restructured. A product category gets reclassified. When the underlying logic of an analysis changes but the automated script doesn't, you get output that looks correct but isn't - and because no human is running it manually, no one catches it until the damage is done.</p>
+        <p class="card-note">This scales in agentic pipelines. An AI agent diagnosing a schema drift may apply a fix that resolves the symptom while masking a deeper architectural problem - a failure mode flagged as a primary risk of self-healing data pipelines in 2026. Blindly fixing everything can "create new failure modes" rather than eliminate them.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-2" style="color:var(--accent);margin-right:0.5rem"></i>The output is consumed without context</h3>
+        <p>Automated reports are excellent at delivering numbers and poor at delivering nuance. A weekly dashboard can tell you new customer acquisition dropped. It can't tell you whether that's a targeting change, a seasonal shift, a competitor promotion, or a pipeline issue. Remove the analyst from the loop and you lose the interpretive layer - stakeholders decide on numbers without the story that gives them meaning.</p>
+        <p class="card-note">LLM text-to-SQL tools illustrate this sharply. Benchmarks report 85–90% accuracy on controlled datasets, but against enterprise-grade Spider 2.0 even top models struggle - faulty joins, missing filters, hallucinated columns. The query executes, the output looks plausible, and no human catches it. "Silent error is the most expensive failure mode of all."</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-3" style="color:var(--accent);margin-right:0.5rem"></i>The maintenance cost is underestimated</h3>
+        <p>Building an automation is one sprint. Maintaining it is indefinite. Every schema change, every API update, every upstream data quality issue becomes your problem to fix. Analysts who automate aggressively often spend as much time debugging pipelines as they'd have spent running the analyses - with the added pressure that something is already broken by the time they find out.</p>
+        <p class="card-note">The structural number: 72% of teams prioritise AI-assisted coding, but only 24% invest equally in pipeline management. Teams accelerate creation faster than they reinforce stability. The debt accumulates silently, across every pipeline that ships without adequate validation.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 04: The Decision Framework -->
+    <div id="framework" class="chapter reveal">
+      <div class="chapter-num">04</div>
+      <div>
+        <div class="chapter-eyebrow">Framework</div>
+        <div class="chapter-title"><i class="fa-solid fa-list-check"></i>A Simple Framework for Deciding</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Before automating any piece of analytical work, run it against three questions:</p>
+    </div>
+
+    <div class="two-card reveal" style="grid-template-columns: 1fr;">
+      <div class="card">
+        <h3><i class="fa-solid fa-repeat" style="color:var(--accent);margin-right:0.5rem"></i>Is it recurring and structurally stable?</h3>
+        <p>If the same question is asked in the same way on a predictable cadence - and the underlying data structure and business logic are unlikely to shift - automation adds genuine value. ETL pipelines, KPI refresh jobs, standard weekly reports fit the pattern. The logic is fixed, the frequency is high, and the maintenance cost is manageable.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-comments" style="color:var(--accent);margin-right:0.5rem"></i>Does the output require interpretation each time?</h3>
+        <p>If the value lies not in the numbers but in what you make of them - campaign post-mortems, attribution deep dives, exploratory segmentation - automation should stop at the data layer. Pull the data automatically, by all means. But the synthesis, the narrative, the recommendation: that stays human.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>What breaks if it's wrong and no one notices?</h3>
+        <p>This is the highest-stakes question. For a recurring operational report feeding weekly planning, silent failure is a serious risk. For a one-off exploratory analysis, the stakes are lower. The higher the downstream consequence, the more a human needs to remain in the loop - reviewing outputs before distribution, or with explicit alerting so failures surface quickly.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 05: What to Never Automate -->
+    <div id="never" class="chapter reveal">
+      <div class="chapter-num">05</div>
+      <div>
+        <div class="chapter-eyebrow">Boundaries</div>
+        <div class="chapter-title"><i class="fa-solid fa-hand"></i>What Should Never Be Automated</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Some analytical work is structurally resistant to automation - not because it's technically complex, but because its value is inseparable from judgment:</p>
+      <ul>
+        <li><strong>Exploratory analysis.</strong> When you don't yet know what you're looking for, you can't encode the question in a script.</li>
+        <li><strong>Stakeholder narratives.</strong> A good analytical story requires understanding the audience, the business context, and the decision at hand. None of that is scriptable.</li>
+        <li><strong>Anomaly investigation.</strong> You can automate anomaly detection. You cannot automate knowing whether an anomaly matters or why.</li>
+        <li><strong>Strategic recommendations.</strong> The last mile between data and action is human by definition.</li>
+      </ul>
+      <p>Trying to automate these doesn't make analytics more efficient. It makes it less useful. And no amount of automation resolves an ownership question - that's a human governance decision, and it has to happen before, not after, you build the pipeline that depends on it.</p>
+    </div>
+
+    <div class="callout-side reveal">
+      <p>41% of analytics teams still cite ambiguous data ownership as an ongoing challenge - unchanged year-over-year. The bottleneck has shifted from infrastructure to accountability. (dbt Labs, 2026)</p>
+    </div>
+
+    <!-- Chapter 06: The AI Inflection Point -->
+    <div id="ai" class="chapter reveal">
+      <div class="chapter-num">06</div>
+      <div>
+        <div class="chapter-eyebrow">Market Context</div>
+        <div class="chapter-title"><i class="fa-solid fa-robot"></i>The AI Inflection Point</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The automation question now has a higher-stakes, faster-moving version. Agentic AI systems - platforms that can plan, execute, and verify analytical workflows without step-by-step human guidance - are moving out of proof-of-concept and into production data stacks. Snowflake announced a $200M partnership with Anthropic in December 2025 to build agentic capabilities into enterprise data platforms; Databricks launched Genie Code in March 2026, generating production-ready dbt models and validating its own outputs.</p>
+    </div>
+
+    <div class="two-card reveal">
+      <div class="card">
+        <h3><i class="fa-solid fa-arrow-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>Market momentum</h3>
+        <p><strong>38.6%</strong> growth in the data science and AI platforms subsegment in 2024 - the highest ever recorded, driven by agentic AI interest (Gartner).</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-circle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>Reality check</h3>
+        <p><strong>40%+</strong> of agentic AI projects are expected to be cancelled by 2027 due to rising costs, unclear value, or poor risk controls (Gartner).</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-shield-halved" style="color:var(--accent);margin-right:0.5rem"></i>The trust gap</h3>
+        <p><strong>83%</strong> of analytics teams now rank trust in data as a top strategic priority - up from 66% the year before, reflecting unease with unvalidated AI output.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-money-bill-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>The cost pressure</h3>
+        <p><strong>57%</strong> of teams report increased warehouse and compute spend, versus only 36% reporting increased team budgets - a widening cost gap driven by AI workloads.</p>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The three failure modes don't disappear with agentic AI. They scale. An agent that applies a hallucinated schema fix, or generates a dbt model that silently misjoins tables, doesn't create a single wrong answer. It creates a factory for wrong answers, running on a schedule, unattended. The foundation determines what the automation can trust - if quality, ownership, and documentation aren't in place, AI agents inherit those gaps and amplify them.</p>
+    </div>
+
+    <div class="callout-accent reveal">
+      <p>"AI won't fix a messy foundation. It just makes the lack of discipline much more visible."</p>
+      <cite>— Bruno Lima, Lead Data Engineer, phData<br>(dbt Labs 2026 Report)</cite>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The teams navigating this best are practising what's now called <strong>bounded autonomy</strong> - letting agents execute where outcomes are predictable and pre-approved, while keeping humans in the loop wherever risk or uncertainty increases. Not constraining AI, but calibrating how much autonomy maps to how much established trust. Discipline becomes the prerequisite for autonomy.</p>
+    </div>
+
+    <!-- Chapter 07: Automation as Capacity -->
+    <div id="capacity" class="chapter reveal">
+      <div class="chapter-num">07</div>
+      <div>
+        <div class="chapter-eyebrow">Perspective</div>
+        <div class="chapter-title"><i class="fa-solid fa-lightbulb"></i>Automation as Capacity, Not Replacement</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The most valuable thing automation ever did for me was not saving hours on a report. It was creating the space to do the work that actually moved things - building attribution models, running proper A/B tests, digging into customer segments no one had thought to look at.</p>
+      <p>That's the right framing. Automation is not a way to do analysis faster. It's a way to protect the time and attention needed for the analysis that actually requires an analyst. Trust in data rose from 66% to 83% as a strategic priority year-over-year - not because automation is being abandoned, but because the teams building durable capability understand that output and reliability have to scale together.</p>
+    </div>
+
+    <div class="callout-accent reveal">
+      <p>Automate the question you've already answered. Stay present for the ones you haven't.</p>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The goal is never to automate everything. It's to automate exactly the right things - so that what remains on your desk is work that genuinely needs you. In a market where AI is compressing the cost of building pipelines to nearly zero, that human layer of judgment, interpretation, and accountability is not a legacy burden. It's the differentiator.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-socials">
+      <a href="https://github.com/Jaykant-M/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener"><i class="fa-solid fa-chart-bar"></i></a>
+      <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p>&copy; 2025 Jaykant Mendapara</p>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

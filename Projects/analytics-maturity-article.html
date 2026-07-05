@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Analytics Maturity Gap — Jaykant Mendapara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d1117;
+      --dark-card:   #161b22;
+      --dark-border: #21262d;
+      --accent:      #3b82f6;
+      --accent-soft: #1d4ed8;
+      --text-light:  #f0f6fc;
+      --text-muted:  #8b949e;
+      --radius:      12px;
+      --shadow-lg:   0 8px 40px rgba(0,0,0,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text-light); line-height: 1.6; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand { color: var(--text-light); font-weight: 600; font-size: 1rem; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Hero ── */
+    .page-hero {
+      display: flex;
+      align-items: center;
+      min-height: 320px;
+      padding: 60px 10% 0;
+      background: var(--dark);
+      border-bottom: 1px solid var(--dark-border);
+      gap: 3rem;
+    }
+    .hero-text-col {
+      flex: 1;
+      padding: 3rem 0;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-intro-col {
+      flex: 0 0 60%;
+      padding: 1.5rem 1.75rem;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius);
+      margin: 2.5rem 0;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── TOC strip ── */
+    .toc-strip {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 3px solid var(--accent);
+      padding: 0.85rem 10%;
+      display: flex; gap: 0; align-items: center;
+      overflow-x: auto;
+    }
+    .toc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 1.5rem; white-space: nowrap; flex-shrink: 0; }
+    .toc-strip a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.85rem; border-radius: 4px; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+    .toc-strip a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Content ── */
+    .content-wrap { max-width: 90%; margin: 0 auto; padding: 0 0 5rem; }
+
+    /* ── Metrics row ── */
+    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 3rem 0 0; margin-bottom: 0; }
+    .metric-item { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .metric-item .val { font-size: 2.5rem; font-weight: 700; color: var(--text-light); line-height: 1; }
+    .metric-item .val span { font-size: 1.5rem; color: var(--accent); }
+    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* ── Chapter opener ── */
+    .chapter {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 3.5rem 0 1.75rem;
+      border-top: 1px solid var(--dark-border);
+      margin-top: 2rem;
+    }
+    .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
+    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
+    .chapter-title i { font-size: 1.2rem; color: var(--accent); font-family: 'Font Awesome 6 Free'; }
+    .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
+
+    /* ── Split section ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; margin-bottom: 2.5rem; }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+
+    .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
+    .body-text li { margin-bottom: 0.5rem; }
+    .body-text strong { color: var(--text-light); }
+
+    /* ── Illustration panel ── */
+    .illus-panel { border-radius: var(--radius); border: 1px solid var(--dark-border); background: var(--dark-card); padding: 2rem; display: flex; align-items: center; justify-content: center; }
+    .illus-panel svg { width: 100%; height: auto; max-height: 260px; }
+
+    /* ── Image block ── */
+    .img-block { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--dark-border); background: var(--dark-card); }
+    .img-block img { width: 100%; height: auto; object-fit: contain; display: block; max-height: 320px; }
+    .img-caption { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 0.6rem; padding: 0 0.5rem; }
+
+    /* ── Icon display block ── */
+    .icon-display { display: flex; align-items: center; justify-content: center; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); min-height: 220px; }
+    .icon-display i { font-size: 5rem; color: var(--accent); opacity: 0.55; }
+
+    /* ── Callout - filled accent ── */
+    .callout-accent { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
+    .callout-accent p { color: #9ca3af; font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
+    .callout-accent cite { color: var(--text-muted); font-style: normal; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
+
+    /* ── Callout - dark side border ── */
+    .callout-side {
+      background: var(--dark-card); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+    }
+    .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
+
+    /* ── Two-card row ── */
+    .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.75rem; }
+    .card p, .card li { font-size: 0.92rem; color: #9ca3af; line-height: 1.75; }
+    .card p { margin-bottom: 0.6rem; }
+    .card p:last-child { margin-bottom: 0; }
+    .card ul { padding-left: 1.1rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .card .card-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--dark-border); padding-top: 0.7rem; margin-top: 0.2rem; }
+
+    /* ── Tags ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
+
+    /* ── CTA ── */
+    .cta-bar { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-top: 3rem; }
+    .cta-bar p { color: #9ca3af; margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
+    .cta-btn:hover { background: var(--accent-soft); }
+
+    /* ── Back link ── */
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer { background: var(--dark-card); border-top: 1px solid var(--dark-border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-socials a { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--dark-border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; transition: color 0.2s, border-color 0.2s; }
+    .footer-socials a:hover { color: var(--text-light); border-color: var(--accent); }
+    footer p { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
+      .hero-intro-col { flex: 1 1 auto; }
+      .split { grid-template-columns: 1fr; }
+      .split.reverse { direction: ltr; }
+      .two-card { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .content-wrap { max-width: 92%; }
+      .toc-strip { padding: 0.85rem 5%; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .metrics-row { grid-template-columns: 1fr; }
+      .hero-intro-col { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">Jaykant Mendapara</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#education">Education</a></li>
+      <li><a href="../index.html#skills">Skills</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <div class="page-hero">
+    <div class="hero-text-col">
+      <div class="hero-eyebrow">Analytics &nbsp;·&nbsp; Thought Leadership</div>
+      <h1 class="hero-title">The Analytics <span>Maturity Gap</span></h1>
+      <p class="hero-desc">Most analytics teams have more infrastructure than ever - and are still solving the wrong problems. A practitioner's look at the four places where analytical capability fails to translate into business impact.</p>
+      <div class="hero-meta">
+        <span><i class="fa-solid fa-clock"></i> 8 min read</span>
+        <span><i class="fa-solid fa-lightbulb"></i> Thought Leadership</span>
+        <span><i class="fa-solid fa-calendar"></i> July 2025</span>
+      </div>
+    </div>
+    <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">32<span>%</span></div>
+        <div class="lbl">of executives say their data strategy has been effective - despite heavy investment in analytics infrastructure.</div>
+      </div>
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">5-25<span>×</span></div>
+        <div class="lbl">higher cost of acquiring a new customer than retaining one - yet investment still skews to acquisition.</div>
+      </div>
+      <div class="metric-item" style="border:none; padding:0;">
+        <div class="val">70<span>%</span></div>
+        <div class="lbl">of analytics and BI initiatives underdeliver - not because the data is wrong, but because the strategy is.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOC strip ── -->
+  <div class="toc-strip">
+    <span class="toc-label">In this article</span>
+    <a href="#paradox">The Paradox</a>
+    <a href="#stack">The Stack Trap</a>
+    <a href="#segmentation">Segmentation</a>
+    <a href="#testing">A/B Testing</a>
+    <a href="#clv">CLV as Strategy</a>
+    <a href="#human">The Human Layer</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content-wrap">
+
+    <a href="../index.html#projects" class="back-link reveal">
+      <i class="fa-solid fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <!-- Tags -->
+    <div class="tag-row reveal" style="margin-top:1.5rem">
+      <span class="tag">Analytics Strategy</span>
+      <span class="tag">CRM Segmentation</span>
+      <span class="tag">A/B Testing</span>
+      <span class="tag">Customer Lifetime Value</span>
+      <span class="tag">Modern Data Stack</span>
+      <span class="tag">dbt</span>
+      <span class="tag">BigQuery</span>
+      <span class="tag">Thought Leadership</span>
+    </div>
+
+    <!-- Chapter 01: The Paradox -->
+    <div id="paradox" class="chapter reveal">
+      <div class="chapter-num">01</div>
+      <div>
+        <div class="chapter-eyebrow">Introduction</div>
+        <div class="chapter-title"><i class="fa-solid fa-scale-unbalanced"></i>The Paradox</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Most analytics teams today have better infrastructure than ever. BigQuery is cheaper than a junior analyst's salary. dbt lets a single engineer build what once required an entire data engineering team. Tableau, Power BI, and Looker Studio put dashboards in front of stakeholders who wouldn't have known what a SQL query was five years ago.</p>
+      <p>And yet something hasn't kept pace. Decisions haven't improved proportionally to the data available. Campaigns still run on instinct. A/B tests reach statistical significance and get shelved. Customer lifetime value is tracked in a dashboard nobody opens. Segmentation logic gets rebuilt from scratch every quarter because nobody owns it.</p>
+      <p>This is the <strong>analytics maturity gap</strong> - the distance between having analytical capability and using it to produce consistently better outcomes. It's not a tooling problem. It's a strategy problem. And it shows up in four predictable, fixable places.</p>
+    </div>
+
+    <!-- Chapter 02: The Stack Trap -->
+    <div id="stack" class="chapter reveal">
+      <div class="chapter-num">02</div>
+      <div>
+        <div class="chapter-eyebrow">Infrastructure</div>
+        <div class="chapter-title"><i class="fa-solid fa-layer-group"></i>When the Modern Data Stack Becomes the Goal</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The modern data stack has quietly become a default purchase decision before it becomes a considered one. A growing number of mid-market organisations run BigQuery, dbt, Snowflake, Fivetran, and Tableau simultaneously - and produce weekly reports with the same insight density as an Excel pivot table from 2015.</p>
+      <p>The stack is not the strategy. It's the infrastructure for one. And infrastructure only creates value when it's matched to a genuine analytical problem the organisation is ready to act on. Many teams skip that step entirely.</p>
+    </div>
+
+    <div class="two-card reveal" style="grid-template-columns: 1fr;">
+      <div class="card">
+        <h3><i class="fa-solid fa-database" style="color:var(--accent);margin-right:0.5rem"></i>Pipelines built for data nobody queries</h3>
+        <p>The ease of ingesting data has outpaced the ability to use it. Teams build pipelines because the tooling makes it easy, not because there's a defined question on the other end. The result is a warehouse full of tables with no downstream consumers and no owner accountable for their quality.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-gauge" style="color:var(--accent);margin-right:0.5rem"></i>Dashboards that measure activity, not decisions</h3>
+        <p>A dashboard that shows weekly active users, revenue by channel, and campaign click-through rates is measuring what happened. It's not answering what to do differently. Most BI builds stop at the former - and stakeholders learn to open the dashboard, nod, and close it without changing anything.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-user-slash" style="color:var(--accent);margin-right:0.5rem"></i>No ownership, no accountability</h3>
+        <p>Data assets without clear owners decay. Definitions drift. Metrics get calculated differently in different reports. When someone asks "why does the revenue figure here not match finance?", the answer is usually a shrug - because nobody owns either number end-to-end.</p>
+        <p class="card-note">Ownership is the difference between a metric layer people trust and one they quietly work around in spreadsheets. No tool assigns it - someone has to decide who holds each number, and that decision rarely gets made.</p>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The question to ask before adding any new tool is not "can this solve our problem?" It's <strong>"have we clearly defined what problem we're solving, who owns the outcome, and what we'd do differently if we had the answer?"</strong> If the answer to any of those is unclear, the tool will not help.</p>
+    </div>
+
+    <!-- Chapter 03: Segmentation -->
+    <div id="segmentation" class="chapter reveal">
+      <div class="chapter-num">03</div>
+      <div>
+        <div class="chapter-eyebrow">CRM &amp; Lifecycle</div>
+        <div class="chapter-title"><i class="fa-solid fa-users-viewfinder"></i>CRM Segmentation That Actually Works</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Most CRM segmentation still runs on RFM: Recency, Frequency, Monetary value. It was a useful framework when data was scarce and computation was expensive. Neither is true anymore - and RFM alone is no longer enough.</p>
+      <p>RFM tells you what customers did. Behaviour-based and lifecycle segmentation tells you where they are in their relationship with your brand - and predicts what they're likely to do next. That distinction changes what you send, when you send it, and who you spend budget on.</p>
+    </div>
+
+    <div class="callout-accent reveal">
+      <p>The best segmentation doesn't describe your customers. It predicts their next action - and tells you which action to take in response.</p>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The failure modes are consistent across most organisations:</p>
+      <ul>
+        <li><strong>Segments built on historical purchase behaviour alone</strong> - no velocity signals, no intent data, no lifecycle stage. A customer who bought once six months ago looks identical to one who browsed daily last week and abandoned at checkout.</li>
+        <li><strong>Segments that can't be actioned</strong> - too broad to target meaningfully, overlapping so customers fall into multiple lists, or defined in a way that can't be mapped to a delivery channel.</li>
+        <li><strong>Segments treated as campaign lists</strong> - rebuilt each time a send goes out rather than maintained as stable, living data assets that update continuously.</li>
+      </ul>
+      <p>What works is building segments as customer-state definitions rather than exports. A "high-value at risk" segment shouldn't be a one-time CSV pull - it should be a live data asset, updated daily, that feeds directly into CRM suppression, paid audience exclusion, and automated retention triggers. The moment it becomes a report is the moment it stops being a tool.</p>
+    </div>
+
+    <div class="two-card reveal">
+      <div class="card">
+        <h3><i class="fa-solid fa-arrow-right-arrow-left" style="color:var(--accent);margin-right:0.5rem"></i>Lifecycle segmentation</h3>
+        <p>Tracks a customer's progression through onboarding into habitual behaviour - the window where retention spend has the highest leverage.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-bullseye" style="color:var(--accent);margin-right:0.5rem"></i>Behavioural signals</h3>
+        <p>Browsing frequency, cart abandonment, and category affinity predict next purchase far better than last purchase date alone.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-shield-halved" style="color:var(--accent);margin-right:0.5rem"></i>Suppression logic</h3>
+        <p>High-CLV customers should often be excluded from discount campaigns - sending them an offer trains them to wait for one.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-cubes" style="color:var(--accent);margin-right:0.5rem"></i>Live data assets</h3>
+        <p>Segments maintained as dbt models with daily refresh cycles outperform manual pulls - consistency is a feature, not a convenience.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 04: A/B Testing -->
+    <div id="testing" class="chapter reveal">
+      <div class="chapter-num">04</div>
+      <div>
+        <div class="chapter-eyebrow">Experimentation</div>
+        <div class="chapter-title"><i class="fa-solid fa-flask-vial"></i>A/B Testing Done Wrong</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>A/B testing is the analytics discipline most likely to produce confident conclusions from unreliable data. The mechanics are well understood. The failure modes are less often discussed.</p>
+      <p>The classic mistake is declaring victory on statistical significance without asking whether the observed difference is large enough to matter, durable beyond the test window, or generalisable to the full customer population. A test that runs two weeks during a promotional period and hits p &lt; 0.05 on click-through rate has measured exactly one thing: whether, during a sale, customers clicked a button more. That's a very thin basis for a product or messaging decision.</p>
+    </div>
+
+    <div class="two-card reveal" style="grid-template-columns: 1fr;">
+      <div class="card">
+        <h3><i class="fa-solid fa-1" style="color:var(--accent);margin-right:0.5rem"></i>No pre-defined minimum detectable effect</h3>
+        <p>Most A/B tests are designed backwards - the sample size and runtime are set first, and the question of what change would actually matter to the business is never asked. A 1.2% lift in conversion might be statistically significant with a large enough sample. It rarely justifies a platform-level change.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-2" style="color:var(--accent);margin-right:0.5rem"></i>Sample ratio mismatch goes unchecked</h3>
+        <p>SRM - where the actual split of users between variant and control doesn't match the intended ratio - is one of the most common and least-checked failure modes. It usually signals a bug in the assignment logic or a systematic routing difference. Running analysis on a compromised split produces results that are statistically valid and causally meaningless.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-3" style="color:var(--accent);margin-right:0.5rem"></i>Winners aren't tracked post-deployment</h3>
+        <p>A variant that wins in a controlled two-week test can underperform once it's the default - novelty effects, seasonal timing, and interaction with other changes all contribute. Without 30- and 60-day post-deployment checks, the "winning" change becomes an untested assumption baked into the product.</p>
+        <p class="card-note">The most expensive A/B test failure isn't a false positive you catch. It's the one you don't - the one that shapes a product or messaging decision for six months on the basis of noise.</p>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Better experimentation isn't more tests - it's more disciplined tests. Define the minimum effect worth detecting before you set sample sizes. Check your assignment ratios before you analyse results. Follow the winning variant past deployment. And build a test log so institutional knowledge about what was tried accumulates rather than evaporating each sprint.</p>
+    </div>
+
+    <!-- Chapter 05: CLV as Strategy -->
+    <div id="clv" class="chapter reveal">
+      <div class="chapter-num">05</div>
+      <div>
+        <div class="chapter-eyebrow">Customer Value</div>
+        <div class="chapter-title"><i class="fa-solid fa-gem"></i>Customer Lifetime Value as Strategy, Not Metric</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>Customer Lifetime Value is one of the most cited metrics in analytics. It's also one of the most underused. Most teams calculate it and put it in a dashboard. Fewer use it to change how they allocate acquisition budget across channels. Fewer still use it to define which customers to prioritise for retention spend, what the ceiling is on a promotional discount, or which onboarding journeys produce better long-term outcomes.</p>
+    </div>
+
+    <div class="metrics-row reveal">
+      <div class="metric-item">
+        <div class="val">5-25<span>×</span></div>
+        <div class="lbl">costlier to acquire a new customer than retain one - yet acquisition analytics gets disproportionate investment.</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">5<span>%</span></div>
+        <div class="lbl">increase in retention can lift profits by 25–95%, depending on margin structure (Bain &amp; Company).</div>
+      </div>
+      <div class="metric-item">
+        <div class="val">12<span>mo</span></div>
+        <div class="lbl">the horizon that matters - value-per-acquisition, cohorted by channel, not first-purchase conversion.</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The shift from CLV as a metric to CLV as a strategic input requires two things most analytics setups don't have in place:</p>
+    </div>
+
+    <div class="two-card reveal">
+      <div class="card">
+        <h3><i class="fa-solid fa-diagram-project" style="color:var(--accent);margin-right:0.5rem"></i>Attribution that connects channel to downstream value</h3>
+        <p>Not first-purchase conversion. Not last-click revenue. The actual 12-month value of customers acquired through each channel, cohorted by acquisition date and segment. Without this, media spend optimises toward cost-per-acquisition rather than value-per-acquisition - and the two often pull in opposite directions.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-sliders" style="color:var(--accent);margin-right:0.5rem"></i>Operational integration into planning</h3>
+        <p>CLV needs to influence campaign briefs, budget approvals, and strategic planning - not sit in a report nobody opens. When it's an input to decisions rather than an output of analysis, budget allocations shift, discount ceilings get set by value tier, and retention programmes get funded proportionally to the value at risk.</p>
+      </div>
+    </div>
+
+    <div class="callout-accent reveal">
+      <p>The moment CLV moves from a metric you track to a lens you make decisions through, your retention strategy stops being reactive and starts being preventative.</p>
+    </div>
+
+    <!-- Chapter 06: Closing the Gap -->
+    <div id="human" class="chapter reveal">
+      <div class="chapter-num">06</div>
+      <div>
+        <div class="chapter-eyebrow">Synthesis</div>
+        <div class="chapter-title"><i class="fa-solid fa-arrows-to-dot"></i>Closing the Gap</div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p>The four gaps above share one property: each is closed by a design choice made <strong>before</strong> the analysis runs, not a smarter tool bolted on after. A maturing analytics function is one where those choices become defaults rather than afterthoughts - and the shift is concrete enough to audit yourself against.</p>
+      <ul>
+        <li><strong>Build for decisions, not dashboards.</strong> Every output should be traceable to a specific decision someone will make differently. If you can't name the decision, reconsider the build.</li>
+        <li><strong>Own your segments like data products.</strong> Segmentation in a spreadsheet or one-off query decays. Versioned, tested data assets compound in value over time.</li>
+        <li><strong>Design experiments before you run them.</strong> The minimum detectable effect, the success metric, the follow-up timeline - set all of these before a single user is assigned.</li>
+        <li><strong>Treat CLV as a planning input.</strong> If it doesn't show up in a budget conversation or a campaign brief, it's decorative.</li>
+      </ul>
+      <p>None of these require a bigger stack. They require deciding, up front, what question each piece of work answers and who acts on it. That is the entire distance between a team that owns impressive infrastructure and one that consistently ships better decisions - and it's a distance you close one deliberate build at a time, not one procurement cycle at a time.</p>
+    </div>
+
+    <div class="callout-accent reveal">
+      <p>Maturity isn't the sophistication of your stack. It's the share of your analytical output that actually changes a decision someone was about to make.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-socials">
+      <a href="https://github.com/Jaykant-M/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener"><i class="fa-solid fa-chart-bar"></i></a>
+      <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p>&copy; 2025 Jaykant Mendapara</p>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
