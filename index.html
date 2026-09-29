@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jaykant Mendapara</title>
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
-
   <!-- Data Layer for GTM Events -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -19,6 +16,10 @@
     page_title: document.title
   });
   </script>
+
+    <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
+
 
   <!-- Scroll Depth Tracking -->
 <script>
@@ -794,76 +795,12 @@ window.addEventListener('scroll', function() {
 
 
 <body>
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V54TXLXLMD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-V54TXLXLMD');
-  </script>
-
 
   <!-- GTM noscript -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <!-- GTM Event Tracking -->
-  <script>
-  // Navigation clicks
-  document.querySelectorAll('a[href*="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      const section = href.replace('#', '') || 'home';
-      
-      window.dataLayer.push({
-        event: 'navigate_section',
-        event_category: 'navigation',
-        event_label: section,
-        page_section: section,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-
-  // Social link clicks
-  document.querySelectorAll('a[href*="github.com"], a[href*="tableau.com"], a[href*="linkedin.com"], a[href*="mailto:"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const url = this.getAttribute('href');
-      let linkType = 'unknown';
-      
-      if (url.includes('github')) linkType = 'github';
-      else if (url.includes('tableau')) linkType = 'tableau';
-      else if (url.includes('linkedin')) linkType = 'linkedin';
-      else if (url.includes('mailto')) linkType = 'email';
-      
-      window.dataLayer.push({
-        event: 'click_social_link',
-        event_category: 'social',
-        event_label: linkType,
-        link_type: linkType,
-        link_url: url,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-
-  // Project card clicks
-  document.querySelectorAll('[class*="project"] a, a[href*="/Projects/"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const projectName = this.textContent.trim() || this.getAttribute('href');
-      
-      window.dataLayer.push({
-        event: 'click_project',
-        event_category: 'projects',
-        event_label: projectName.toLowerCase().replace(/\s+/g, '-'),
-        project_name: projectName,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-  </script>
   
+
   <!-- ── Navigation ─────────────────────────────────────────── -->
   <nav>
     <a href="#about" class="nav-brand">Jaykant Mendapara</a>
@@ -1318,5 +1255,62 @@ window.addEventListener('scroll', function() {
       });
     });
   </script>
+
+  <!-- GTM Event Tracking -->
+  <script>
+  // Navigation clicks
+  document.querySelectorAll('a[href*="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      const section = href.replace('#', '') || 'home';
+      
+      window.dataLayer.push({
+        event: 'navigate_section',
+        event_category: 'navigation',
+        event_label: section,
+        page_section: section,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+
+  // Social link clicks
+  document.querySelectorAll('a[href*="github.com"], a[href*="tableau.com"], a[href*="linkedin.com"], a[href*="mailto:"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const url = this.getAttribute('href');
+      let linkType = 'unknown';
+      
+      if (url.includes('github')) linkType = 'github';
+      else if (url.includes('tableau')) linkType = 'tableau';
+      else if (url.includes('linkedin')) linkType = 'linkedin';
+      else if (url.includes('mailto')) linkType = 'email';
+      
+      window.dataLayer.push({
+        event: 'click_social_link',
+        event_category: 'social',
+        event_label: linkType,
+        link_type: linkType,
+        link_url: url,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+
+  // Project card clicks
+  document.querySelectorAll('[class*="project"] a, a[href*="/Projects/"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const projectName = this.textContent.trim() || this.getAttribute('href');
+      
+      window.dataLayer.push({
+        event: 'click_project',
+        event_category: 'projects',
+        event_label: projectName.toLowerCase().replace(/\s+/g, '-'),
+        project_name: projectName,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+  </script>
+
 </body>
 </html>
