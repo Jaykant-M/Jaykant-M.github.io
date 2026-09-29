@@ -20,62 +20,6 @@
   });
   </script>
 
-  <!-- GTM Event Tracking -->
-  <script>
-  // Navigation clicks
-  document.querySelectorAll('a[href*="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      const section = href.replace('#', '') || 'home';
-      
-      window.dataLayer.push({
-        event: 'navigate_section',
-        event_category: 'navigation',
-        event_label: section,
-        page_section: section,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-
-  // Social link clicks
-  document.querySelectorAll('a[href*="github.com"], a[href*="tableau.com"], a[href*="linkedin.com"], a[href*="mailto:"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const url = this.getAttribute('href');
-      let linkType = 'unknown';
-      
-      if (url.includes('github')) linkType = 'github';
-      else if (url.includes('tableau')) linkType = 'tableau';
-      else if (url.includes('linkedin')) linkType = 'linkedin';
-      else if (url.includes('mailto')) linkType = 'email';
-      
-      window.dataLayer.push({
-        event: 'click_social_link',
-        event_category: 'social',
-        event_label: linkType,
-        link_type: linkType,
-        link_url: url,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-
-  // Project card clicks
-  document.querySelectorAll('[class*="project"] a, a[href*="/Projects/"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const projectName = this.textContent.trim() || this.getAttribute('href');
-      
-      window.dataLayer.push({
-        event: 'click_project',
-        event_category: 'projects',
-        event_label: projectName.toLowerCase().replace(/\s+/g, '-'),
-        project_name: projectName,
-        timestamp: new Date().toISOString()
-      });
-    });
-  });
-  </script>
-
   <!-- Scroll Depth Tracking -->
 <script>
 let scrollTracked = { 25: false, 50: false, 75: false, 100: false };
@@ -864,6 +808,62 @@ window.addEventListener('scroll', function() {
   <!-- GTM noscript -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
+  <!-- GTM Event Tracking -->
+  <script>
+  // Navigation clicks
+  document.querySelectorAll('a[href*="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      const section = href.replace('#', '') || 'home';
+      
+      window.dataLayer.push({
+        event: 'navigate_section',
+        event_category: 'navigation',
+        event_label: section,
+        page_section: section,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+
+  // Social link clicks
+  document.querySelectorAll('a[href*="github.com"], a[href*="tableau.com"], a[href*="linkedin.com"], a[href*="mailto:"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const url = this.getAttribute('href');
+      let linkType = 'unknown';
+      
+      if (url.includes('github')) linkType = 'github';
+      else if (url.includes('tableau')) linkType = 'tableau';
+      else if (url.includes('linkedin')) linkType = 'linkedin';
+      else if (url.includes('mailto')) linkType = 'email';
+      
+      window.dataLayer.push({
+        event: 'click_social_link',
+        event_category: 'social',
+        event_label: linkType,
+        link_type: linkType,
+        link_url: url,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+
+  // Project card clicks
+  document.querySelectorAll('[class*="project"] a, a[href*="/Projects/"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const projectName = this.textContent.trim() || this.getAttribute('href');
+      
+      window.dataLayer.push({
+        event: 'click_project',
+        event_category: 'projects',
+        event_label: projectName.toLowerCase().replace(/\s+/g, '-'),
+        project_name: projectName,
+        timestamp: new Date().toISOString()
+      });
+    });
+  });
+  </script>
+  
   <!-- ── Navigation ─────────────────────────────────────────── -->
   <nav>
     <a href="#about" class="nav-brand">Jaykant Mendapara</a>
