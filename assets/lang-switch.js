@@ -115,8 +115,7 @@
     langSwitch.appendChild(langStack);
     if (navRight) navRight.appendChild(langSwitch);
 
-    function setLanguage(lang) {
-      current = lang;
+    function swapText(lang) {
       const dict = dicts[lang] || {};
       i18nEls.forEach(el => {
         const t = dict[el.dataset.i18n];
@@ -126,6 +125,28 @@
           ? t
           : (lead ? lead + ' ' : '') + t + (trail ? ' ' + trail : '');
       });
+    }
+
+    // Text cross-fades along with the colours instead of snapping. Web Animations
+    // sit on top of the page CSS, so the pages' own opacity transitions are untouched.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let fadeOuts = [], swapTimer;
+    function fadeText(lang) {
+      clearTimeout(swapTimer);
+      fadeOuts.forEach(a => a.cancel());
+      fadeOuts = i18nEls.map(el => el.animate([{ opacity: 0 }], { duration: 150, easing: 'ease-in', fill: 'forwards' }));
+      swapTimer = setTimeout(() => {
+        swapText(lang);
+        fadeOuts.forEach(a => a.cancel());
+        fadeOuts = [];
+        i18nEls.forEach(el => el.animate([{ opacity: 0, offset: 0 }], { duration: 250, easing: 'ease-out' }));
+      }, 150);
+    }
+
+    function setLanguage(lang) {
+      current = lang;
+      if (root.classList.contains('theme-ready') && !reduceMotion) fadeText(lang);
+      else swapText(lang);
       root.lang = lang;
       root.dataset.theme = lang;
 
