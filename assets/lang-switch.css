@@ -1,0 +1,169 @@
+/* Language switcher + flag colour themes, shared by every page.
+   Pages define their palette with --dark, --dark-card, --dark-border,
+   --accent and --accent-soft; the themes below override them per language. */
+
+/* ─── Language themes ──────────────────────────────────────── */
+/* The colours are registered so the browser can animate them:
+   everything that uses the vars cross-fades when the language changes. */
+@property --dark        { syntax: '<color>'; inherits: true; initial-value: #0d1117; }
+@property --dark-card   { syntax: '<color>'; inherits: true; initial-value: #161b22; }
+@property --dark-border { syntax: '<color>'; inherits: true; initial-value: #21262d; }
+@property --accent      { syntax: '<color>'; inherits: true; initial-value: #3b82f6; }
+@property --accent-soft { syntax: '<color>'; inherits: true; initial-value: #1d4ed8; }
+@property --text-body   { syntax: '<color>'; inherits: true; initial-value: #9ca3af; }
+@property --text-muted  { syntax: '<color>'; inherits: true; initial-value: #8b949e; }
+@property --flag-1      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --flag-2      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --flag-3      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+/* UK: navy with red */
+:root[data-theme="en"] {
+  --dark:       #0a1330;
+  --dark-card:  #111d42;
+  --dark-border:#22315c;
+  --accent:     #ff6b7d;
+  --accent-soft:#c8102e;
+  --text-body:  #d3d9ea;
+  --text-muted: #aab4cf;
+  --flag-1:     #012169;
+  --flag-2:     #ffffff;
+  --flag-3:     #C8102E;
+}
+
+/* Germany: graphite (light enough for the black stripe to show) with red and gold */
+:root[data-theme="de"] {
+  --dark:       #24211f;
+  --dark-card:  #2f2a27;
+  --dark-border:#453c35;
+  --accent:     #ffce00;
+  --accent-soft:#dd0000;
+  --text-body:  #e4ddd5;
+  --text-muted: #c0b6ab;
+  --flag-1:     #000000;
+  --flag-2:     #DD0000;
+  --flag-3:     #FFCE00;
+}
+
+/* France: near-neutral slate with only a hint of blue and a red accent;
+   white comes from the page text, full blue only in the flag stripe */
+:root[data-theme="fr"] {
+  --dark:       #15171e;
+  --dark-card:  #1e212b;
+  --dark-border:#323848;
+  --accent:     #ff7062;
+  --accent-soft:#d62f22;
+  --text-body:  #d9dce4;
+  --text-muted: #b2b7c4;
+  --flag-1:     #0055A4;
+  --flag-2:     #ffffff;
+  --flag-3:     #EF4135;
+}
+
+/* Body and muted text are tinted per theme and kept at 7:1+ on the
+   background and cards (body ~11:1); accent buttons use dark text */
+
+/* Added by JS after the first paint, so the initial theme doesn't animate in */
+:root.theme-ready {
+  transition: --dark 0.8s ease, --dark-card 0.8s ease, --dark-border 0.8s ease,
+              --text-body 0.8s ease, --text-muted 0.8s ease,
+              --accent 0.8s ease, --accent-soft 0.8s ease,
+              --flag-1 0.8s ease, --flag-2 0.8s ease, --flag-3 0.8s ease;
+}
+
+/* Flag stripe along the bottom of the header */
+nav::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--flag-1) 0 33.34%, var(--flag-2) 33.34% 66.67%, var(--flag-3) 66.67% 100%);
+}
+
+/* Long German/French words would otherwise push phone layouts sideways;
+   hyphenation follows <html lang>, which the switcher keeps in sync */
+@media (max-width: 600px) {
+  body { overflow-wrap: anywhere; hyphens: auto; }
+}
+
+/* Current page / section in the header */
+.nav-links a.active { color: var(--text-light); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ─── Language switcher ────────────────────────────────────── */
+/* Collapsed: bubbles stacked sideways with the selected one in front.
+   Hover / keyboard focus / .open (tap on touch): drops down into a column.
+   Each bubble's position comes from --i (0 = selected), set in JS. */
+.lang-switch {
+  position: relative;
+  width: 52px;                /* front bubble + two 10px peeks */
+  height: 32px;
+}
+
+.lang-stack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 52px;
+  height: 32px;
+}
+
+.lang-btn {
+  --s: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 2px solid var(--dark);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--dark);
+  cursor: pointer;
+  filter: brightness(0.55) saturate(0.7);
+  transform: translateX(calc(var(--i, 0) * 10px)) scale(var(--s));
+  transition: transform 0.3s ease, filter 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.lang-switch.open .lang-stack,
+.lang-switch:has(.lang-btn:focus-visible) .lang-stack { height: 112px; }
+
+.lang-switch.open .lang-btn,
+.lang-switch:has(.lang-btn:focus-visible) .lang-btn {
+  transform: translateY(calc(var(--i, 0) * 40px)) scale(var(--s));
+}
+
+/* Phones keep :hover after a tap, so hover only expands on real pointers */
+@media (hover: hover) {
+  .lang-switch:hover .lang-stack { height: 112px; }   /* keeps the hover area unbroken */
+  .lang-switch:hover .lang-btn {
+    transform: translateY(calc(var(--i, 0) * 40px)) scale(var(--s));
+  }
+  .lang-switch:hover .lang-btn:hover {
+    filter: none;
+    --s: 1.1;
+  }
+}
+
+.lang-btn svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lang-btn.active {
+  filter: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

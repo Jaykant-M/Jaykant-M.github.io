@@ -47,6 +47,9 @@ window.addEventListener('scroll', function() {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/lang-switch.css" />
+  <script src="i18n/home.js"></script>
+  <script src="assets/lang-switch.js"></script>
 
   <style>
     /* ─── Reset & Base ─────────────────────────────────────────── */
@@ -84,7 +87,7 @@ window.addEventListener('scroll', function() {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(13, 17, 23, 0.92);
+      background: color-mix(in srgb, var(--dark) 92%, transparent);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--dark-border);
@@ -171,7 +174,7 @@ window.addEventListener('scroll', function() {
     }
 
     .hero-text .bio {
-      color: #9ca3af;
+      color: var(--text-body);
       font-size: 1.2rem;
       line-height: 1.75;
       max-width: 750px;
@@ -205,7 +208,7 @@ window.addEventListener('scroll', function() {
     .social-link:hover {
       color: var(--text-light);
       border-color: var(--accent);
-      background: rgba(59,130,246,0.08);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
     }
 
     .hero-photo-wrap {
@@ -219,7 +222,7 @@ window.addEventListener('scroll', function() {
       object-fit: cover;
       object-position: top;
       border: 3px solid var(--accent);
-      box-shadow: 0 0 0 8px rgba(59,130,246,0.15);
+      box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent);
     }
 
     /* ─── Quote banner ─────────────────────────────────────────── */
@@ -237,7 +240,7 @@ window.addEventListener('scroll', function() {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: clamp(1rem, 2vw, 1.25rem);
-      color: #9ca3af;
+      color: var(--text-body);
       line-height: 1.7;
     }
 
@@ -344,7 +347,7 @@ window.addEventListener('scroll', function() {
     }
 
     .exp-card:hover {
-      border-color: rgba(59,130,246,0.4);
+      border-color: color-mix(in srgb, var(--accent) 40%, transparent);
       box-shadow: var(--shadow-lg);
     }
 
@@ -411,7 +414,7 @@ window.addEventListener('scroll', function() {
     }
 
     .exp-body {
-      color: #9ca3af;
+      color: var(--text-body);
       font-size: 1rem;
       line-height: 1.7;
       flex: 1;
@@ -420,7 +423,7 @@ window.addEventListener('scroll', function() {
     .exp-body p + p { margin-top: 0.6rem; }
     .exp-body p + ul { margin-top: 0.5rem; }
     .exp-body ul { list-style: disc; padding-left: 1.25rem; margin: 0; }
-    .exp-body ul li { margin-bottom: 0.35rem; color: #9ca3af; line-height: 1.65; }
+    .exp-body ul li { margin-bottom: 0.35rem; color: var(--text-body); line-height: 1.65; }
 
     .exp-body strong {
       color: #c9d1d9;
@@ -445,7 +448,7 @@ window.addEventListener('scroll', function() {
     }
 
     .edu-card:hover {
-      border-color: rgba(59,130,246,0.4);
+      border-color: color-mix(in srgb, var(--accent) 40%, transparent);
       box-shadow: var(--shadow-lg);
     }
 
@@ -563,7 +566,7 @@ window.addEventListener('scroll', function() {
     }
 
     .project-card:hover {
-      border-color: rgba(59,130,246,0.4);
+      border-color: color-mix(in srgb, var(--accent) 40%, transparent);
       box-shadow: var(--shadow-lg);
       transform: translateY(-3px);
     }
@@ -603,7 +606,7 @@ window.addEventListener('scroll', function() {
       font-size: 0.82rem;
       font-weight: 600;
       padding: 0.15rem 0.5rem;
-      background: rgba(59,130,246,0.12);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
       color: var(--accent);
       border-radius: 4px;
       letter-spacing: 0.04em;
@@ -619,7 +622,7 @@ window.addEventListener('scroll', function() {
 
     .project-card-body p {
       font-size: 0.95rem;
-      color: #9ca3af;
+      color: var(--text-body);
       line-height: 1.6;
       flex: 1;
     }
@@ -666,7 +669,7 @@ window.addEventListener('scroll', function() {
     }
 
     .skill-card:hover {
-      border-color: rgba(59,130,246,0.4);
+      border-color: color-mix(in srgb, var(--accent) 40%, transparent);
       box-shadow: var(--shadow-lg);
     }
 
@@ -680,8 +683,8 @@ window.addEventListener('scroll', function() {
     .skill-icon {
       width: 40px;
       height: 40px;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.2);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -708,7 +711,7 @@ window.addEventListener('scroll', function() {
       font-size: 0.875rem;
       padding: 0.3rem 0.75rem;
       background: rgba(255,255,255,0.05);
-      color: #9ca3af;
+      color: var(--text-body);
       border-radius: 5px;
       border: 1px solid var(--dark-border);
     }
@@ -786,9 +789,33 @@ window.addEventListener('scroll', function() {
         justify-content: center;
       }
 
+      nav { padding: 0 1rem; }
+
       .nav-links { display: none; }
 
       .exp-header { flex-direction: column; }
+
+      .section-inner { max-width: 100%; padding: 0 0.5rem; }
+
+      .exp-card, .edu-card { flex-direction: column; }
+
+      .exp-logo-panel, .edu-logo-panel {
+        width: auto;
+        height: 120px;
+        align-self: stretch;
+        margin: 1rem 1rem 0;
+      }
+
+      .exp-logo-panel img, .edu-logo-panel img { max-height: 80px; transform: none; }
+
+      .exp-content, .edu-content { padding: 1.25rem; }
+
+      .exp-meta .exp-row, .edu-row, .edu-degree-item .edu-field-row {
+        flex-wrap: wrap;
+        gap: 0 1rem;
+      }
+
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -805,11 +832,11 @@ window.addEventListener('scroll', function() {
   <nav>
     <a href="#about" class="nav-brand">Jaykant Mendapara</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
     </ul>
   </nav>
 
@@ -823,14 +850,14 @@ window.addEventListener('scroll', function() {
         <img src="images/Jaykant.png" alt="Jaykant Mendapara" />
       </div>
       <div class="hero-text">
-        <p class="role">Data Analyst &amp; CRM Specialist</p>
+        <p class="role" data-i18n="hero.role">Data Analyst &amp; CRM Specialist</p>
         <h1>Jaykant<br>Mendapara</h1>
-        <p class="bio">
+        <p class="bio" data-i18n="hero.bio1">
           Analytically skilled and results-driven data professional with 6+ years of experience in data
           analysis, visualization, and management. Proficient in SQL, Python, and Power BI, with strong
           expertise in automating analytical processes to improve efficiency and productivity.
         </p>
-        <p class="bio">
+        <p class="bio" data-i18n="hero.bio2">
           Currently working as a Customer &amp; CRM Analyst at H&amp;M, driving data-driven
           decision-making across customer acquisition, retention, and omnichannel performance.
         </p>
@@ -845,7 +872,7 @@ window.addEventListener('scroll', function() {
             <i class="fa-brands fa-linkedin-in"></i> LinkedIn
           </a>
           <a href="mailto:mendaparajaykant@gmail.com" class="social-link">
-            <i class="fa-solid fa-envelope"></i> Email
+            <i class="fa-solid fa-envelope"></i> <span data-i18n="social.email">Email</span>
           </a>
         </div>
       </div>
@@ -854,7 +881,7 @@ window.addEventListener('scroll', function() {
 
   <!-- ── Quote ──────────────────────────────────────────────── -->
   <div class="quote-banner" id="quote">
-    <blockquote>
+    <blockquote data-i18n="quote">
       "I believe the ability to harness information and organize it in a meaningful way has the power to
       radically transform every aspect of real world advancement - from personal growth to growth of
       businesses across the globe."
@@ -866,18 +893,18 @@ window.addEventListener('scroll', function() {
   <!-- ── Experience ─────────────────────────────────────────── -->
   <section id="experience" class="section section--dark">
     <div class="section-inner">
-      <p class="section-heading">Work History</p>
-      <h2 class="section-title">Professional Experience</h2>
+      <p class="section-heading" data-i18n="exp.heading">Work History</p>
+      <h2 class="section-title" data-i18n="exp.title">Professional Experience</h2>
 
       <!-- H&M -->
       <div class="exp-card reveal">
         <div class="exp-logo-panel"><img src="images/Logo/H&M.png" alt="H&M" /></div>
         <div class="exp-content">
           <div class="exp-meta">
-            <div class="exp-row"><h3>H&amp;M</h3><span class="location">Hamburg, Germany</span></div>
-            <div class="exp-row"><p class="role">Customer &amp; CRM Analyst</p><span class="date">November 2024 - Present</span></div>
+            <div class="exp-row"><h3>H&amp;M</h3><span class="location" data-i18n="loc.hamburg">Hamburg, Germany</span></div>
+            <div class="exp-row"><p class="role">Customer &amp; CRM Analyst</p><span class="date" data-i18n="exp.hm.date">November 2024 - Present</span></div>
           </div>
-          <div class="exp-body">
+          <div class="exp-body" data-i18n="exp.hm.body">
             <p><strong>Primary Focus:</strong> Serve as central analytics point of contact for customer base performance, collaborating with strategy and commercial sales teams to drive data-informed decisions. Deliver end-to-end analytical support spanning the full customer lifecycle - from acquisition and onboarding through to retention and loyalty.</p>
             <p><strong>Daily Challenges:</strong></p>
             <ul>
@@ -897,10 +924,10 @@ window.addEventListener('scroll', function() {
         <div class="exp-logo-panel"><img src="images/Logo/ESPRIT.png" alt="ESPRIT" /></div>
         <div class="exp-content">
           <div class="exp-meta">
-            <div class="exp-row"><h3>ESPRIT Europe GmbH</h3><span class="location">Ratingen, Germany</span></div>
-            <div class="exp-row"><p class="role">Business Insight Manager</p><span class="date">December 2023 - October 2024</span></div>
+            <div class="exp-row"><h3>ESPRIT Europe GmbH</h3><span class="location" data-i18n="loc.ratingen">Ratingen, Germany</span></div>
+            <div class="exp-row"><p class="role">Business Insight Manager</p><span class="date" data-i18n="exp.esprit.date">December 2023 - October 2024</span></div>
           </div>
-          <div class="exp-body">
+          <div class="exp-body" data-i18n="exp.esprit.body">
             <p><strong>Primary Focus:</strong> Act as the lead analyst for the eCommerce team, collaborating with CRM, Site Merchandising, and Commercial Sales to translate complex data into strategic business decisions. Serve as the liaison between Data Engineering, Data Science, and commercial stakeholders - bridging technical capability with business requirements through data analysis and machine learning.</p>
             <p><strong>Daily Challenges:</strong></p>
             <ul>
@@ -920,10 +947,10 @@ window.addEventListener('scroll', function() {
         <div class="exp-logo-panel"><img src="images/Logo/AS.png" alt="Ankorstore" /></div>
         <div class="exp-content">
           <div class="exp-meta">
-            <div class="exp-row"><h3>Ankorstore</h3><span class="location">Paris, France</span></div>
-            <div class="exp-row"><p class="role">Operations Strategy &amp; Performance Data Analyst</p><span class="date">January 2022 - July 2022</span></div>
+            <div class="exp-row"><h3>Ankorstore</h3><span class="location" data-i18n="loc.paris">Paris, France</span></div>
+            <div class="exp-row"><p class="role">Operations Strategy &amp; Performance Data Analyst</p><span class="date" data-i18n="exp.ankorstore.date">January 2022 - July 2022</span></div>
           </div>
-          <div class="exp-body">
+          <div class="exp-body" data-i18n="exp.ankorstore.body">
             <p><strong>Primary Focus:</strong> Work closely with the leadership team and cross-functional managers across Brand Integration, Brand Support, and Customer Success to identify root causes behind low-performing KPIs through segmented data analysis. Integrate operational changes into existing performance reports to maintain clear, real-time visibility of business impact.</p>
             <p><strong>Daily Challenges:</strong></p>
             <ul>
@@ -940,10 +967,10 @@ window.addEventListener('scroll', function() {
         <div class="exp-logo-panel"><img src="images/Logo/OW.png" alt="Optimal Ways" /></div>
         <div class="exp-content">
           <div class="exp-meta">
-            <div class="exp-row"><h3>Optimal Ways</h3><span class="location">Lille, France</span></div>
-            <div class="exp-row"><p class="role">Digital Data Analyst</p><span class="date">June 2021 - December 2021</span></div>
+            <div class="exp-row"><h3>Optimal Ways</h3><span class="location" data-i18n="loc.lille">Lille, France</span></div>
+            <div class="exp-row"><p class="role">Digital Data Analyst</p><span class="date" data-i18n="exp.ow.date">June 2021 - December 2021</span></div>
           </div>
-          <div class="exp-body">
+          <div class="exp-body" data-i18n="exp.ow.body">
             <p><strong>Primary Focus:</strong> Support consultants in implementing web tracking solutions for large-scale e-commerce and retail clients, enabling them to improve digital marketing performance through live, behavior-driven data. Deploy and manage tag management solutions using Google Tag Manager and Tealium to ensure accurate, privacy-compliant data collection across web platforms.</p>
             <p><strong>Daily Challenges:</strong></p>
             <ul>
@@ -961,10 +988,10 @@ window.addEventListener('scroll', function() {
         <div class="exp-logo-panel"><img src="images/Logo/TCS.png" alt="TCS" /></div>
         <div class="exp-content">
           <div class="exp-meta">
-            <div class="exp-row"><h3>Tata Consultancy Services</h3><span class="location">Pune, India</span></div>
-            <div class="exp-row"><p class="role">Systems Engineer - Software Development &amp; Enablement</p><span class="date">June 2017 - August 2019</span></div>
+            <div class="exp-row"><h3>Tata Consultancy Services</h3><span class="location" data-i18n="loc.pune">Pune, India</span></div>
+            <div class="exp-row"><p class="role">Systems Engineer - Software Development &amp; Enablement</p><span class="date" data-i18n="exp.tcs.date">June 2017 - August 2019</span></div>
           </div>
-          <div class="exp-body">
+          <div class="exp-body" data-i18n="exp.tcs.body">
             <p><strong>Primary Focus:</strong> Act as the single point of contact for multiple primary product modules within a large-scale client engagement, understanding user requirements and delivering real-time solutions to improve business operations.</p>
             <p><strong>Daily Challenges:</strong></p>
             <ul>
@@ -981,23 +1008,23 @@ window.addEventListener('scroll', function() {
   <!-- ── Education ──────────────────────────────────────────── -->
   <section id="education" class="section section--dark">
     <div class="section-inner">
-      <p class="section-heading">Academic Background</p>
-      <h2 class="section-title">Education</h2>
+      <p class="section-heading" data-i18n="edu.heading">Academic Background</p>
+      <h2 class="section-title" data-i18n="edu.title">Education</h2>
       <div class="edu-grid">
 
         <!-- EDHEC -->
         <div class="edu-card reveal">
           <div class="edu-logo-panel"><img src="images/Logo/Edhec_logo.jpg" alt="EDHEC Business School" /></div>
           <div class="edu-content">
-            <div class="edu-row"><h3>EDHEC Business School</h3><span class="location">Lille, France</span></div>
+            <div class="edu-row"><h3>EDHEC Business School</h3><span class="location" data-i18n="loc.lille">Lille, France</span></div>
             <div class="edu-degree">
               <div class="edu-degree-item">
                 <h4>Master of Science</h4>
-                <div class="edu-field-row"><p>Data Analytics &amp; Artificial Intelligence - Data Science Specialisation</p><span class="edu-date">Sep 2022 – Mar 2023</span></div>
+                <div class="edu-field-row"><p data-i18n="edu.edhec.msc">Data Analytics &amp; Artificial Intelligence - Data Science Specialisation</p><span class="edu-date" data-i18n="edu.edhec.msc.date">Sep 2022 – Mar 2023</span></div>
               </div>
               <div class="edu-degree-item">
                 <h4>Master in Management</h4>
-                <div class="edu-field-row"><p>Business Management</p><span class="edu-date">Sep 2020 – Apr 2021</span></div>
+                <div class="edu-field-row"><p data-i18n="edu.edhec.mim">Business Management</p><span class="edu-date" data-i18n="edu.edhec.mim.date">Sep 2020 – Apr 2021</span></div>
               </div>
             </div>
           </div>
@@ -1007,11 +1034,11 @@ window.addEventListener('scroll', function() {
         <div class="edu-card reveal">
           <div class="edu-logo-panel"><img src="images/Logo/SRM_logo.png" alt="SRM University" /></div>
           <div class="edu-content">
-            <div class="edu-row"><h3>SRM University</h3><span class="location">Chennai, India</span></div>
+            <div class="edu-row"><h3>SRM University</h3><span class="location" data-i18n="loc.chennai">Chennai, India</span></div>
             <div class="edu-degree">
               <div class="edu-degree-item">
                 <h4>Bachelor of Technology</h4>
-                <div class="edu-field-row"><p>Electrical and Electronics Engineering</p><span class="edu-date">Jun 2013 – Apr 2017</span></div>
+                <div class="edu-field-row"><p data-i18n="edu.srm.btech">Electrical and Electronics Engineering</p><span class="edu-date" data-i18n="edu.srm.btech.date">Jun 2013 – Apr 2017</span></div>
               </div>
             </div>
           </div>
@@ -1024,14 +1051,14 @@ window.addEventListener('scroll', function() {
   <!-- ── Skills ─────────────────────────────────────────────── -->
   <section id="skills" class="section section--dark">
     <div class="section-inner">
-      <p class="section-heading">Technical Toolkit</p>
-      <h2 class="section-title">Tools &amp; Skills</h2>
+      <p class="section-heading" data-i18n="skills.heading">Technical Toolkit</p>
+      <h2 class="section-title" data-i18n="skills.title">Tools &amp; Skills</h2>
       <div class="skills-grid">
 
         <div class="skill-card reveal">
           <div class="skill-card-header">
             <div class="skill-icon"><i class="fa-solid fa-chart-line"></i></div>
-            <h3>Data Analysis &amp; Visualisation</h3>
+            <h3 data-i18n="skills.dataviz">Data Analysis &amp; Visualisation</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">Power BI</span>
@@ -1050,7 +1077,7 @@ window.addEventListener('scroll', function() {
         <div class="skill-card reveal">
           <div class="skill-card-header">
             <div class="skill-icon"><i class="fa-solid fa-globe"></i></div>
-            <h3>Web &amp; Digital Analytics</h3>
+            <h3 data-i18n="skills.web">Web &amp; Digital Analytics</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">GTM</span>
@@ -1068,7 +1095,7 @@ window.addEventListener('scroll', function() {
         <div class="skill-card reveal">
           <div class="skill-card-header">
             <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
-            <h3>Database &amp; Big Data</h3>
+            <h3 data-i18n="skills.db">Database &amp; Big Data</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">Advanced SQL</span>
@@ -1103,7 +1130,7 @@ window.addEventListener('scroll', function() {
         <div class="skill-card reveal">
           <div class="skill-card-header">
             <div class="skill-icon"><i class="fa-solid fa-list-check"></i></div>
-            <h3>Project Management</h3>
+            <h3 data-i18n="skills.pm">Project Management</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">Git</span>
@@ -1122,13 +1149,13 @@ window.addEventListener('scroll', function() {
         <div class="skill-card reveal">
           <div class="skill-card-header">
             <div class="skill-icon"><i class="fa-solid fa-language"></i></div>
-            <h3>Languages</h3>
+            <h3 data-i18n="skills.languages">Languages</h3>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">English (Bilingual)</span>
-            <span class="skill-tag">German (Beginner)</span>
-            <span class="skill-tag">French (Intermediate)</span>
-            <span class="skill-tag">Gujarati (Native)</span>
+            <span class="skill-tag" data-i18n="lang.english">English (Bilingual)</span>
+            <span class="skill-tag" data-i18n="lang.german">German (Beginner)</span>
+            <span class="skill-tag" data-i18n="lang.french">French (Intermediate)</span>
+            <span class="skill-tag" data-i18n="lang.gujarati">Gujarati (Native)</span>
           </div>
         </div>
 
@@ -1139,10 +1166,10 @@ window.addEventListener('scroll', function() {
   <!-- ── Projects ───────────────────────────────────────────── -->
   <section id="projects" class="section section--dark">
     <div class="section-inner">
-      <p class="section-heading">Selected Work</p>
-      <h2 class="section-title">Projects</h2>
+      <p class="section-heading" data-i18n="projects.heading">Selected Work</p>
+      <h2 class="section-title" data-i18n="projects.title">Projects</h2>
       <div class="wip-badge">
-        <i class="fa-solid fa-triangle-exclamation"></i> This section is a work in progress
+        <i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="projects.wip">This section is a work in progress</span>
       </div>
       <div class="projects-grid">
 
@@ -1156,8 +1183,8 @@ window.addEventListener('scroll', function() {
               <span class="project-tag">Tableau</span>
             </div>
             <h3>Tableau DataViz Challenge</h3>
-            <p>Visual storytelling project exploring UNICEF data through interactive Tableau dashboards, created as part of the EDHEC Data Analytics programme.</p>
-            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+            <p data-i18n="projects.tableau.desc">Visual storytelling project exploring UNICEF data through interactive Tableau dashboards, created as part of the EDHEC Data Analytics programme.</p>
+            <div class="project-card-footer"><span data-i18n="projects.readMore">Read more</span> <i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </a>
 
@@ -1171,8 +1198,8 @@ window.addEventListener('scroll', function() {
               <span class="project-tag">ML</span>
             </div>
             <h3>Customer Churn in E-Commerce</h3>
-            <p>End-to-end analysis and predictive modelling to identify at-risk customers in an e-commerce context, using Python and machine learning techniques.</p>
-            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+            <p data-i18n="projects.churn.desc">End-to-end analysis and predictive modelling to identify at-risk customers in an e-commerce context, using Python and machine learning techniques.</p>
+            <div class="project-card-footer"><span data-i18n="projects.readMore">Read more</span> <i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </a>
 
@@ -1186,8 +1213,8 @@ window.addEventListener('scroll', function() {
               <span class="project-tag">Data Governance</span>
             </div>
             <h3>Automation in Analytics</h3>
-            <p>Not everything that can be automated should be. A practitioner's case for keeping judgment at the centre of the analytics workflow as AI reshapes the toolkit.</p>
-            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+            <p data-i18n="projects.automation.desc">Not everything that can be automated should be. A practitioner's case for keeping judgment at the centre of the analytics workflow as AI reshapes the toolkit.</p>
+            <div class="project-card-footer"><span data-i18n="projects.readMore">Read more</span> <i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </a>
 
@@ -1201,8 +1228,8 @@ window.addEventListener('scroll', function() {
               <span class="project-tag">CLV Strategy</span>
             </div>
             <h3>The Analytics Maturity Gap</h3>
-            <p>Four places where analytical capability consistently fails to translate into business impact — from data stack decisions to segmentation, A/B testing, and CLV strategy.</p>
-            <div class="project-card-footer">Read more <i class="fa-solid fa-arrow-right"></i></div>
+            <p data-i18n="projects.maturity.desc">Four places where analytical capability consistently fails to translate into business impact — from data stack decisions to segmentation, A/B testing, and CLV strategy.</p>
+            <div class="project-card-footer"><span data-i18n="projects.readMore">Read more</span> <i class="fa-solid fa-arrow-right"></i></div>
           </div>
         </a>
 
@@ -1245,15 +1272,17 @@ window.addEventListener('scroll', function() {
     // Nav active state
     const sections = document.querySelectorAll('section[id], #about');
     const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
+    function updateActiveNav() {
+      let current = 'about';
       sections.forEach(s => {
         if (window.scrollY >= s.offsetTop - 80) current = s.id;
       });
       navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text-light)' : '';
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
       });
-    });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
   </script>
 
   <!-- GTM Event Tracking -->
