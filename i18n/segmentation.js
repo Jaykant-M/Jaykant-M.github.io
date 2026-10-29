@@ -5,7 +5,7 @@ window.I18N_PAGE = {
   de: {
     t1: `Verhaltenssegmentierung für Lifecycle-Targeting — Jaykant Mendapara`,
     t2: `Design-Thinking-Ansatz &nbsp;·&nbsp; CRM- &amp; Lifecycle-Analytics`,
-    t3: `Verhaltenssegmentierung für <span>Lifecycle-Targeting</span>`,
+    t3: `Verhaltens&shy;segmentierung für <span>Lifecycle-Targeting</span>`,
     t4: `Eine Fallstudie aus Mobilität / Ride-Sharing: Wie sich überlappende Kundendefinitionen in eine einzige, sich gegenseitig ausschließende Segmentierung verwandeln – ab dem ersten Tag nutzbar und als Design-Thinking-Problem statt als Modellierungsübung angegangen.`,
     t5: `11 Min. Lesezeit`,
     t6: `Design Thinking`,
@@ -13,7 +13,7 @@ window.I18N_PAGE = {
     t8: `ein Kunde sollte ab seiner ersten Sitzung eine klare CRM-Behandlung erhalten – nicht erst nach Monaten gesammelter Historie`,
     t9: `Eine <span>Regel</span>`,
     t10: `jeder Kunde gehört genau zu einem Segment, mit einem nachvollziehbaren Grund – keine Überschneidungen, kein Resttopf`,
-    t11: `Selbst-<span>korrigierend</span>`,
+    t11: `Selbst-<span>korri&shy;gierend</span>`,
     t12: `die Segmente bleiben fest; was sich entwickelt, ist die Sicherheit hinter jeder Zuordnung, je mehr Verhalten hinzukommt`,
     t13: `Design-Thinking-Rundgang`,
     t14: `Ansatz`,

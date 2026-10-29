@@ -130,16 +130,18 @@
     // Text cross-fades along with the colours instead of snapping. Web Animations
     // sit on top of the page CSS, so the pages' own opacity transitions are untouched.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let fadeOuts = [], swapTimer;
+    let fades = [], swapTimer, doneTimer;
     function fadeText(lang) {
       clearTimeout(swapTimer);
-      fadeOuts.forEach(a => a.cancel());
-      fadeOuts = i18nEls.map(el => el.animate([{ opacity: 0 }], { duration: 150, easing: 'ease-in', fill: 'forwards' }));
+      clearTimeout(doneTimer);
+      fades.forEach(a => a.cancel());
+      fades = i18nEls.map(el => el.animate([{ opacity: 0 }], { duration: 150, easing: 'ease-in', fill: 'forwards' }));
       swapTimer = setTimeout(() => {
         swapText(lang);
-        fadeOuts.forEach(a => a.cancel());
-        fadeOuts = [];
-        i18nEls.forEach(el => el.animate([{ opacity: 0, offset: 0 }], { duration: 250, easing: 'ease-out' }));
+        fades.forEach(a => a.cancel());
+        fades = i18nEls.map(el => el.animate([{ opacity: 0, offset: 0 }], { duration: 250, easing: 'ease-out' }));
+        // Backstop: if frames stall (e.g. a background tab), never leave text invisible
+        doneTimer = setTimeout(() => { fades.forEach(a => a.finish()); fades = []; }, 300);
       }, 150);
     }
 

@@ -53,14 +53,14 @@
       padding: 60px 10% 0; background: var(--dark);
       border-bottom: 1px solid var(--dark-border); gap: 3rem;
     }
-    .hero-text-col { flex: 1; padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; }
+    .hero-text-col { flex: 1; min-width: 0; padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; }
     .hero-intro-col {
       flex: 0 0 60%; padding: 1.5rem 1.75rem;
       background: var(--dark-card); border: 1px solid var(--dark-border);
       border-radius: var(--radius); margin: 2.5rem 0;
     }
     .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; hyphens: auto; overflow-wrap: break-word; }
     .hero-title span { color: var(--accent); }
     .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
     .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
@@ -80,7 +80,8 @@
     .content-wrap { max-width: 90%; margin: 0 auto; padding: 0 0 5rem; }
 
     /* ── Metrics row / hero stat ── */
-    .metric-item .val { font-size: 1.6rem; font-weight: 700; color: var(--text-light); line-height: 1.1; }
+    .metric-item { min-width: 0; }   /* lets the grid columns shrink below long German words */
+    .metric-item .val { font-size: 1.6rem; font-weight: 700; color: var(--text-light); line-height: 1.1; hyphens: auto; overflow-wrap: break-word; }
     .metric-item .val span { color: var(--accent); }
     .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.5; }
 
