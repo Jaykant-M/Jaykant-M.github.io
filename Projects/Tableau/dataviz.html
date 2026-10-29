@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tableau DataViz Challenge</title>
+  <title data-i18n="t1">Tableau DataViz Challenge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../assets/lang-switch.css" />
+  <script src="../../i18n/dataviz.js"></script>
+  <script src="../../assets/lang-switch.js"></script>
 
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
@@ -33,7 +36,7 @@
     /* ── Nav ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--dark) 92%, transparent); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--dark-border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2rem; height: 60px;
@@ -76,7 +79,7 @@
       color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
     }
     .hero-title span { color: var(--accent); }
-    .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
     .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
     .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
     .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
@@ -121,8 +124,8 @@
     .split.reverse { direction: rtl; }
     .split.reverse > * { direction: ltr; }
 
-    .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
-    .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
+    .body-text p { color: var(--text-body); line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: var(--text-body); line-height: 1.8; font-size: 1rem; }
     .body-text li { margin-bottom: 0.5rem; }
     .body-text strong { color: var(--text-light); }
 
@@ -145,8 +148,8 @@
     .icon-display i { font-size: 5rem; color: var(--accent); opacity: 0.55; }
 
     /* ── Callout - filled accent ── */
-    .callout-accent { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
-    .callout-accent p { color: #9ca3af; font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
+    .callout-accent { background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
+    .callout-accent p { color: var(--text-body); font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
     .callout-accent cite { color: var(--text-muted); font-style: normal; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
 
     /* ── Callout - dark side border ── */
@@ -155,19 +158,19 @@
       border-radius: 0 var(--radius) var(--radius) 0;
       padding: 1.25rem 1.5rem; margin: 1.5rem 0;
     }
-    .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
+    .callout-side p { color: var(--text-body); font-style: italic; margin: 0; }
 
     /* ── Two-card row ── */
     .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
     .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
     .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.75rem; }
-    .card p, .card li { font-size: 0.92rem; color: #9ca3af; line-height: 1.75; }
+    .card p, .card li { font-size: 0.92rem; color: var(--text-body); line-height: 1.75; }
     .card ul { padding-left: 1.1rem; }
     .card li { margin-bottom: 0.35rem; }
 
     /* ── Tags ── */
     .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 20px; letter-spacing: 0.04em; }
 
     /* ── Tableau embed ── */
     .embed-wrap { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; margin: 2rem 0; }
@@ -178,9 +181,9 @@
 
     /* ── CTA ── */
     .cta-bar { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-top: 3rem; }
-    .cta-bar p { color: #9ca3af; margin-bottom: 1.25rem; font-size: 0.95rem; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
-    .cta-btn:hover { background: var(--accent-soft); }
+    .cta-bar p { color: var(--text-body); margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #111827; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
+    .cta-btn:hover { background: color-mix(in srgb, var(--accent) 80%, #fff); }
 
     /* ── Back link ── */
     .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
@@ -198,6 +201,8 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 900px) {
+      .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
+      .hero-intro-col { flex: 1 1 auto; }
       .split { grid-template-columns: 1fr; }
       .split.reverse { direction: ltr; }
       .two-card { grid-template-columns: 1fr; }
@@ -210,6 +215,7 @@
       .nav-links { display: none; }
       .metrics-row { grid-template-columns: 1fr; }
       .hero-content { padding: 0 5% 3rem; }
+      .hero-intro-col { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -221,71 +227,71 @@
   <nav>
     <a href="../../index.html" class="nav-brand">Jaykant Mendapara</a>
     <ul class="nav-links">
-      <li><a href="../../index.html#about">About</a></li>
-      <li><a href="../../index.html#experience">Experience</a></li>
-      <li><a href="../../index.html#education">Education</a></li>
-      <li><a href="../../index.html#skills">Skills</a></li>
-      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../../index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="../../index.html#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="../../index.html#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="../../index.html#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="../../index.html#projects" class="active" data-i18n="nav.projects">Projects</a></li>
     </ul>
   </nav>
 
   <!-- ── Hero ── -->
   <div class="page-hero">
     <div class="hero-text-col">
-      <div class="hero-eyebrow">Data Visualisation &nbsp;·&nbsp; EDHEC × UNICEF</div>
-      <h1 class="hero-title">Tableau<br><span>DataViz</span> Challenge</h1>
-      <p class="hero-desc">A Tableau dashboard on the global education crisis, built while studying at EDHEC Business School's Lille campus - selected as a finalist from entries across 16 European business schools.</p>
+      <div class="hero-eyebrow" data-i18n="t2">Data Visualisation &nbsp;·&nbsp; EDHEC × UNICEF</div>
+      <h1 class="hero-title" data-i18n="t3">Tableau<br><span>DataViz</span> Challenge</h1>
+      <p class="hero-desc" data-i18n="t4">A Tableau dashboard on the global education crisis, built while studying at EDHEC Business School's Lille campus - selected as a finalist from entries across 16 European business schools.</p>
       <div class="hero-meta">
-        <span><i class="fa-solid fa-user"></i> Solo Entry</span>
-        <span><i class="fa-solid fa-trophy"></i> 10 Finalists</span>
-        <span><i class="fa-solid fa-location-dot"></i> Paris &middot; May 2023</span>
+        <span data-i18n="t5"><i class="fa-solid fa-user"></i> Solo Entry</span>
+        <span data-i18n="t6"><i class="fa-solid fa-trophy"></i> 10 Finalists</span>
+        <span data-i18n="t7"><i class="fa-solid fa-location-dot"></i> Paris &middot; May 2023</span>
       </div>
     </div>
     <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">600<span>M+</span></div>
-        <div class="lbl">Children attend school but still can't read or do basic math - a learning crisis hiding behind attendance numbers.</div>
+        <div class="lbl" data-i18n="t8">Children attend school but still can't read or do basic math - a learning crisis hiding behind attendance numbers.</div>
       </div>
       <div class="metric-item" style="border:none; padding:0;">
-        <div class="val">1 <span>in</span> 5</div>
-        <div class="lbl">Children attend a school with no basic drinking water</div>
+        <div class="val">1 <span data-i18n="t9">in</span> 5</div>
+        <div class="lbl" data-i18n="t10">Children attend a school with no basic drinking water</div>
       </div>
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">8<span>×</span></div>
-        <div class="lbl">More likely to be out of school if born into the poorest 20% of households</div>
+        <div class="lbl" data-i18n="t11">More likely to be out of school if born into the poorest 20% of households</div>
       </div>
     </div>
   </div>
 
   <!-- ── TOC strip ── -->
   <div class="toc-strip">
-    <span class="toc-label">In this project</span>
-    <a href="#challenge">The Challenge</a>
-    <a href="#purpose">Purpose</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#data">Data Sources</a>
-    <a href="#insights">Key Insights</a>
-    <a href="#ux">User Experience</a>
-    <a href="#impact">Impact</a>
-    <a href="#reflection">Reflection</a>
+    <span class="toc-label" data-i18n="t12">In this project</span>
+    <a href="#challenge" data-i18n="t13">The Challenge</a>
+    <a href="#purpose" data-i18n="t14">Purpose</a>
+    <a href="#dashboard" data-i18n="t15">Dashboard</a>
+    <a href="#data" data-i18n="t16">Data Sources</a>
+    <a href="#insights" data-i18n="t17">Key Insights</a>
+    <a href="#ux" data-i18n="t18">User Experience</a>
+    <a href="#impact" data-i18n="t19">Impact</a>
+    <a href="#reflection" data-i18n="t20">Reflection</a>
   </div>
 
   <!-- ── Content ── -->
   <div class="content-wrap">
 
-    <a href="../../index.html#projects" class="back-link reveal">
+    <a href="../../index.html#projects" class="back-link reveal" data-i18n="t21">
       <i class="fa-solid fa-arrow-left"></i> Back to Projects
     </a>
 
     <!-- Tags -->
     <div class="tag-row reveal" style="margin-top:1.5rem">
-      <span class="tag">Tableau</span>
-      <span class="tag">Finalist 2023</span>
-      <span class="tag">UNICEF</span>
-      <span class="tag">EDHEC</span>
-      <span class="tag">Data Visualisation</span>
-      <span class="tag">Education Analytics</span>
-      <span class="tag">Tableau Prep</span>
+      <span class="tag" data-i18n="t22">Tableau</span>
+      <span class="tag" data-i18n="t23">Finalist 2023</span>
+      <span class="tag" data-i18n="t24">UNICEF</span>
+      <span class="tag" data-i18n="t25">EDHEC</span>
+      <span class="tag" data-i18n="t26">Data Visualisation</span>
+      <span class="tag" data-i18n="t27">Education Analytics</span>
+      <span class="tag" data-i18n="t28">Tableau Prep</span>
     </div>
 
     <!-- Dashboard screenshots -->
@@ -294,47 +300,47 @@
       <img src="../../images/Projects/StudentDataViz/Finals3.jpeg" alt="Dashboard screenshot 3" onerror="this.style.display='none'" />
       <img src="../../images/Projects/StudentDataViz/Finals2.jpeg" alt="Dashboard screenshot 2" onerror="this.style.display='none'" />
     </div>
-    <p class="img-caption">Live final, EDHEC's Paris Opera campus - 12 May 2023</p>
+    <p class="img-caption" data-i18n="t29">Live final, EDHEC's Paris Opera campus - 12 May 2023</p>
 
     <!-- Chapter 01: The Challenge -->
     <div id="challenge" class="chapter reveal">
       <div class="chapter-num">01</div>
       <div>
-        <div class="chapter-eyebrow">European Student Data Viz Challenge 2023</div>
-        <div class="chapter-title"><i class="fa-solid fa-trophy"></i>The Challenge</div>
+        <div class="chapter-eyebrow" data-i18n="t30">European Student Data Viz Challenge 2023</div>
+        <div class="chapter-title" data-i18n="t31"><i class="fa-solid fa-trophy"></i>The Challenge</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>In 2023, while studying at EDHEC Business School's Lille campus, I entered the European Student Data Viz Challenge - organised by EDHEC in partnership with UNICEF, Tableau, and Mazars, drawing entries from students at 16 top European business schools and universities across 9 countries, including INSEAD, ESMT, the London School of Economics, Dublin City University, and Católica Lisbon. The dashboard was selected as one of 10 finalists, which meant travelling to Paris to pitch it live in front of a judging panel drawn from all four partner organisations, at EDHEC's Paris Opera campus on 12 May 2023.</p>
+      <p data-i18n="t32">In 2023, while studying at EDHEC Business School's Lille campus, I entered the European Student Data Viz Challenge - organised by EDHEC in partnership with UNICEF, Tableau, and Mazars, drawing entries from students at 16 top European business schools and universities across 9 countries, including INSEAD, ESMT, the London School of Economics, Dublin City University, and Católica Lisbon. The dashboard was selected as one of 10 finalists, which meant travelling to Paris to pitch it live in front of a judging panel drawn from all four partner organisations, at EDHEC's Paris Opera campus on 12 May 2023.</p>
     </div>
 
     <!-- Chapter 01: Purpose -->
     <div id="purpose" class="chapter reveal">
       <div class="chapter-num">02</div>
       <div>
-        <div class="chapter-eyebrow">Background</div>
-        <div class="chapter-title"><i class="fa-solid fa-bullseye"></i>Purpose &amp; Inspiration</div>
+        <div class="chapter-eyebrow" data-i18n="t33">Background</div>
+        <div class="chapter-title" data-i18n="t34"><i class="fa-solid fa-bullseye"></i>Purpose &amp; Inspiration</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>This project was driven by a belief in education's transformative power. Despite rising school enrollment globally, UNICEF data reveals that <strong>600 million children and adolescents worldwide are unable to attain minimum proficiency</strong> in reading and mathematics.</p>
-      <p>Growing up in India gave me a first-hand perspective on how poverty, sanitation, and water access silently shape learning outcomes - factors that rarely appear in traditional academic reporting but are deeply correlated with educational performance.</p>
+      <p data-i18n="t35">This project was driven by a belief in education's transformative power. Despite rising school enrollment globally, UNICEF data reveals that <strong>600 million children and adolescents worldwide are unable to attain minimum proficiency</strong> in reading and mathematics.</p>
+      <p data-i18n="t36">Growing up in India gave me a first-hand perspective on how poverty, sanitation, and water access silently shape learning outcomes - factors that rarely appear in traditional academic reporting but are deeply correlated with educational performance.</p>
     </div>
 
     <!-- Chapter 02: Dashboard -->
     <div id="dashboard" class="chapter reveal">
       <div class="chapter-num">03</div>
       <div>
-        <div class="chapter-eyebrow">Interactive Visualisation</div>
-        <div class="chapter-title"><i class="fa-solid fa-chart-bar"></i>Live Dashboard</div>
+        <div class="chapter-eyebrow" data-i18n="t37">Interactive Visualisation</div>
+        <div class="chapter-title" data-i18n="t38"><i class="fa-solid fa-chart-bar"></i>Live Dashboard</div>
       </div>
     </div>
 
     <!-- Tableau embed -->
     <div class="embed-wrap reveal">
-      <div class="embed-label"><i class="fa-solid fa-chart-bar"></i><h2>UNICEF: Education &amp; Beyond - Interactive Dashboard</h2></div>
+      <div class="embed-label"><i class="fa-solid fa-chart-bar"></i><h2 data-i18n="t39">UNICEF: Education &amp; Beyond - Interactive Dashboard</h2></div>
       <div class="tableauPlaceholder" id="viz-container">
         <object class="tableauViz" width="100%" height="827" style="display:none;">
           <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
@@ -355,13 +361,13 @@
     </div>
 
     <div class="body-text reveal">
-      <p>The dashboard is built around three connected lenses - access, infrastructure, and poverty - rather than a single chart. Interactive filters, dynamic charts, and custom visualizations let users explore:</p>
+      <p data-i18n="t40">The dashboard is built around three connected lenses - access, infrastructure, and poverty - rather than a single chart. Interactive filters, dynamic charts, and custom visualizations let users explore:</p>
       <ul>
-        <li>School enrollment rates across countries and regions</li>
-        <li>Education expenditure as a percentage of GDP</li>
-        <li>Gender disparities in literacy and enrollment</li>
-        <li>Child labor rates and their correlation with dropout patterns</li>
-        <li>Infrastructure indicators: water access, sanitation, electricity</li>
+        <li data-i18n="t41">School enrollment rates across countries and regions</li>
+        <li data-i18n="t42">Education expenditure as a percentage of GDP</li>
+        <li data-i18n="t43">Gender disparities in literacy and enrollment</li>
+        <li data-i18n="t44">Child labor rates and their correlation with dropout patterns</li>
+        <li data-i18n="t45">Infrastructure indicators: water access, sanitation, electricity</li>
       </ul>
     </div>
 
@@ -369,56 +375,56 @@
     <div id="data" class="chapter reveal">
       <div class="chapter-num">04</div>
       <div>
-        <div class="chapter-eyebrow">Research foundation</div>
-        <div class="chapter-title"><i class="fa-solid fa-database"></i>Data Sources</div>
+        <div class="chapter-eyebrow" data-i18n="t46">Research foundation</div>
+        <div class="chapter-title" data-i18n="t47"><i class="fa-solid fa-database"></i>Data Sources</div>
       </div>
     </div>
 
     <div class="two-card reveal" style="grid-template-columns: repeat(3,1fr);">
       <div class="card">
-        <h3><i class="fa-solid fa-graduation-cap" style="color:var(--accent);margin-right:0.5rem"></i>UNESCO</h3>
-        <p>Global education statistics and learning outcomes across countries and regions.</p>
+        <h3 data-i18n="t48"><i class="fa-solid fa-graduation-cap" style="color:var(--accent);margin-right:0.5rem"></i>UNESCO</h3>
+        <p data-i18n="t49">Global education statistics and learning outcomes across countries and regions.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-landmark" style="color:var(--accent);margin-right:0.5rem"></i>World Bank</h3>
-        <p>Economic indicators and infrastructure data including GDP expenditure on education.</p>
+        <h3 data-i18n="t50"><i class="fa-solid fa-landmark" style="color:var(--accent);margin-right:0.5rem"></i>World Bank</h3>
+        <p data-i18n="t51">Economic indicators and infrastructure data including GDP expenditure on education.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-building-columns" style="color:var(--accent);margin-right:0.5rem"></i>National Ministries</h3>
-        <p>Country-level enrollment and expenditure figures from education ministries.</p>
+        <h3 data-i18n="t52"><i class="fa-solid fa-building-columns" style="color:var(--accent);margin-right:0.5rem"></i>National Ministries</h3>
+        <p data-i18n="t53">Country-level enrollment and expenditure figures from education ministries.</p>
       </div>
     </div>
-    <p class="img-caption reveal" style="margin-top:0.5rem;">All datasets were cleaned and joined in Tableau Prep before visualization.</p>
+    <p class="img-caption reveal" style="margin-top:0.5rem;" data-i18n="t54">All datasets were cleaned and joined in Tableau Prep before visualization.</p>
 
     <!-- Chapter 04: Key Insights -->
     <div id="insights" class="chapter reveal">
       <div class="chapter-num">05</div>
       <div>
-        <div class="chapter-eyebrow">What the data revealed</div>
-        <div class="chapter-title"><i class="fa-solid fa-lightbulb"></i>Key Insights</div>
+        <div class="chapter-eyebrow" data-i18n="t55">What the data revealed</div>
+        <div class="chapter-title" data-i18n="t56"><i class="fa-solid fa-lightbulb"></i>Key Insights</div>
       </div>
     </div>
 
     <div class="two-card reveal" style="grid-template-columns: repeat(3,1fr);">
       <div class="card">
-        <h3><i class="fa-solid fa-city" style="color:var(--accent);margin-right:0.5rem"></i>Urban-Rural Gap</h3>
-        <p>Significant disparities in educational access persist between urban and rural populations across developing regions.</p>
+        <h3 data-i18n="t57"><i class="fa-solid fa-city" style="color:var(--accent);margin-right:0.5rem"></i>Urban-Rural Gap</h3>
+        <p data-i18n="t58">Significant disparities in educational access persist between urban and rural populations across developing regions.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-droplet" style="color:var(--accent);margin-right:0.5rem"></i>Water & Attendance</h3>
-        <p>1 in 5 children attend a school with no basic drinking water service - schools lacking it show measurably lower attendance (WHO/UNICEF).</p>
+        <h3 data-i18n="t59"><i class="fa-solid fa-droplet" style="color:var(--accent);margin-right:0.5rem"></i>Water & Attendance</h3>
+        <p data-i18n="t60">1 in 5 children attend a school with no basic drinking water service - schools lacking it show measurably lower attendance (WHO/UNICEF).</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-arrow-trend-down" style="color:var(--accent);margin-right:0.5rem"></i>Secondary Dropout</h3>
-        <p>Out-of-school rates increase sharply between lower primary and secondary levels, signalling a critical transition gap.</p>
+        <h3 data-i18n="t61"><i class="fa-solid fa-arrow-trend-down" style="color:var(--accent);margin-right:0.5rem"></i>Secondary Dropout</h3>
+        <p data-i18n="t62">Out-of-school rates increase sharply between lower primary and secondary levels, signalling a critical transition gap.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-coins" style="color:var(--accent);margin-right:0.5rem"></i>Poverty Exclusion</h3>
-        <p>Children from the poorest 20% of households are 8× more likely to be out of school than those from the richest 20% (UNESCO GEM Report).</p>
+        <h3 data-i18n="t63"><i class="fa-solid fa-coins" style="color:var(--accent);margin-right:0.5rem"></i>Poverty Exclusion</h3>
+        <p data-i18n="t64">Children from the poorest 20% of households are 8× more likely to be out of school than those from the richest 20% (UNESCO GEM Report).</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-venus-mars" style="color:var(--accent);margin-right:0.5rem"></i>Gender Literacy Gap</h3>
-        <p>Gender literacy gaps signal structural barriers to equal education access, particularly in South Asia and Sub-Saharan Africa.</p>
+        <h3 data-i18n="t65"><i class="fa-solid fa-venus-mars" style="color:var(--accent);margin-right:0.5rem"></i>Gender Literacy Gap</h3>
+        <p data-i18n="t66">Gender literacy gaps signal structural barriers to equal education access, particularly in South Asia and Sub-Saharan Africa.</p>
       </div>
     </div>
 
@@ -426,48 +432,48 @@
     <div id="ux" class="chapter reveal">
       <div class="chapter-num">06</div>
       <div>
-        <div class="chapter-eyebrow">Design decisions</div>
-        <div class="chapter-title"><i class="fa-solid fa-sliders"></i>User Experience</div>
+        <div class="chapter-eyebrow" data-i18n="t67">Design decisions</div>
+        <div class="chapter-title" data-i18n="t68"><i class="fa-solid fa-sliders"></i>User Experience</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The dashboard was designed for diverse stakeholders - policymakers, educators, and researchers - regardless of technical expertise. Navigation is intuitive, with clear labelling and consistent color coding to distinguish regions and categories. Custom tooltips surface contextual information without cluttering the visual space, keeping the focus on the story the data is telling.</p>
+      <p data-i18n="t69">The dashboard was designed for diverse stakeholders - policymakers, educators, and researchers - regardless of technical expertise. Navigation is intuitive, with clear labelling and consistent color coding to distinguish regions and categories. Custom tooltips surface contextual information without cluttering the visual space, keeping the focus on the story the data is telling.</p>
     </div>
 
     <!-- Chapter 06: Impact -->
     <div id="impact" class="chapter reveal">
       <div class="chapter-num">07</div>
       <div>
-        <div class="chapter-eyebrow">Looking ahead</div>
-        <div class="chapter-title"><i class="fa-solid fa-chart-line"></i>Impact &amp; Future Directions</div>
+        <div class="chapter-eyebrow" data-i18n="t70">Looking ahead</div>
+        <div class="chapter-title" data-i18n="t71"><i class="fa-solid fa-chart-line"></i>Impact &amp; Future Directions</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The dashboard was built to inform strategic initiatives around global education access. Potential expansions include:</p>
+      <p data-i18n="t72">The dashboard was built to inform strategic initiatives around global education access. Potential expansions include:</p>
       <ul>
-        <li>Adding health and nutrition datasets to enrich the correlation analysis</li>
-        <li>Integrating time-series views to track progress across decades</li>
-        <li>Building a country-level drill-through for deeper local insights</li>
+        <li data-i18n="t73">Adding health and nutrition datasets to enrich the correlation analysis</li>
+        <li data-i18n="t74">Integrating time-series views to track progress across decades</li>
+        <li data-i18n="t75">Building a country-level drill-through for deeper local insights</li>
       </ul>
     </div>
 
     <!-- Technical + Challenges -->
     <div class="two-card reveal" style="margin-top:1rem">
       <div class="card">
-        <h3><i class="fa-solid fa-code" style="color:var(--accent);margin-right:0.5rem"></i>Technical Skills</h3>
+        <h3 data-i18n="t76"><i class="fa-solid fa-code" style="color:var(--accent);margin-right:0.5rem"></i>Technical Skills</h3>
         <ul>
-          <li>Tableau Desktop - calculated fields, LOD expressions, parameter actions</li>
-          <li>Data cleaning and reshaping in Tableau Prep</li>
-          <li>Cross-dataset joins and blending</li>
-          <li>Statistical analysis and insight interpretation</li>
+          <li data-i18n="t77">Tableau Desktop - calculated fields, LOD expressions, parameter actions</li>
+          <li data-i18n="t78">Data cleaning and reshaping in Tableau Prep</li>
+          <li data-i18n="t79">Cross-dataset joins and blending</li>
+          <li data-i18n="t80">Statistical analysis and insight interpretation</li>
         </ul>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-lightbulb" style="color:var(--accent);margin-right:0.5rem"></i>Challenges &amp; Learnings</h3>
-        <p>Integrating multiple datasets with inconsistencies required careful data wrangling. Balancing visual complexity with clarity taught me to ruthlessly prioritize the most impactful metrics and progressively reveal detail on demand.</p>
-        <p>The harder challenge, though, was translating a data finding into a live pitch for a mixed judging panel - getting from "I found a correlation between water access and attendance" to something a room could feel, not just read off a chart.</p>
+        <h3 data-i18n="t81"><i class="fa-solid fa-lightbulb" style="color:var(--accent);margin-right:0.5rem"></i>Challenges &amp; Learnings</h3>
+        <p data-i18n="t82">Integrating multiple datasets with inconsistencies required careful data wrangling. Balancing visual complexity with clarity taught me to ruthlessly prioritize the most impactful metrics and progressively reveal detail on demand.</p>
+        <p data-i18n="t83">The harder challenge, though, was translating a data finding into a live pitch for a mixed judging panel - getting from "I found a correlation between water access and attendance" to something a room could feel, not just read off a chart.</p>
       </div>
     </div>
 
@@ -476,8 +482,8 @@
 
     <!-- CTA -->
     <div class="cta-bar reveal">
-      <p>View the live dashboard and other visualizations on my Tableau Public profile</p>
-      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener" class="cta-btn">
+      <p data-i18n="t84">View the live dashboard and other visualizations on my Tableau Public profile</p>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener" class="cta-btn" data-i18n="t85">
         <i class="fa-solid fa-chart-bar"></i> View on Tableau Public
       </a>
     </div>
@@ -491,7 +497,7 @@
       <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
       <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
     </div>
-    <p>&copy; 2025 Jaykant Mendapara</p>
+    <p data-i18n="t86">&copy; 2025 Jaykant Mendapara</p>
   </footer>
 
   <script>

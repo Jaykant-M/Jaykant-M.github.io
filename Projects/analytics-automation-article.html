@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automation in Analytics: A Decision, Not a Default — Jaykant Mendapara</title>
+  <title data-i18n="t1">Automation in Analytics: A Decision, Not a Default — Jaykant Mendapara</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/lang-switch.css" />
+  <script src="../i18n/automation.js"></script>
+  <script src="../assets/lang-switch.js"></script>
 
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
@@ -33,7 +36,7 @@
     /* ── Nav ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--dark) 92%, transparent); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--dark-border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2rem; height: 60px;
@@ -76,7 +79,7 @@
       color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
     }
     .hero-title span { color: var(--accent); }
-    .hero-desc { color: #9ca3af; font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
     .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
     .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
@@ -120,8 +123,8 @@
     .split.reverse { direction: rtl; }
     .split.reverse > * { direction: ltr; }
 
-    .body-text p { color: #9ca3af; line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
-    .body-text ul, .body-text ol { padding-left: 1.25rem; color: #9ca3af; line-height: 1.8; font-size: 1rem; }
+    .body-text p { color: var(--text-body); line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: var(--text-body); line-height: 1.8; font-size: 1rem; }
     .body-text li { margin-bottom: 0.5rem; }
     .body-text strong { color: var(--text-light); }
 
@@ -139,8 +142,8 @@
     .icon-display i { font-size: 5rem; color: var(--accent); opacity: 0.55; }
 
     /* ── Callout - filled accent ── */
-    .callout-accent { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
-    .callout-accent p { color: #9ca3af; font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
+    .callout-accent { background: color-mix(in srgb, var(--accent) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-radius: var(--radius); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: flex-end; gap: 2rem; }
+    .callout-accent p { color: var(--text-body); font-style: italic; font-size: 1rem; font-weight: 400; line-height: 1.65; margin: 0; flex: 1; }
     .callout-accent cite { color: var(--text-muted); font-style: normal; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
 
     /* ── Callout - dark side border ── */
@@ -149,13 +152,13 @@
       border-radius: 0 var(--radius) var(--radius) 0;
       padding: 1.25rem 1.5rem; margin: 1.5rem 0;
     }
-    .callout-side p { color: #9ca3af; font-style: italic; margin: 0; }
+    .callout-side p { color: var(--text-body); font-style: italic; margin: 0; }
 
     /* ── Two-card row ── */
     .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
     .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.5rem; }
     .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.75rem; }
-    .card p, .card li { font-size: 0.92rem; color: #9ca3af; line-height: 1.75; }
+    .card p, .card li { font-size: 0.92rem; color: var(--text-body); line-height: 1.75; }
     .card p { margin-bottom: 0.6rem; }
     .card p:last-child { margin-bottom: 0; }
     .card ul { padding-left: 1.1rem; }
@@ -164,13 +167,13 @@
 
     /* ── Tags ── */
     .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); border-radius: 20px; letter-spacing: 0.04em; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 20px; letter-spacing: 0.04em; }
 
     /* ── CTA ── */
     .cta-bar { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 2.5rem; text-align: center; margin-top: 3rem; }
-    .cta-bar p { color: #9ca3af; margin-bottom: 1.25rem; font-size: 0.95rem; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
-    .cta-btn:hover { background: var(--accent-soft); }
+    .cta-bar p { color: var(--text-body); margin-bottom: 1.25rem; font-size: 0.95rem; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #111827; text-decoration: none; font-size: 0.9rem; font-weight: 600; padding: 0.7rem 1.5rem; border-radius: 8px; transition: background 0.2s; }
+    .cta-btn:hover { background: color-mix(in srgb, var(--accent) 80%, #fff); }
 
     /* ── Back link ── */
     .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
@@ -201,6 +204,8 @@
       .nav-links { display: none; }
       .metrics-row { grid-template-columns: 1fr; }
       .hero-intro-col { grid-template-columns: 1fr !important; }
+      .callout-accent { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .callout-accent cite { white-space: normal; }
     }
   </style>
 </head>
@@ -212,115 +217,115 @@
   <nav>
     <a href="../index.html" class="nav-brand">Jaykant Mendapara</a>
     <ul class="nav-links">
-      <li><a href="../index.html#about">About</a></li>
-      <li><a href="../index.html#experience">Experience</a></li>
-      <li><a href="../index.html#education">Education</a></li>
-      <li><a href="../index.html#skills">Skills</a></li>
-      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="../index.html#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="../index.html#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="../index.html#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="../index.html#projects" class="active" data-i18n="nav.projects">Projects</a></li>
     </ul>
   </nav>
 
   <!-- ── Hero ── -->
   <div class="page-hero">
     <div class="hero-text-col">
-      <div class="hero-eyebrow">Analytics &nbsp;·&nbsp; Thought Leadership</div>
-      <h1 class="hero-title">Automation in Analytics:<br>A Decision, <span>Not a Default</span></h1>
-      <p class="hero-desc">Not everything that can be automated should be. As AI reshapes the analyst's toolkit faster than governance can follow - a practitioner's case for keeping judgment at the centre of the workflow.</p>
+      <div class="hero-eyebrow" data-i18n="t2">Analytics &nbsp;·&nbsp; Thought Leadership</div>
+      <h1 class="hero-title" data-i18n="t3">Automation in Analytics:<br>A Decision, <span>Not a Default</span></h1>
+      <p class="hero-desc" data-i18n="t4">Not everything that can be automated should be. As AI reshapes the analyst's toolkit faster than governance can follow - a practitioner's case for keeping judgment at the centre of the workflow.</p>
       <div class="hero-meta">
-        <span><i class="fa-solid fa-clock"></i> 7 min read</span>
-        <span><i class="fa-solid fa-lightbulb"></i> Thought Leadership</span>
-        <span><i class="fa-solid fa-calendar"></i> July 2025</span>
+        <span data-i18n="t5"><i class="fa-solid fa-clock"></i> 7 min read</span>
+        <span data-i18n="t6"><i class="fa-solid fa-lightbulb"></i> Thought Leadership</span>
+        <span data-i18n="t7"><i class="fa-solid fa-calendar"></i> July 2025</span>
       </div>
     </div>
     <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">72<span>%</span></div>
-        <div class="lbl">of analytics teams now prioritise AI-assisted coding - yet only 24% invest equally in governance and validation.</div>
+        <div class="lbl" data-i18n="t8">of analytics teams now prioritise AI-assisted coding - yet only 24% invest equally in governance and validation.</div>
       </div>
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">71<span>%</span></div>
-        <div class="lbl">are concerned about hallucinated or incorrect data reaching stakeholders in an AI-accelerated workflow.</div>
+        <div class="lbl" data-i18n="t9">are concerned about hallucinated or incorrect data reaching stakeholders in an AI-accelerated workflow.</div>
       </div>
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">40<span>%+</span></div>
-        <div class="lbl">of agentic AI projects are expected to be cancelled by 2027 over cost, unclear value, or poor controls (Gartner).</div>
+        <div class="lbl" data-i18n="t10">of agentic AI projects are expected to be cancelled by 2027 over cost, unclear value, or poor controls (Gartner).</div>
       </div>
     </div>
   </div>
 
   <!-- ── TOC strip ── -->
   <div class="toc-strip">
-    <span class="toc-label">In this article</span>
-    <a href="#default">The Wrong Default</a>
-    <a href="#why">Why We Automate</a>
-    <a href="#failures">Three Failure Modes</a>
-    <a href="#framework">The Decision Framework</a>
-    <a href="#never">What to Never Automate</a>
-    <a href="#ai">The AI Inflection Point</a>
-    <a href="#capacity">Automation as Capacity</a>
+    <span class="toc-label" data-i18n="t11">In this article</span>
+    <a href="#default" data-i18n="t12">The Wrong Default</a>
+    <a href="#why" data-i18n="t13">Why We Automate</a>
+    <a href="#failures" data-i18n="t14">Three Failure Modes</a>
+    <a href="#framework" data-i18n="t15">The Decision Framework</a>
+    <a href="#never" data-i18n="t16">What to Never Automate</a>
+    <a href="#ai" data-i18n="t17">The AI Inflection Point</a>
+    <a href="#capacity" data-i18n="t18">Automation as Capacity</a>
   </div>
 
   <!-- ── Content ── -->
   <div class="content-wrap">
 
-    <a href="../index.html#projects" class="back-link reveal">
+    <a href="../index.html#projects" class="back-link reveal" data-i18n="t19">
       <i class="fa-solid fa-arrow-left"></i> Back to Projects
     </a>
 
     <!-- Tags -->
     <div class="tag-row reveal" style="margin-top:1.5rem">
-      <span class="tag">Analytics Automation</span>
-      <span class="tag">Agentic AI</span>
-      <span class="tag">Python</span>
-      <span class="tag">GCP</span>
-      <span class="tag">dbt</span>
-      <span class="tag">BigQuery</span>
-      <span class="tag">Data Governance</span>
-      <span class="tag">Thought Leadership</span>
+      <span class="tag" data-i18n="t20">Analytics Automation</span>
+      <span class="tag" data-i18n="t21">Agentic AI</span>
+      <span class="tag" data-i18n="t22">Python</span>
+      <span class="tag" data-i18n="t23">GCP</span>
+      <span class="tag" data-i18n="t24">dbt</span>
+      <span class="tag" data-i18n="t25">BigQuery</span>
+      <span class="tag" data-i18n="t26">Data Governance</span>
+      <span class="tag" data-i18n="t27">Thought Leadership</span>
     </div>
 
     <!-- Chapter 01: The Wrong Default -->
     <div id="default" class="chapter reveal">
       <div class="chapter-num">01</div>
       <div>
-        <div class="chapter-eyebrow">Introduction</div>
-        <div class="chapter-title"><i class="fa-solid fa-triangle-exclamation"></i>The Wrong Default</div>
+        <div class="chapter-eyebrow" data-i18n="t28">Introduction</div>
+        <div class="chapter-title" data-i18n="t29"><i class="fa-solid fa-triangle-exclamation"></i>The Wrong Default</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>There's a specific kind of silence that follows a broken automated report. No error message. No failed job alert. Just a dashboard quietly showing last month's numbers as if they were today's, and a stakeholder making decisions on stale data while you're working on something else entirely.</p>
-      <p>I've been in that position. And it taught me something most analytics content glosses over: automation is not a productivity strategy. It's a design decision - and like any design decision, it can be made well or badly.</p>
-      <p>This matters more now than ever. The dbt Labs 2026 State of Analytics Engineering report - the most comprehensive pulse-check of the field published this year - opens with a blunt finding: <strong>AI is scaling analytics output faster than governance can follow.</strong> The teams and tools are moving. The controls haven't kept pace. That gap is exactly where poor automation decisions live.</p>
+      <p data-i18n="t30">There's a specific kind of silence that follows a broken automated report. No error message. No failed job alert. Just a dashboard quietly showing last month's numbers as if they were today's, and a stakeholder making decisions on stale data while you're working on something else entirely.</p>
+      <p data-i18n="t31">I've been in that position. And it taught me something most analytics content glosses over: automation is not a productivity strategy. It's a design decision - and like any design decision, it can be made well or badly.</p>
+      <p data-i18n="t32">This matters more now than ever. The dbt Labs 2026 State of Analytics Engineering report - the most comprehensive pulse-check of the field published this year - opens with a blunt finding: <strong>AI is scaling analytics output faster than governance can follow.</strong> The teams and tools are moving. The controls haven't kept pace. That gap is exactly where poor automation decisions live.</p>
     </div>
 
     <!-- Chapter 02: Why We Automate -->
     <div id="why" class="chapter reveal">
       <div class="chapter-num">02</div>
       <div>
-        <div class="chapter-eyebrow">Context</div>
-        <div class="chapter-title"><i class="fa-solid fa-bolt"></i>Why Analysts Default to Automation</div>
+        <div class="chapter-eyebrow" data-i18n="t33">Context</div>
+        <div class="chapter-title" data-i18n="t34"><i class="fa-solid fa-bolt"></i>Why Analysts Default to Automation</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The instinct makes sense. Repetitive tasks feel like a waste of analytical capacity. If you've built a segmented deal analysis three Mondays in a row, the natural response is to script it, schedule it, and reclaim those hours for something more strategic. Tools like Python, BigQuery, dbt, and cloud schedulers make this easier than ever.</p>
-      <p>The tooling landscape has accelerated sharply. The Fivetran and dbt Labs merger - announced October 2025 and completed in 2026 - created a combined analytics infrastructure business approaching $600M in revenue. Snowflake's native dbt integration lets teams run transformation pipelines directly inside the warehouse without separate containers or VMs. What once required a dedicated data engineering setup is now a few clicks away.</p>
-      <p>But <strong>"I can automate this" is a different question from "I should automate this."</strong> The first is about capability. The second is about judgment - and judgment is exactly what automation cannot replace. When tooling lowers the cost of automating something, it also lowers the friction that used to force analysts to think carefully about whether they should.</p>
+      <p data-i18n="t35">The instinct makes sense. Repetitive tasks feel like a waste of analytical capacity. If you've built a segmented deal analysis three Mondays in a row, the natural response is to script it, schedule it, and reclaim those hours for something more strategic. Tools like Python, BigQuery, dbt, and cloud schedulers make this easier than ever.</p>
+      <p data-i18n="t36">The tooling landscape has accelerated sharply. The Fivetran and dbt Labs merger - announced October 2025 and completed in 2026 - created a combined analytics infrastructure business approaching $600M in revenue. Snowflake's native dbt integration lets teams run transformation pipelines directly inside the warehouse without separate containers or VMs. What once required a dedicated data engineering setup is now a few clicks away.</p>
+      <p data-i18n="t37">But <strong>"I can automate this" is a different question from "I should automate this."</strong> The first is about capability. The second is about judgment - and judgment is exactly what automation cannot replace. When tooling lowers the cost of automating something, it also lowers the friction that used to force analysts to think carefully about whether they should.</p>
     </div>
 
     <div class="metrics-row reveal">
       <div class="metric-item">
         <div class="val">72<span>%</span></div>
-        <div class="lbl">of practitioners now prioritise AI-assisted coding in their development process (dbt Labs, 2026).</div>
+        <div class="lbl" data-i18n="t38">of practitioners now prioritise AI-assisted coding in their development process (dbt Labs, 2026).</div>
       </div>
       <div class="metric-item">
         <div class="val">24<span>%</span></div>
-        <div class="lbl">invest equally in AI-assisted pipeline management - testing, observability, quality controls.</div>
+        <div class="lbl" data-i18n="t39">invest equally in AI-assisted pipeline management - testing, observability, quality controls.</div>
       </div>
       <div class="metric-item">
         <div class="val">$600<span>M</span></div>
-        <div class="lbl">combined revenue of the Fivetran–dbt Labs entity - transformation automation is now enterprise infrastructure.</div>
+        <div class="lbl" data-i18n="t40">combined revenue of the Fivetran–dbt Labs entity - transformation automation is now enterprise infrastructure.</div>
       </div>
     </div>
 
@@ -328,30 +333,30 @@
     <div id="failures" class="chapter reveal">
       <div class="chapter-num">03</div>
       <div>
-        <div class="chapter-eyebrow">Risk</div>
-        <div class="chapter-title"><i class="fa-solid fa-circle-xmark"></i>Three Ways Automation Fails</div>
+        <div class="chapter-eyebrow" data-i18n="t41">Risk</div>
+        <div class="chapter-title" data-i18n="t42"><i class="fa-solid fa-circle-xmark"></i>Three Ways Automation Fails</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>Automation fails in three reliably distinct ways - and all three are avoidable with foresight. The market is currently producing data on all of them simultaneously.</p>
+      <p data-i18n="t43">Automation fails in three reliably distinct ways - and all three are avoidable with foresight. The market is currently producing data on all of them simultaneously.</p>
     </div>
 
     <div class="two-card reveal" style="grid-template-columns: 1fr;">
       <div class="card">
-        <h3><i class="fa-solid fa-1" style="color:var(--accent);margin-right:0.5rem"></i>The logic changes, but the automation doesn't</h3>
-        <p>Business rules shift constantly. Loyalty tier definitions change. Campaign structures get restructured. A product category gets reclassified. When the underlying logic of an analysis changes but the automated script doesn't, you get output that looks correct but isn't - and because no human is running it manually, no one catches it until the damage is done.</p>
-        <p class="card-note">This scales in agentic pipelines. An AI agent diagnosing a schema drift may apply a fix that resolves the symptom while masking a deeper architectural problem - a failure mode flagged as a primary risk of self-healing data pipelines in 2026. Blindly fixing everything can "create new failure modes" rather than eliminate them.</p>
+        <h3 data-i18n="t44"><i class="fa-solid fa-1" style="color:var(--accent);margin-right:0.5rem"></i>The logic changes, but the automation doesn't</h3>
+        <p data-i18n="t45">Business rules shift constantly. Loyalty tier definitions change. Campaign structures get restructured. A product category gets reclassified. When the underlying logic of an analysis changes but the automated script doesn't, you get output that looks correct but isn't - and because no human is running it manually, no one catches it until the damage is done.</p>
+        <p class="card-note" data-i18n="t46">This scales in agentic pipelines. An AI agent diagnosing a schema drift may apply a fix that resolves the symptom while masking a deeper architectural problem - a failure mode flagged as a primary risk of self-healing data pipelines in 2026. Blindly fixing everything can "create new failure modes" rather than eliminate them.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-2" style="color:var(--accent);margin-right:0.5rem"></i>The output is consumed without context</h3>
-        <p>Automated reports are excellent at delivering numbers and poor at delivering nuance. A weekly dashboard can tell you new customer acquisition dropped. It can't tell you whether that's a targeting change, a seasonal shift, a competitor promotion, or a pipeline issue. Remove the analyst from the loop and you lose the interpretive layer - stakeholders decide on numbers without the story that gives them meaning.</p>
-        <p class="card-note">LLM text-to-SQL tools illustrate this sharply. Benchmarks report 85–90% accuracy on controlled datasets, but against enterprise-grade Spider 2.0 even top models struggle - faulty joins, missing filters, hallucinated columns. The query executes, the output looks plausible, and no human catches it. "Silent error is the most expensive failure mode of all."</p>
+        <h3 data-i18n="t47"><i class="fa-solid fa-2" style="color:var(--accent);margin-right:0.5rem"></i>The output is consumed without context</h3>
+        <p data-i18n="t48">Automated reports are excellent at delivering numbers and poor at delivering nuance. A weekly dashboard can tell you new customer acquisition dropped. It can't tell you whether that's a targeting change, a seasonal shift, a competitor promotion, or a pipeline issue. Remove the analyst from the loop and you lose the interpretive layer - stakeholders decide on numbers without the story that gives them meaning.</p>
+        <p class="card-note" data-i18n="t49">LLM text-to-SQL tools illustrate this sharply. Benchmarks report 85–90% accuracy on controlled datasets, but against enterprise-grade Spider 2.0 even top models struggle - faulty joins, missing filters, hallucinated columns. The query executes, the output looks plausible, and no human catches it. "Silent error is the most expensive failure mode of all."</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-3" style="color:var(--accent);margin-right:0.5rem"></i>The maintenance cost is underestimated</h3>
-        <p>Building an automation is one sprint. Maintaining it is indefinite. Every schema change, every API update, every upstream data quality issue becomes your problem to fix. Analysts who automate aggressively often spend as much time debugging pipelines as they'd have spent running the analyses - with the added pressure that something is already broken by the time they find out.</p>
-        <p class="card-note">The structural number: 72% of teams prioritise AI-assisted coding, but only 24% invest equally in pipeline management. Teams accelerate creation faster than they reinforce stability. The debt accumulates silently, across every pipeline that ships without adequate validation.</p>
+        <h3 data-i18n="t50"><i class="fa-solid fa-3" style="color:var(--accent);margin-right:0.5rem"></i>The maintenance cost is underestimated</h3>
+        <p data-i18n="t51">Building an automation is one sprint. Maintaining it is indefinite. Every schema change, every API update, every upstream data quality issue becomes your problem to fix. Analysts who automate aggressively often spend as much time debugging pipelines as they'd have spent running the analyses - with the added pressure that something is already broken by the time they find out.</p>
+        <p class="card-note" data-i18n="t52">The structural number: 72% of teams prioritise AI-assisted coding, but only 24% invest equally in pipeline management. Teams accelerate creation faster than they reinforce stability. The debt accumulates silently, across every pipeline that ships without adequate validation.</p>
       </div>
     </div>
 
@@ -359,27 +364,27 @@
     <div id="framework" class="chapter reveal">
       <div class="chapter-num">04</div>
       <div>
-        <div class="chapter-eyebrow">Framework</div>
-        <div class="chapter-title"><i class="fa-solid fa-list-check"></i>A Simple Framework for Deciding</div>
+        <div class="chapter-eyebrow" data-i18n="t53">Framework</div>
+        <div class="chapter-title" data-i18n="t54"><i class="fa-solid fa-list-check"></i>A Simple Framework for Deciding</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>Before automating any piece of analytical work, run it against three questions:</p>
+      <p data-i18n="t55">Before automating any piece of analytical work, run it against three questions:</p>
     </div>
 
     <div class="two-card reveal" style="grid-template-columns: 1fr;">
       <div class="card">
-        <h3><i class="fa-solid fa-repeat" style="color:var(--accent);margin-right:0.5rem"></i>Is it recurring and structurally stable?</h3>
-        <p>If the same question is asked in the same way on a predictable cadence - and the underlying data structure and business logic are unlikely to shift - automation adds genuine value. ETL pipelines, KPI refresh jobs, standard weekly reports fit the pattern. The logic is fixed, the frequency is high, and the maintenance cost is manageable.</p>
+        <h3 data-i18n="t56"><i class="fa-solid fa-repeat" style="color:var(--accent);margin-right:0.5rem"></i>Is it recurring and structurally stable?</h3>
+        <p data-i18n="t57">If the same question is asked in the same way on a predictable cadence - and the underlying data structure and business logic are unlikely to shift - automation adds genuine value. ETL pipelines, KPI refresh jobs, standard weekly reports fit the pattern. The logic is fixed, the frequency is high, and the maintenance cost is manageable.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-comments" style="color:var(--accent);margin-right:0.5rem"></i>Does the output require interpretation each time?</h3>
-        <p>If the value lies not in the numbers but in what you make of them - campaign post-mortems, attribution deep dives, exploratory segmentation - automation should stop at the data layer. Pull the data automatically, by all means. But the synthesis, the narrative, the recommendation: that stays human.</p>
+        <h3 data-i18n="t58"><i class="fa-solid fa-comments" style="color:var(--accent);margin-right:0.5rem"></i>Does the output require interpretation each time?</h3>
+        <p data-i18n="t59">If the value lies not in the numbers but in what you make of them - campaign post-mortems, attribution deep dives, exploratory segmentation - automation should stop at the data layer. Pull the data automatically, by all means. But the synthesis, the narrative, the recommendation: that stays human.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>What breaks if it's wrong and no one notices?</h3>
-        <p>This is the highest-stakes question. For a recurring operational report feeding weekly planning, silent failure is a serious risk. For a one-off exploratory analysis, the stakes are lower. The higher the downstream consequence, the more a human needs to remain in the loop - reviewing outputs before distribution, or with explicit alerting so failures surface quickly.</p>
+        <h3 data-i18n="t60"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>What breaks if it's wrong and no one notices?</h3>
+        <p data-i18n="t61">This is the highest-stakes question. For a recurring operational report feeding weekly planning, silent failure is a serious risk. For a one-off exploratory analysis, the stakes are lower. The higher the downstream consequence, the more a human needs to remain in the loop - reviewing outputs before distribution, or with explicit alerting so failures surface quickly.</p>
       </div>
     </div>
 
@@ -387,91 +392,91 @@
     <div id="never" class="chapter reveal">
       <div class="chapter-num">05</div>
       <div>
-        <div class="chapter-eyebrow">Boundaries</div>
-        <div class="chapter-title"><i class="fa-solid fa-hand"></i>What Should Never Be Automated</div>
+        <div class="chapter-eyebrow" data-i18n="t62">Boundaries</div>
+        <div class="chapter-title" data-i18n="t63"><i class="fa-solid fa-hand"></i>What Should Never Be Automated</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>Some analytical work is structurally resistant to automation - not because it's technically complex, but because its value is inseparable from judgment:</p>
+      <p data-i18n="t64">Some analytical work is structurally resistant to automation - not because it's technically complex, but because its value is inseparable from judgment:</p>
       <ul>
-        <li><strong>Exploratory analysis.</strong> When you don't yet know what you're looking for, you can't encode the question in a script.</li>
-        <li><strong>Stakeholder narratives.</strong> A good analytical story requires understanding the audience, the business context, and the decision at hand. None of that is scriptable.</li>
-        <li><strong>Anomaly investigation.</strong> You can automate anomaly detection. You cannot automate knowing whether an anomaly matters or why.</li>
-        <li><strong>Strategic recommendations.</strong> The last mile between data and action is human by definition.</li>
+        <li data-i18n="t65"><strong>Exploratory analysis.</strong> When you don't yet know what you're looking for, you can't encode the question in a script.</li>
+        <li data-i18n="t66"><strong>Stakeholder narratives.</strong> A good analytical story requires understanding the audience, the business context, and the decision at hand. None of that is scriptable.</li>
+        <li data-i18n="t67"><strong>Anomaly investigation.</strong> You can automate anomaly detection. You cannot automate knowing whether an anomaly matters or why.</li>
+        <li data-i18n="t68"><strong>Strategic recommendations.</strong> The last mile between data and action is human by definition.</li>
       </ul>
-      <p>Trying to automate these doesn't make analytics more efficient. It makes it less useful. And no amount of automation resolves an ownership question - that's a human governance decision, and it has to happen before, not after, you build the pipeline that depends on it.</p>
+      <p data-i18n="t69">Trying to automate these doesn't make analytics more efficient. It makes it less useful. And no amount of automation resolves an ownership question - that's a human governance decision, and it has to happen before, not after, you build the pipeline that depends on it.</p>
     </div>
 
     <div class="callout-side reveal">
-      <p>41% of analytics teams still cite ambiguous data ownership as an ongoing challenge - unchanged year-over-year. The bottleneck has shifted from infrastructure to accountability. (dbt Labs, 2026)</p>
+      <p data-i18n="t70">41% of analytics teams still cite ambiguous data ownership as an ongoing challenge - unchanged year-over-year. The bottleneck has shifted from infrastructure to accountability. (dbt Labs, 2026)</p>
     </div>
 
     <!-- Chapter 06: The AI Inflection Point -->
     <div id="ai" class="chapter reveal">
       <div class="chapter-num">06</div>
       <div>
-        <div class="chapter-eyebrow">Market Context</div>
-        <div class="chapter-title"><i class="fa-solid fa-robot"></i>The AI Inflection Point</div>
+        <div class="chapter-eyebrow" data-i18n="t71">Market Context</div>
+        <div class="chapter-title" data-i18n="t72"><i class="fa-solid fa-robot"></i>The AI Inflection Point</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The automation question now has a higher-stakes, faster-moving version. Agentic AI systems - platforms that can plan, execute, and verify analytical workflows without step-by-step human guidance - are moving out of proof-of-concept and into production data stacks. Snowflake announced a $200M partnership with Anthropic in December 2025 to build agentic capabilities into enterprise data platforms; Databricks launched Genie Code in March 2026, generating production-ready dbt models and validating its own outputs.</p>
+      <p data-i18n="t73">The automation question now has a higher-stakes, faster-moving version. Agentic AI systems - platforms that can plan, execute, and verify analytical workflows without step-by-step human guidance - are moving out of proof-of-concept and into production data stacks. Snowflake announced a $200M partnership with Anthropic in December 2025 to build agentic capabilities into enterprise data platforms; Databricks launched Genie Code in March 2026, generating production-ready dbt models and validating its own outputs.</p>
     </div>
 
     <div class="two-card reveal">
       <div class="card">
-        <h3><i class="fa-solid fa-arrow-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>Market momentum</h3>
-        <p><strong>38.6%</strong> growth in the data science and AI platforms subsegment in 2024 - the highest ever recorded, driven by agentic AI interest (Gartner).</p>
+        <h3 data-i18n="t74"><i class="fa-solid fa-arrow-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>Market momentum</h3>
+        <p data-i18n="t75"><strong>38.6%</strong> growth in the data science and AI platforms subsegment in 2024 - the highest ever recorded, driven by agentic AI interest (Gartner).</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-circle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>Reality check</h3>
-        <p><strong>40%+</strong> of agentic AI projects are expected to be cancelled by 2027 due to rising costs, unclear value, or poor risk controls (Gartner).</p>
+        <h3 data-i18n="t76"><i class="fa-solid fa-circle-exclamation" style="color:var(--accent);margin-right:0.5rem"></i>Reality check</h3>
+        <p data-i18n="t77"><strong>40%+</strong> of agentic AI projects are expected to be cancelled by 2027 due to rising costs, unclear value, or poor risk controls (Gartner).</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-shield-halved" style="color:var(--accent);margin-right:0.5rem"></i>The trust gap</h3>
-        <p><strong>83%</strong> of analytics teams now rank trust in data as a top strategic priority - up from 66% the year before, reflecting unease with unvalidated AI output.</p>
+        <h3 data-i18n="t78"><i class="fa-solid fa-shield-halved" style="color:var(--accent);margin-right:0.5rem"></i>The trust gap</h3>
+        <p data-i18n="t79"><strong>83%</strong> of analytics teams now rank trust in data as a top strategic priority - up from 66% the year before, reflecting unease with unvalidated AI output.</p>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-money-bill-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>The cost pressure</h3>
-        <p><strong>57%</strong> of teams report increased warehouse and compute spend, versus only 36% reporting increased team budgets - a widening cost gap driven by AI workloads.</p>
+        <h3 data-i18n="t80"><i class="fa-solid fa-money-bill-trend-up" style="color:var(--accent);margin-right:0.5rem"></i>The cost pressure</h3>
+        <p data-i18n="t81"><strong>57%</strong> of teams report increased warehouse and compute spend, versus only 36% reporting increased team budgets - a widening cost gap driven by AI workloads.</p>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The three failure modes don't disappear with agentic AI. They scale. An agent that applies a hallucinated schema fix, or generates a dbt model that silently misjoins tables, doesn't create a single wrong answer. It creates a factory for wrong answers, running on a schedule, unattended. The foundation determines what the automation can trust - if quality, ownership, and documentation aren't in place, AI agents inherit those gaps and amplify them.</p>
+      <p data-i18n="t82">The three failure modes don't disappear with agentic AI. They scale. An agent that applies a hallucinated schema fix, or generates a dbt model that silently misjoins tables, doesn't create a single wrong answer. It creates a factory for wrong answers, running on a schedule, unattended. The foundation determines what the automation can trust - if quality, ownership, and documentation aren't in place, AI agents inherit those gaps and amplify them.</p>
     </div>
 
     <div class="callout-accent reveal">
-      <p>"AI won't fix a messy foundation. It just makes the lack of discipline much more visible."</p>
-      <cite>— Bruno Lima, Lead Data Engineer, phData<br>(dbt Labs 2026 Report)</cite>
+      <p data-i18n="t83">"AI won't fix a messy foundation. It just makes the lack of discipline much more visible."</p>
+      <cite data-i18n="t84">— Bruno Lima, Lead Data Engineer, phData<br>(dbt Labs 2026 Report)</cite>
     </div>
 
     <div class="body-text reveal">
-      <p>The teams navigating this best are practising what's now called <strong>bounded autonomy</strong> - letting agents execute where outcomes are predictable and pre-approved, while keeping humans in the loop wherever risk or uncertainty increases. Not constraining AI, but calibrating how much autonomy maps to how much established trust. Discipline becomes the prerequisite for autonomy.</p>
+      <p data-i18n="t85">The teams navigating this best are practising what's now called <strong>bounded autonomy</strong> - letting agents execute where outcomes are predictable and pre-approved, while keeping humans in the loop wherever risk or uncertainty increases. Not constraining AI, but calibrating how much autonomy maps to how much established trust. Discipline becomes the prerequisite for autonomy.</p>
     </div>
 
     <!-- Chapter 07: Automation as Capacity -->
     <div id="capacity" class="chapter reveal">
       <div class="chapter-num">07</div>
       <div>
-        <div class="chapter-eyebrow">Perspective</div>
-        <div class="chapter-title"><i class="fa-solid fa-lightbulb"></i>Automation as Capacity, Not Replacement</div>
+        <div class="chapter-eyebrow" data-i18n="t86">Perspective</div>
+        <div class="chapter-title" data-i18n="t87"><i class="fa-solid fa-lightbulb"></i>Automation as Capacity, Not Replacement</div>
       </div>
     </div>
 
     <div class="body-text reveal">
-      <p>The most valuable thing automation ever did for me was not saving hours on a report. It was creating the space to do the work that actually moved things - building attribution models, running proper A/B tests, digging into customer segments no one had thought to look at.</p>
-      <p>That's the right framing. Automation is not a way to do analysis faster. It's a way to protect the time and attention needed for the analysis that actually requires an analyst. Trust in data rose from 66% to 83% as a strategic priority year-over-year - not because automation is being abandoned, but because the teams building durable capability understand that output and reliability have to scale together.</p>
+      <p data-i18n="t88">The most valuable thing automation ever did for me was not saving hours on a report. It was creating the space to do the work that actually moved things - building attribution models, running proper A/B tests, digging into customer segments no one had thought to look at.</p>
+      <p data-i18n="t89">That's the right framing. Automation is not a way to do analysis faster. It's a way to protect the time and attention needed for the analysis that actually requires an analyst. Trust in data rose from 66% to 83% as a strategic priority year-over-year - not because automation is being abandoned, but because the teams building durable capability understand that output and reliability have to scale together.</p>
     </div>
 
     <div class="callout-accent reveal">
-      <p>Automate the question you've already answered. Stay present for the ones you haven't.</p>
+      <p data-i18n="t90">Automate the question you've already answered. Stay present for the ones you haven't.</p>
     </div>
 
     <div class="body-text reveal">
-      <p>The goal is never to automate everything. It's to automate exactly the right things - so that what remains on your desk is work that genuinely needs you. In a market where AI is compressing the cost of building pipelines to nearly zero, that human layer of judgment, interpretation, and accountability is not a legacy burden. It's the differentiator.</p>
+      <p data-i18n="t91">The goal is never to automate everything. It's to automate exactly the right things - so that what remains on your desk is work that genuinely needs you. In a market where AI is compressing the cost of building pipelines to nearly zero, that human layer of judgment, interpretation, and accountability is not a legacy burden. It's the differentiator.</p>
     </div>
 
   </div>
@@ -483,7 +488,7 @@
       <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
       <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
     </div>
-    <p>&copy; 2025 Jaykant Mendapara</p>
+    <p data-i18n="t92">&copy; 2025 Jaykant Mendapara</p>
   </footer>
 
   <script>

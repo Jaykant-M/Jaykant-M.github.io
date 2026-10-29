@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="t1">Behavioural Segmentation for Lifecycle Targeting — Jaykant Mendapara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/lang-switch.css" />
+  <script src="../i18n/segmentation.js"></script>
+  <script src="../assets/lang-switch.js"></script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TF3V8RN');</script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d1117;
+      --dark-card:   #161b22;
+      --dark-border: #21262d;
+      --accent:      #3b82f6;
+      --accent-soft: #1d4ed8;
+      --text-light:  #f0f6fc;
+      --text-muted:  #8b949e;
+      --good:        #2dd4bf;
+      --bad:         #f87171;
+      --radius:      12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text-light); line-height: 1.6; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: color-mix(in srgb, var(--dark) 92%, transparent); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .nav-brand { color: var(--text-light); font-weight: 600; font-size: 1rem; text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.75rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Hero ── */
+    .page-hero {
+      display: flex; align-items: center; min-height: 320px;
+      padding: 60px 10% 0; background: var(--dark);
+      border-bottom: 1px solid var(--dark-border); gap: 3rem;
+    }
+    .hero-text-col { flex: 1; padding: 3rem 0; display: flex; flex-direction: column; justify-content: center; }
+    .hero-intro-col {
+      flex: 0 0 60%; padding: 1.5rem 1.75rem;
+      background: var(--dark-card); border: 1px solid var(--dark-border);
+      border-radius: var(--radius); margin: 2.5rem 0;
+    }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
+    .hero-title span { color: var(--accent); }
+    .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
+    .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
+    .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── TOC strip ── */
+    .toc-strip {
+      background: var(--dark-card); border-top: 1px solid var(--dark-border);
+      border-bottom: 3px solid var(--accent); padding: 0.85rem 10%;
+      display: flex; gap: 0; align-items: center; overflow-x: auto;
+    }
+    .toc-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-right: 1.5rem; white-space: nowrap; flex-shrink: 0; }
+    .toc-strip a { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.85rem; border-radius: 4px; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+    .toc-strip a:hover { color: var(--text-light); background: rgba(255,255,255,0.06); }
+
+    /* ── Content ── */
+    .content-wrap { max-width: 90%; margin: 0 auto; padding: 0 0 5rem; }
+
+    /* ── Metrics row / hero stat ── */
+    .metric-item .val { font-size: 1.6rem; font-weight: 700; color: var(--text-light); line-height: 1.1; }
+    .metric-item .val span { color: var(--accent); }
+    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.5; }
+
+    /* ── Chapter opener ── */
+    .chapter {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 3.5rem 0 1.75rem; border-top: 1px solid var(--dark-border); margin-top: 2rem;
+    }
+    .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
+    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
+    .chapter-title i { font-size: 1.2rem; color: var(--accent); font-family: 'Font Awesome 6 Free'; }
+    .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
+
+    /* ── Body text ── */
+    .body-text p { color: var(--text-body); line-height: 1.8; margin-bottom: 0.85rem; font-size: 1rem; }
+    .body-text ul, .body-text ol { padding-left: 1.25rem; color: var(--text-body); line-height: 1.8; font-size: 1rem; margin-bottom: 0.85rem; }
+    .body-text li { margin-bottom: 0.6rem; }
+    .body-text strong { color: var(--text-light); }
+    .body-text em { color: #c9d1d9; font-style: italic; }
+    .sub { font-size: 1.05rem; font-weight: 600; color: var(--text-light); margin: 1.75rem 0 0.6rem; }
+
+    /* ── Pull quote ── */
+    .pull { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; color: var(--text-light); border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; margin: 1.75rem 0; line-height: 1.5; }
+
+    /* ── Icon row / card ── */
+    .icon-row { display: flex; gap: 1rem; margin: 0.5rem 0 1.75rem; flex-wrap: wrap; }
+    .icon-card { flex: 1; min-width: 180px; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.25rem 1.1rem; }
+    .icon-card img { width: 40px; height: 40px; object-fit: contain; border-radius: 8px; margin-bottom: 0.85rem; }
+    .icon-card > i { font-size: 1.65rem; color: var(--accent); display: block; line-height: 1; margin-bottom: 0.9rem; }
+    .icon-card .t { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.3rem; }
+    .icon-card .d { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── Decision steps ── */
+    .steps { border: 1px solid var(--dark-border); border-radius: var(--radius); overflow: hidden; margin: 0.5rem 0 1.75rem; background: var(--dark-card); }
+    .step { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 1.25rem; border-top: 1px solid var(--dark-border); }
+    .step:first-child { border-top: none; }
+    .step.win { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .step img { width: 28px; height: 28px; object-fit: contain; border-radius: 6px; flex-shrink: 0; margin-top: 2px; }
+    .step > i { font-size: 1.2rem; color: var(--accent); flex-shrink: 0; margin-top: 3px; width: 26px; text-align: center; }
+    .step .rank { font-weight: 700; font-size: 0.85rem; color: var(--accent); flex-shrink: 0; min-width: 18px; padding-top: 3px; white-space: nowrap; }
+    .step .t { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.2rem; }
+    .step .d { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── Evidence matrix ── */
+    .matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin: 0.75rem 0 1.75rem; }
+    .matrix .colhead { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); text-align: center; padding-bottom: 0.2rem; }
+    .matrix .cell { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 8px; padding: 0.9rem 0.8rem; font-size: 0.85rem; text-align: center; color: var(--text-body); line-height: 1.5; }
+    .matrix .rowlabel { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; text-transform: uppercase; letter-spacing: 0.03em; }
+
+    /* ── Segment grid ── */
+    .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 0.75rem 0 1.75rem; }
+    .seg-card { border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.1rem; background: var(--dark-card); }
+    .seg-card .name { font-size: 0.98rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.4rem; }
+    .seg-card .tag { display: inline-block; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; padding: 0.15rem 0.55rem; border-radius: 10px; margin-bottom: 0.55rem; }
+    .seg-card .tag.top { background: rgba(45,212,191,0.15); color: var(--good); }
+    .seg-card .tag.bulk { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+    .seg-card .tag.warn { background: rgba(248,113,113,0.15); color: var(--bad); }
+    .seg-card .tag.neutral { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+    .seg-card .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── Two-card grid (2 columns) ── */
+    .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.75rem 0 1.75rem; }
+    .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.4rem; }
+    .card h3 { font-size: 0.98rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.55rem; display: flex; align-items: center; }
+    .card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+    /* highlighted step 2 + its connected detail group */
+    .card.step-highlight { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent); }
+    .step2-group { position: relative; margin: 0 0 1.75rem; padding: 1.3rem 1.3rem 0.6rem; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); border-radius: var(--radius); }
+    .step2-group::before { content: ""; position: absolute; top: -8px; left: 75%; transform: translateX(-50%) rotate(45deg); width: 15px; height: 15px; background: #12213b; border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-top: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+    .step2-group .group-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 0.95rem; display: flex; align-items: center; gap: 0.45rem; }
+    .step2-group .icon-row { margin: 0; }
+
+    /* ── Relative bars ── */
+    .bar-block { margin: 0.75rem 0 1.75rem; }
+    .bar-row { display: grid; grid-template-columns: 175px 1fr; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+    .bar-row .lab { font-size: 0.82rem; color: #c9d1d9; text-align: right; }
+    .bar-track { background: var(--dark-border); border-radius: 4px; height: 14px; overflow: hidden; }
+    .bar-fill {
+      background: var(--accent); height: 100%; border-radius: 4px;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bar-block.visible .bar-fill { transform: scaleX(1); }
+    .bar-block.visible .bar-row:nth-child(1) .bar-fill { transition-delay: 0.05s; }
+    .bar-block.visible .bar-row:nth-child(2) .bar-fill { transition-delay: 0.14s; }
+    .bar-block.visible .bar-row:nth-child(3) .bar-fill { transition-delay: 0.23s; }
+    .bar-block.visible .bar-row:nth-child(4) .bar-fill { transition-delay: 0.32s; }
+    .bar-block.visible .bar-row:nth-child(5) .bar-fill { transition-delay: 0.41s; }
+    .bar-block.visible .bar-row:nth-child(6) .bar-fill { transition-delay: 0.50s; }
+    @media (prefers-reduced-motion: reduce) {
+      .bar-fill { transform: scaleX(1); transition: none; }
+    }
+    .bar-fill.top { background: var(--good); }
+    .bar-fill.bulk { background: var(--accent); }
+    .bar-fill.neutral { background: var(--text-muted); }
+    .bar-fill.neg { background: var(--bad); }
+    .bar-caption { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic; line-height: 1.55; }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; padding: 0; margin: 1.25rem 0; }
+    .checklist li { display: flex; gap: 0.85rem; padding: 0.9rem 0; border-top: 1px solid var(--dark-border); font-size: 0.98rem; color: #c9d1d9; line-height: 1.6; }
+    .checklist li:first-child { border-top: none; }
+    .checklist .mark { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ── Closing ── */
+    .closing { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; margin: 1.75rem 0 0; color: var(--text-light); line-height: 1.45; }
+
+    /* ── Tags ── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 20px; letter-spacing: 0.04em; }
+
+    /* ── Back link ── */
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin: 2.5rem 0 0; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer { background: var(--dark-card); border-top: 1px solid var(--dark-border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-socials a { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--dark-border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1rem; transition: color 0.2s, border-color 0.2s; }
+    .footer-socials a:hover { color: var(--text-light); border-color: var(--accent); }
+    footer p { color: var(--text-muted); font-size: 0.8rem; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
+      .hero-intro-col { flex: 1 1 auto; }
+      .content-wrap { max-width: 92%; }
+      .toc-strip { padding: 0.85rem 5%; }
+      .seg-grid { grid-template-columns: 1fr; }
+      .two-card { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: 1fr; }
+      .matrix .colhead { display: none; }
+      .bar-row { grid-template-columns: 120px 1fr; }
+      .icon-card { min-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-intro-col { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── Generic process flow (added: reusable methodology diagram) ── */
+    .process { margin: 0.75rem 0 1.75rem; }
+    .pf-phase { display: flex; gap: 1.1rem; align-items: stretch; }
+    .pf-rail { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 2.4rem; }
+    .pf-node { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--dark-card); border: 1px solid var(--accent); color: var(--accent); font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
+    .pf-line { flex: 1; width: 2px; background: var(--dark-border); margin: 0.2rem 0; min-height: 0.6rem; }
+    .pf-phase:last-child .pf-line { display: none; }
+    .pf-body { padding-bottom: 1.4rem; }
+    .pf-phase:last-child .pf-body { padding-bottom: 0; }
+    .pf-stage { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .pf-title { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
+    .pf-title i { color: var(--accent); font-size: 0.9rem; }
+    .pf-desc { font-size: 0.9rem; color: var(--text-body); line-height: 1.65; }
+    .pf-loop { font-size: 0.82rem; color: var(--accent); font-style: italic; margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* ── Confidentiality / disclaimer block (added) ── */
+    .disclaimer { background: var(--dark-card); border: 1px solid var(--dark-border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 1.4rem 1.5rem; margin: 1.5rem 0 0; }
+    .disclaimer .dh { font-size: 0.95rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+    .disclaimer .dh i { color: var(--accent); }
+    .disclaimer p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.6rem; }
+    .disclaimer p:last-child { margin-bottom: 0; }
+    .disclaimer strong { color: #c9d1d9; }
+
+    /* ── Design-thinking layer (added) ── */
+    .approach { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin: 0.5rem 0 1.75rem; }
+    .dt-step { background: var(--dark-card); border: 1px solid var(--dark-border); border-top: 2px solid var(--accent); border-radius: var(--radius); padding: 1rem 0.9rem; }
+    .dt-step .n { font-size: 0.7rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.4rem; }
+    .dt-step .n i { font-size: 0.9rem; }
+    .dt-step .st { font-family: 'Playfair Display', serif; font-size: 1.02rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.4rem; line-height: 1.25; }
+    .dt-step .sd { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+    .chapter-eyebrow .dt-stage { background: color-mix(in srgb, var(--accent) 16%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 4px; padding: 0.05rem 0.45rem; margin-right: 0.35rem; }
+    .dt-chip { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 10px; padding: 0.1rem 0.5rem; margin-left: 0.5rem; vertical-align: middle; }
+    @media (max-width: 900px) { .approach { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .approach { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3V8RN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">Jaykant Mendapara</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="../index.html#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="../index.html#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="../index.html#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="../index.html#projects" class="active" data-i18n="nav.projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <div class="page-hero">
+    <div class="hero-text-col">
+      <div class="hero-eyebrow" data-i18n="t2">Design-Thinking Approach &nbsp;·&nbsp; CRM &amp; Lifecycle Analytics</div>
+      <h1 class="hero-title" data-i18n="t3">Behavioural Segmentation for <span>Lifecycle Targeting</span></h1>
+      <p class="hero-desc" data-i18n="t4">A mobility / ride-sharing case study: turning overlapping customer definitions into one mutually-exclusive segmentation - actionable from day one, and framed as a design-thinking problem rather than a modelling exercise.</p>
+      <div class="hero-meta">
+        <span data-i18n="t5"><i class="fa-solid fa-clock"></i> 11 min read</span>
+        <span data-i18n="t6"><i class="fa-solid fa-compass-drafting"></i> Design Thinking</span>
+        <span><i class="fa-solid fa-calendar"></i> 2026</span>
+      </div>
+    </div>
+    <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem; align-items:start;">
+      <div class="metric-item">
+        <div class="val" data-i18n="t7">Day <span>1</span></div>
+        <div class="lbl" data-i18n="t8">a customer should get one clear CRM treatment from their first session - not after months of accumulated history</div>
+      </div>
+      <div class="metric-item">
+        <div class="val" data-i18n="t9">One <span>Rule</span></div>
+        <div class="lbl" data-i18n="t10">every customer maps to exactly one segment, with a traceable reason why - no overlaps, no leftover bucket</div>
+      </div>
+      <div class="metric-item">
+        <div class="val" data-i18n="t11">Self-<span>Correcting</span></div>
+        <div class="lbl" data-i18n="t12">segments stay fixed; what evolves is the confidence behind each one, as more behaviour arrives</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOC strip ── -->
+  <div class="toc-strip">
+    <span class="toc-label" data-i18n="t13">Design-thinking walkthrough</span>
+    <a href="#approach" data-i18n="t14">Approach</a>
+    <a href="#problem" data-i18n="t15">The Problem</a>
+    <a href="#hierarchy" data-i18n="t16">Decision Hierarchy</a>
+    <a href="#crm" data-i18n="t17">CRM Strategy</a>
+    <a href="#process" data-i18n="t18">Process</a>
+    <a href="#synthesis" data-i18n="t19">Synthesis</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content-wrap">
+
+    <a href="../index.html#projects" class="back-link reveal" data-i18n="t20">
+      <i class="fa-solid fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <!-- Tags -->
+    <div class="tag-row reveal" style="margin-top:1.5rem">
+      <span class="tag" data-i18n="t21">CRM Analytics</span>
+      <span class="tag" data-i18n="t22">Lifecycle Segmentation</span>
+      <span class="tag" data-i18n="t23">Behavioural Data</span>
+      <span class="tag" data-i18n="t24">Cold Start Problem</span>
+      <span class="tag" data-i18n="t25">Decision Trees</span>
+      <span class="tag" data-i18n="t26">Design Thinking</span>
+    </div>
+
+    <!-- ADDED: design-thinking approach band (5 stages, honest empathy framing) -->
+    <div id="approach" class="body-text reveal">
+      <h3 class="sub" style="margin-top:0.5rem" data-i18n="t27">A design-thinking approach, not a model-first one</h3>
+      <p data-i18n="t28">The hard part of this project wasn't the maths - it was resisting the fancier model in favour of something a person could actually act on. That's a design problem, so I ran it as one: empathise, define, ideate, prototype, test - as a loop, not a line.</p>
+    </div>
+    <div class="approach reveal">
+      <div class="dt-step">
+        <div class="n" data-i18n="t29"><i class="fa-solid fa-people-group"></i>01 Empathise</div>
+        <div class="st" data-i18n="t30">Two users, not one</div>
+        <div class="sd" data-i18n="t31">The CRM operator who has to act on a segment, and the customer who receives the treatment. Understood from behaviour, not surveys.</div>
+      </div>
+      <div class="dt-step">
+        <div class="n" data-i18n="t32"><i class="fa-solid fa-crosshairs"></i>02 Define</div>
+        <div class="st" data-i18n="t33">One decision to serve</div>
+        <div class="sd" data-i18n="t34">What treatment does this customer get, and from when. Every later choice narrows to that single question.</div>
+      </div>
+      <div class="dt-step">
+        <div class="n" data-i18n="t35"><i class="fa-solid fa-lightbulb"></i>03 Ideate</div>
+        <div class="st" data-i18n="t36">Options on the table</div>
+        <div class="sd" data-i18n="t37">Clustering, RFM, value deciles, personas - four obvious approaches considered, and the reason each was ruled out.</div>
+      </div>
+      <div class="dt-step">
+        <div class="n" data-i18n="t38"><i class="fa-solid fa-screwdriver-wrench"></i>04 Prototype</div>
+        <div class="st" data-i18n="t39">Build it to be read</div>
+        <div class="sd" data-i18n="t40">An ordered, explainable rule hierarchy, a cold-start tier, and an automated decision engine - designed to be challenged.</div>
+      </div>
+      <div class="dt-step">
+        <div class="n" data-i18n="t41"><i class="fa-solid fa-vial-circle-check"></i>05 Test</div>
+        <div class="st" data-i18n="t42">Prove it, then iterate</div>
+        <div class="sd" data-i18n="t43">Validated against real value and a held-out slice of new customers, then stress-tested for what it still can't see.</div>
+      </div>
+    </div>
+
+    <!-- Chapter 01 -->
+    <div id="problem" class="chapter reveal">
+      <div class="chapter-num">01</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t44"><span class="dt-stage">Empathise</span> · The Problem</div>
+        <div class="chapter-title" data-i18n="t45"><i class="fa-solid fa-object-ungroup"></i>One Customer, Too Many Definitions</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t46">The starting point for this project was a familiar kind of mess: a CRM strategy running on multiple, overlapping definitions of who counts as an engaged customer - each one built for a different campaign, by a different team, at a different time. No single source of truth existed for the one decision that mattered most: what treatment does this customer get, right now?</p>
+      <p data-i18n="t47">The goal was to replace that patchwork with one actionable segmentation - a system that assigns every customer to exactly one segment, from the earliest point in their lifecycle, and gets more confident about that assignment as real behaviour accumulates rather than waiting for it.</p>
+      <p class="pull" data-i18n="t48">A customer should receive one clear CRM treatment from day one, with the segmentation evolving automatically as more behavioural evidence arrives - not the other way around.</p>
+      <p data-i18n="t49">That constraint - usable from day one, not just eventually accurate - shaped almost every methodological choice that followed.</p>
+    </div>
+
+    <!-- Chapter 02 -->
+    <div id="data" class="chapter reveal">
+      <div class="chapter-num">02</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t50"><span class="dt-stage">Empathise</span> · Data Understanding</div>
+        <div class="chapter-title" data-i18n="t51"><i class="fa-solid fa-magnifying-glass-chart"></i>Reading the Data Before Modelling It</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t52">Before building anything, the dataset needed a proper interrogation - not just a null-count and a shrug. A few patterns turned out to matter a lot more than they first appeared to:</p>
+      <ul>
+        <li data-i18n="t53"><strong>Structural nulls aren't missing data.</strong> A blank "days since payment method added" field wasn't a data gap to impute - it meant the customer had never registered a payment method at all. Imputing a value there would have manufactured a signal that didn't exist. It stayed in as a categorical flag instead.</li>
+        <li data-i18n="t54"><strong>Some fields were logically impossible, and that's useful.</strong> A subset of customers showed a route-repetition score higher than either of its own component scores - a mathematical impossibility given how the fields were defined. That's not an insight; it's a pipeline defect, and worth flagging to the data owner rather than modelling around.</li>
+        <li data-i18n="t55"><strong>The mean lies when a market has whales.</strong> A handful of extreme values pulled the average value per customer well above what a typical customer actually looks like. Comparing the maximum against a high percentile, rather than trusting the mean at face value, exposed how concentrated that risk was.</li>
+        <li data-i18n="t56"><strong>Outcome variables need to stay outcome variables.</strong> Value, maturity, and churn were kept strictly separate from the behavioural fields used to predict them throughout - mixing the two is the fastest way to build a segmentation that's secretly just circular.</li>
+      </ul>
+      <p data-i18n="t57">The base itself was heavily front-loaded: a large share of customers churned out after a single interaction, and only a minority ever reached the point where "lifetime behaviour" was a meaningful concept. That single fact - most of the base never accumulates much history - became the central design problem for everything downstream.</p>
+    </div>
+
+    <!-- Chapter 03 -->
+    <div id="drivers" class="chapter reveal">
+      <div class="chapter-num">03</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t58"><span class="dt-stage">Define</span> · Differentiation</div>
+        <div class="chapter-title" data-i18n="t59"><i class="fa-solid fa-arrows-split-up-and-left"></i>What Actually Drives Long-Term Value</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t60">Before building a segmentation, it's worth checking what actually separates a long-term, high-value customer from one who activates fast and disappears just as quickly. Comparing the two groups - plus the much larger group that never builds a habit at all - surfaced one dominant pattern and several genuinely counterintuitive ones.</p>
+      <p class="pull" data-i18n="t61">Long-term value is created by habit formation, not by isolated high-intent transactions.</p>
+      <p data-i18n="t62">Customers who develop a stable, repeatable usage pattern go on to generate dramatically more long-run value than customers who show up with obvious purchase intent - a pre-booked, high-context, "clearly a real need" interaction - but never come back. High intent looks valuable in the moment. Routine is what actually pays off.</p>
+      <h3 class="sub" data-i18n="t63">Vouchers &ne; price sensitivity</h3>
+      <p data-i18n="t64">The highest-value, longest-retained customers redeemed the most vouchers - but relied the least on discounted service tiers. The group that never built a habit showed the opposite: light voucher use, heavy reliance on the cheapest available tier. The implication: voucher redemption reinforces already-valuable customers, while a structural preference for the discounted tier is the real price-sensitivity signal. Conflating the two into one "discount-seeker" segment would have hidden both findings.</p>
+      <h3 class="sub" data-i18n="t65">The starting point matters more than the destination</h3>
+      <p data-i18n="t66">Across every segment, repetition at the point where a customer <em>starts</em> an interaction was a stronger signal than repetition at where they end it. The practical implication is a targeting one: build routine-forming nudges around a customer's starting context, not their destination.</p>
+      <h3 class="sub" data-i18n="t67">Satisfaction isn't a churn predictor here</h3>
+      <p data-i18n="t68">The group that never built a habit rated their experience the most positively and rated it most often. The long-term, high-value group rated the least. Sentiment and retention pointed in opposite directions - which meant behaviour, not stated satisfaction, had to carry the segmentation.</p>
+      <h3 class="sub" data-i18n="t69">Timing patterns don't differentiate</h3>
+      <p data-i18n="t70">Rush-hour share and weekend share were nearly identical across every segment. Whatever separates a long-term customer from a one-off, it isn't when they show up.</p>
+    </div>
+
+    <!-- Chapter 04 -->
+    <div id="hierarchy" class="chapter reveal">
+      <div class="chapter-num">04</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t71"><span class="dt-stage">Ideate &rarr; Prototype</span> · Method</div>
+        <div class="chapter-title" data-i18n="t72"><i class="fa-solid fa-sitemap"></i>Building the Decision Hierarchy</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t73">With the drivers understood, the next question was purely methodological: how do you turn "routine formation matters most" into a segmentation every customer can be run through, that a non-technical stakeholder can actually explain?</p>
+      <p data-i18n="t74">The answer was an <strong>ordered rule hierarchy</strong> - ranked threshold rules evaluated top to bottom, first match wins, output is a plain IF/THEN/ELSE. Every customer lands in exactly one segment, and every assignment has a rule behind it that a stakeholder can read and challenge.</p>
+    </div>
+    <div class="two-card reveal" style="margin-bottom:0.9rem;">
+      <div class="card"><h3 data-i18n="t75"><i class="fa-solid fa-compass-drafting" style="color:var(--accent);margin-right:0.5rem"></i>1. Design constraint<span class="dt-chip">Define</span></h3><p data-i18n="t76">One customer, one segment. No leftover bucket. Actionable from the earliest point possible.</p></div>
+      <div class="card step-highlight"><h3 data-i18n="t77"><i class="fa-solid fa-gears" style="color:var(--accent);margin-right:0.5rem"></i>2. Method, by elimination<span class="dt-chip">Ideate</span></h3><p data-i18n="t78">Four more obvious approaches were ruled out first - clustering, RFM, value deciles, and persona flags (shown below) - which is what left an ordered rule hierarchy.</p></div>
+    </div>
+    <div class="step2-group reveal">
+      <div class="group-label" data-i18n="t79"><i class="fa-solid fa-turn-down"></i> Part of Step 2 &middot; the four approaches ruled out<span class="dt-chip">Ideate</span></div>
+      <div class="icon-row">
+        <div class="icon-card"><i class="fa-solid fa-circle-nodes"></i><div class="t" data-i18n="t80">Clustering</div><div class="d" data-i18n="t81">Boundaries shift on retraining and aren't linked to actual value - hard to explain, harder to trust.</div></div>
+        <div class="icon-card"><i class="fa-solid fa-calendar-days"></i><div class="t" data-i18n="t82">RFM</div><div class="d" data-i18n="t83">Needs months of history a brand-new customer simply doesn't have yet.</div></div>
+        <div class="icon-card"><i class="fa-solid fa-ranking-star"></i><div class="t" data-i18n="t84">Value deciles</div><div class="d" data-i18n="t85">Describes how much a customer is worth, not why - no lever for CRM to pull.</div></div>
+        <div class="icon-card"><i class="fa-solid fa-user-tag"></i><div class="t" data-i18n="t86">Persona flags</div><div class="d" data-i18n="t87">One customer can qualify for three personas at once - not an actionable, exclusive assignment.</div></div>
+      </div>
+    </div>
+    <div class="two-card reveal">
+      <div class="card"><h3 data-i18n="t88"><i class="fa-solid fa-filter" style="color:var(--accent);margin-right:0.5rem"></i>3. Admissible variables<span class="dt-chip">Prototype</span></h3><p data-i18n="t89">Routine formation, commercial intent (business or premium usage), discount dependence, geographic stability, and planned/high-intent demand. Everything else - acquisition metadata, ratings, redundant fields - excluded by design.</p></div>
+      <div class="card"><h3 data-i18n="t90"><i class="fa-solid fa-arrow-down-wide-short" style="color:var(--accent);margin-right:0.5rem"></i>4. Let the data decide the ranking<span class="dt-chip">Prototype</span></h3><p data-i18n="t91">A shallow decision tree, run on behavioural variables only, was used purely to rank the admissible variables by importance - not to set thresholds. Routine formation dominated everything else combined.</p></div>
+      <div class="card" style="border-color: color-mix(in srgb, var(--accent) 50%, transparent);"><h3 data-i18n="t92"><i class="fa-solid fa-stairs" style="color:var(--accent);margin-right:0.5rem"></i>5. The ladder<span class="dt-chip">Prototype</span></h3><p data-i18n="t93">Routine + commercial intent, then routine alone, then discount dependence, then geographic-only activity, then planned/high-intent demand, with everything else falling to a final catch-all. Discount dependence is deliberately ranked above the geography and intent rules - it's a spending decision that can show up anywhere in the funnel, so it needs to be caught wherever it appears.</p></div>
+      <div class="card"><h3 data-i18n="t94"><i class="fa-solid fa-circle-check" style="color:var(--accent);margin-right:0.5rem"></i>6. Validation<span class="dt-chip">Test</span></h3><p data-i18n="t95">Differences between segments were cross-checked against actual value and maturity outcomes, not just behavioural description - and the rule set was tested on a held-out slice of new customers to confirm it generalised rather than overfitting the data it was built on.</p></div>
+    </div>
+
+    <div class="body-text reveal">
+      <h3 class="sub" data-i18n="t96">What came out the other end</h3>
+      <p data-i18n="t97">Six segments, each with a genuinely different profile and a genuinely different value trajectory:</p>
+    </div>
+    <div class="seg-grid reveal">
+      <div class="seg-card"><span class="tag top" data-i18n="t98">Highest value per customer</span><div class="name" data-i18n="t99">Premium Habit Builders</div><div class="desc" data-i18n="t100">Routine customers who also show commercial intent (business or premium usage). Small in number, outsized in value.</div></div>
+      <div class="seg-card"><span class="tag bulk" data-i18n="t101">Largest value contributor</span><div class="name" data-i18n="t102">Habit Builders</div><div class="desc" data-i18n="t103">Routine customers without the commercial layer. The single biggest driver of total portfolio value.</div></div>
+      <div class="seg-card"><span class="tag warn" data-i18n="t104">Value-destructive</span><div class="name" data-i18n="t105">Promotion Dependent</div><div class="desc" data-i18n="t106">Customers whose discount usage eats through their own margin. Structurally unprofitable, not just low-value.</div></div>
+      <div class="seg-card"><span class="tag neutral" data-i18n="t107">High volume, low depth</span><div class="name" data-i18n="t108">Explorers</div><div class="desc" data-i18n="t109">Active exclusively outside their home market. Real usage, but a fundamentally different relationship to retain.</div></div>
+      <div class="seg-card"><span class="tag neutral" data-i18n="t110">Situational demand</span><div class="name" data-i18n="t111">Occasional Utility</div><div class="desc" data-i18n="t112">Pre-booked, high-context usage - the kind that looks like intent but rarely repeats.</div></div>
+      <div class="seg-card"><span class="tag neutral" data-i18n="t113">Unproven</span><div class="name" data-i18n="t114">Trialists</div><div class="desc" data-i18n="t115">Everyone left over: no routine, no pre-booking, no high-intent signal yet. The catch-all, by design.</div></div>
+    </div>
+
+    <div class="bar-block reveal">
+      <div class="bar-row"><div class="lab" data-i18n="t116">Premium Habit Builders</div><div class="bar-track"><div class="bar-fill top" style="width:11%"></div></div></div>
+      <div class="bar-row"><div class="lab" data-i18n="t117">Habit Builders</div><div class="bar-track"><div class="bar-fill bulk" style="width:58%"></div></div></div>
+      <div class="bar-row"><div class="lab" data-i18n="t118">Promotion Dependent</div><div class="bar-track"><div class="bar-fill neg" style="width:6%"></div></div></div>
+      <div class="bar-row"><div class="lab" data-i18n="t119">Explorers</div><div class="bar-track"><div class="bar-fill neutral" style="width:18%"></div></div></div>
+      <div class="bar-row"><div class="lab" data-i18n="t120">Occasional Utility</div><div class="bar-track"><div class="bar-fill neutral" style="width:7%"></div></div></div>
+      <div class="bar-row"><div class="lab" data-i18n="t121">Trialists</div><div class="bar-track"><div class="bar-fill neutral" style="width:8%"></div></div></div>
+      <div class="bar-caption" data-i18n="t122">Relative share of total value by segment - deliberately unlabelled. The shape of the imbalance is the point: value is heavily concentrated in the two habit-forming segments, and one segment actively subtracts from it.</div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t123">The two routine-based segments together hold a share of total value wildly out of proportion to their share of the customer base - while the promotion-dependent segment, despite being a modest slice of the base, generates a negative return once discount cost is netted against what it spends. That single comparison did more to justify the segmentation than any behavioural description could.</p>
+    </div>
+
+    <!-- Chapter 05 -->
+    <div id="crm" class="chapter reveal">
+      <div class="chapter-num">05</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t124"><span class="dt-stage">Prototype</span> · Application</div>
+        <div class="chapter-title" data-i18n="t125"><i class="fa-solid fa-bullseye"></i>CRM Strategy by Segment</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t126">A segmentation is only as good as the decisions it changes. Each segment was mapped to a distinct lifecycle treatment - and, just as importantly, to a short list of what <em>not</em> to do:</p>
+      <ul>
+        <li data-i18n="t127"><strong>Premium Habit Builders</strong> - retain, expand, cross-sell into higher-tier and business usage through account-management channels. Deliberately avoid discounting: this segment already shows the lowest discount reliance of any group, and a promotion here would be pure margin giveaway.</li>
+        <li data-i18n="t128"><strong>Habit Builders</strong> - protect the routine with light nudges only when a break in pattern is detected. Avoid aggressive discounting: the data shows no measurable uplift from pushing promotions into an already-loyal segment.</li>
+        <li data-i18n="t129"><strong>Promotion Dependent</strong> - withdraw the subsidy. Remove from promotional eligibility, shift to organic-only communication, and monitor for exploiter behaviour (multi-account creation, offer stacking).</li>
+        <li data-i18n="t130"><strong>Explorers</strong> - serve, don't nurture. This segment rides exclusively outside its home market, so domestic retention campaigns are wasted spend; the right moment is around travel and destination context instead.</li>
+        <li data-i18n="t131"><strong>Occasional Utility</strong> - convert the occasion into a routine with a post-interaction prompt to save the frequent context (a location, a route) as a favourite. Avoid mistaking high-intent volume for high value - it isn't the same thing.</li>
+        <li data-i18n="t132"><strong>Trialists</strong> - one time-boxed activation nudge after the first interaction, then stop. This segment shows zero routine, zero pre-booking, and zero high-intent signal - an extended nurture sequence has nothing to build on yet.</li>
+      </ul>
+    </div>
+
+    <!-- Chapter 06 -->
+    <div id="coldstart" class="chapter reveal">
+      <div class="chapter-num">06</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t133"><span class="dt-stage">Prototype</span> · Automation</div>
+        <div class="chapter-title" data-i18n="t134"><i class="fa-solid fa-snowflake"></i>Solving Cold Start: A Progressive Signal Framework</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t135">The rule hierarchy above has one obvious hole: it needs behavioural data to run, and a genuinely new customer has none yet. Waiting until enough interactions accumulate to run the real rules isn't a minor edge case - the earlier data-quality work had already shown that a large majority of the base never reaches that point at all. Waiting means never segmenting most of the base, and defaulting them to a generic, non-personalised treatment indefinitely.</p>
+    </div>
+    <div class="icon-row reveal">
+      <div class="icon-card"><i class="fa-solid fa-user-plus"></i><div class="t" data-i18n="t136">Signup</div><div class="d" data-i18n="t137">Assign a provisional "cold-start tier" immediately, using only acquisition-based signals available at registration - referral, onboarding voucher, verification status, geography.</div></div>
+      <div class="icon-card"><i class="fa-solid fa-flag-checkered"></i><div class="t" data-i18n="t138">First interaction</div><div class="d" data-i18n="t139">The real behavioural signal begins the moment the first interaction completes - domestic vs. abroad, commercial vs. standard usage.</div></div>
+      <div class="icon-card"><i class="fa-solid fa-arrow-trend-up"></i><div class="t" data-i18n="t140">Subsequent interactions</div><div class="d" data-i18n="t141">Each new data point tightens the confidence behind the eventual segment, without changing the underlying rules that define it.</div></div>
+    </div>
+    <div class="body-text reveal">
+      <p class="pull" data-i18n="t142">Behavioural segments stay fixed. What evolves is the strength of the evidence supporting each one.</p>
+      <p data-i18n="t143">The signup-based starting point isn't optional - it's mandatory, precisely because behavioural fields are ratios over completed interactions, and their precision is capped by how many interactions a customer has actually had. A customer can't be well-described by a ratio with almost no denominator. The provisional tier exists purely to give every customer <em>some</em> defensible treatment from minute one, which then gets replaced by real evidence as fast as that evidence arrives.</p>
+    </div>
+
+    <!-- Chapter 07 -->
+    <div id="honest" class="chapter reveal">
+      <div class="chapter-num">07</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t144"><span class="dt-stage">Prototype</span> · Automation</div>
+        <div class="chapter-title" data-i18n="t145"><i class="fa-solid fa-scale-balanced"></i>Keeping Segments Honest: Promote Fast, Demote Slow</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t146">Once segments can shift automatically, a new failure mode appears: reacting to noise. One irregular interaction shouldn't flip a loyal customer's treatment overnight, but a genuine change in circumstance shouldn't sit unaddressed for weeks either. The system needed different reaction speeds for different kinds of evidence.</p>
+    </div>
+    <div class="matrix reveal">
+      <div class="rowlabel"></div>
+      <div class="colhead" data-i18n="t147">Positive Evidence</div>
+      <div class="colhead" data-i18n="t148">Negative Evidence</div>
+      <div class="rowlabel" data-i18n="t149">What?</div>
+      <div class="cell" data-i18n="t150">Repeat pattern, emerging routine</div>
+      <div class="cell" data-i18n="t151">One irregular interaction, pattern break</div>
+      <div class="rowlabel" data-i18n="t152">Now what?</div>
+      <div class="cell" data-i18n="t153">Upgrade immediately</div>
+      <div class="cell" data-i18n="t154">Wait for repeated confirmation</div>
+      <div class="rowlabel" data-i18n="t155">Why?</div>
+      <div class="cell" data-i18n="t156">Evidence of habit is real and should be reinforced quickly</div>
+      <div class="cell" data-i18n="t157">One irregular interaction doesn't mean the habit is lost</div>
+    </div>
+    <div class="body-text reveal">
+      <p class="pull" data-i18n="t158">A third category - structural signals like deep discount dependence - sits outside this speed trade-off entirely: it's applied immediately and overrides the hierarchy, because a spending pattern like that is unlikely to fluctuate interaction-to-interaction the way a single missed routine day might.</p>
+      <h3 class="sub" data-i18n="t159">The Automated CRM Decision Engine</h3>
+      <p data-i18n="t160">Segment membership recalculates after every completed interaction - but recalculating isn't the same as acting. A three-tier alerting framework separates the two, so the system reacts to real change without firing on noise:</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step win"><i class="fa-solid fa-bolt"></i><div class="rank">T1</div><div><div class="t" data-i18n="t161">Immediate response</div><div class="d" data-i18n="t162">A confirmed shift into a risk state or a broken routine triggers a real-time, customer-facing action - the tier that can't wait for the next cycle.</div></div></div>
+      <div class="step"><i class="fa-solid fa-calendar-check"></i><div class="rank">T2</div><div><div class="t" data-i18n="t163">Next-cycle journey</div><div class="d" data-i18n="t164">A segment confirmed after sufficient evidence moves the customer into the appropriate lifecycle journey on the next scheduled cycle - deliberate, not reactive.</div></div></div>
+      <div class="step"><i class="fa-solid fa-eye"></i><div class="rank">T3</div><div><div class="t" data-i18n="t165">Track only</div><div class="d" data-i18n="t166">Minor, unconfirmed fluctuations are logged for trend purposes but generate no customer-facing communication at all - watched, not acted on.</div></div></div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t167">A simple cooldown on how often a customer can be pulled into a newly triggered journey keeps the engine from causing the exact message fatigue it was built to prevent.</p>
+    </div>
+
+    <!-- Chapter 08 -->
+    <div id="gaps" class="chapter reveal">
+      <div class="chapter-num">08</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t168"><span class="dt-stage">Test</span> · Recommendations</div>
+        <div class="chapter-title" data-i18n="t169"><i class="fa-solid fa-puzzle-piece"></i>What's Still Missing</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t170">The segmentation works with what's available today, but three information gaps stood out as the highest-value additions:</p>
+    </div>
+    <div class="icon-row reveal">
+      <div class="icon-card"><i class="fa-solid fa-stopwatch"></i><div class="t" data-i18n="t171">Timing signals</div><div class="d" data-i18n="t172">The gap between a customer's first and second interaction, and how that gap trends. Two customers can look identical after two interactions today, but returning after two days versus two months represents a completely different trajectory - and there's currently no clock on that.</div></div>
+      <div class="icon-card"><i class="fa-solid fa-triangle-exclamation"></i><div class="t" data-i18n="t173">Service friction</div><div class="d" data-i18n="t174">Cancellations, unfulfilled requests, and exposure to poor service conditions. Without this, low demand and failed demand look identical - there's no way to tell whether a customer left because they didn't want to come back, or because the service failed them first.</div></div>
+      <div class="icon-card"><i class="fa-solid fa-bullseye"></i><div class="t" data-i18n="t175">Customer intent</div><div class="d" data-i18n="t176">Signals from before the very first completed interaction - conversion from quote to booking, searches, sessions. This would allow segmentation to begin before any behavioural history exists at all.</div></div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t177"><strong>Priority order matters here.</strong> Routine formation is the strongest predictor of long-term value uncovered in this analysis, but it only becomes measurable after multiple interactions. Timing and friction signals are what would let CRM catch a high-risk customer several interactions earlier than the current framework can - before the window to intervene has closed.</p>
+    </div>
+
+    <!-- ADDED SECTION: generic reusable process flow -->
+    <div id="process" class="chapter reveal">
+      <div class="chapter-num"><i class="fa-solid fa-diagram-project" style="font-size:2.2rem;color:var(--dark-border);"></i></div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t178">Process</div>
+        <div class="chapter-title" data-i18n="t179"><i class="fa-solid fa-route"></i>The Repeatable Process Behind It</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t180">The specifics above are one application. The underlying approach is the part that transfers - design thinking applied to a data problem, run as a loop rather than a line. The same sequence carries to any behavioural-segmentation-for-lifecycle problem, whatever the dataset:</p>
+    </div>
+    <div class="process reveal">
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">1</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t181">Frame</div>
+          <div class="pf-title" data-i18n="t182"><i class="fa-solid fa-bullseye"></i>Define the one decision</div>
+          <div class="pf-desc" data-i18n="t183">Pin the segmentation to a single question CRM has to answer - what treatment does this customer get, and from when - before touching a variable.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">2</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t184">Data understanding</div>
+          <div class="pf-title" data-i18n="t185"><i class="fa-solid fa-magnifying-glass-chart"></i>Interrogate before modelling</div>
+          <div class="pf-desc" data-i18n="t186">Separate structural nulls from missing data, catch impossible values, distrust the mean where whales exist, and keep outcome fields out of the predictor set.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">3</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t187">Differentiation</div>
+          <div class="pf-title" data-i18n="t188"><i class="fa-solid fa-arrows-split-up-and-left"></i>Isolate the real value drivers</div>
+          <div class="pf-desc" data-i18n="t189">Compare long-term vs. one-off customers to find what actually predicts value - and discard the intuitive signals that don't (here: satisfaction, timing).</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">4</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t190">Feature selection &amp; ranking</div>
+          <div class="pf-title" data-i18n="t191"><i class="fa-solid fa-arrow-down-wide-short"></i>Keep only admissible inputs, then rank them</div>
+          <div class="pf-desc" data-i18n="t192">Filter to behavioural, actionable, leak-free variables; use a shallow tree to order them by importance - not to set thresholds.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">5</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t193">Modelling</div>
+          <div class="pf-title" data-i18n="t194"><i class="fa-solid fa-sitemap"></i>Build an ordered rule hierarchy</div>
+          <div class="pf-desc" data-i18n="t195">Turn the ranking into first-match-wins IF/THEN rules: one customer, one segment, one readable reason a stakeholder can challenge.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">6</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t196">Validation</div>
+          <div class="pf-title" data-i18n="t197"><i class="fa-solid fa-circle-check"></i>Test against outcomes and a holdout</div>
+          <div class="pf-desc" data-i18n="t198">Cross-check segment differences against real value/maturity, and confirm the rules generalise on unseen new customers rather than overfitting.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">7</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t199">Coverage</div>
+          <div class="pf-title" data-i18n="t200"><i class="fa-solid fa-snowflake"></i>Solve cold start</div>
+          <div class="pf-desc" data-i18n="t201">Give brand-new customers a provisional tier from signup signals, then replace it with real evidence as behaviour arrives - so no one waits for treatment.</div>
+        </div>
+      </div>
+      <div class="pf-phase">
+        <div class="pf-rail"><div class="pf-node">8</div><div class="pf-line"></div></div>
+        <div class="pf-body">
+          <div class="pf-stage" data-i18n="t202">Activation &amp; monitoring</div>
+          <div class="pf-title" data-i18n="t203"><i class="fa-solid fa-arrows-rotate"></i>Map to lifecycle actions, then self-correct</div>
+          <div class="pf-desc" data-i18n="t204">Attach each segment to one treatment and one "don't", recalculate after every interaction, and react at different speeds - promote fast, demote slow.</div>
+          <div class="pf-loop" data-i18n="t205"><i class="fa-solid fa-rotate-left"></i>Loops back to step 2 continuously: every new interaction is fresh evidence.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-text reveal">
+      <p data-i18n="t206">Across all eight steps the same five design-thinking moves recur: <strong>empathise</strong> with the operator and the customer, <strong>define</strong> the one decision, <strong>ideate</strong> and eliminate, <strong>prototype</strong> the rules, then <strong>test</strong> and iterate.</p>
+    </div>
+
+    <!-- Chapter 09 -->
+    <div id="synthesis" class="chapter reveal">
+      <div class="chapter-num">09</div>
+      <div>
+        <div class="chapter-eyebrow" data-i18n="t207"><span class="dt-stage">Reflect</span> · Synthesis</div>
+        <div class="chapter-title" data-i18n="t208"><i class="fa-solid fa-lightbulb"></i>Closing Thought</div>
+      </div>
+    </div>
+    <div class="body-text reveal">
+      <p data-i18n="t209">Nothing in this framework required a more sophisticated model. The hard part - and the actual value delivered - was resisting the more elegant-looking options (clustering, personas, a black-box classifier) in favour of a segmentation a CRM stakeholder could read, trust, and act on immediately, with a clear answer to "why is this customer in this segment" every single time.</p>
+      <ul class="checklist">
+        <li data-i18n="t210"><span class="mark">&rarr;</span> An ordered, explainable rule beats a more accurate but opaque model, when the output has to survive a conversation with the person acting on it.</li>
+        <li data-i18n="t211"><span class="mark">&rarr;</span> Cold start isn't an edge case to patch later - for a base this front-loaded, it's the majority case, and it has to be designed for from day one.</li>
+        <li data-i18n="t212"><span class="mark">&rarr;</span> Reacting at different speeds to different kinds of evidence is what keeps an automated system from undermining its own trustworthiness through noise.</li>
+      </ul>
+      <p class="closing" data-i18n="t213">The best segment isn't the one that best describes a customer today. It's the one that tells CRM exactly what to do about them - and keeps telling the truth as more evidence comes in.</p>
+    </div>
+
+    <!-- ADDED SECTION: data confidentiality + disclaimers -->
+    <div id="confidentiality" class="disclaimer reveal">
+      <div class="dh" data-i18n="t214"><i class="fa-solid fa-shield-halved"></i>A note on the data</div>
+      <p data-i18n="t215">This case study is based on a <strong>take-home exercise from an interview process</strong>, built on a <strong>synthetic dataset</strong> provided for that exercise - it contains no real customer records.</p>
+      <p data-i18n="t216">The dataset, the original brief, and any exact figures belong to the company that issued them and are <strong>not reproduced here</strong> - both to respect their process and to keep the exercise fair for other candidates. Everything shown is anonymised and directional; visuals, including the deliberately unlabelled value-share chart, illustrate the shape of the findings rather than exact numbers.</p>
+      <p data-i18n="t217">This is a personal write-up of my own approach and reasoning. Views are my own, and nothing here reproduces proprietary material from the issuing company.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-socials">
+      <a href="https://github.com/Jaykant-M/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+      <a href="https://public.tableau.com/app/profile/jaykant.mendapara" target="_blank" rel="noopener"><i class="fa-solid fa-chart-bar"></i></a>
+      <a href="https://www.linkedin.com/in/jaykantmendapara/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:mendaparajaykant@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p data-i18n="t218">&copy; 2026 Jaykant Mendapara</p>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
