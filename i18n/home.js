@@ -8,6 +8,10 @@ window.I18N_PAGE = {
     'social.email': 'E-Mail',
     'quote': '„Ich bin überzeugt, dass die Fähigkeit, Informationen zu erschließen und sinnvoll zu ordnen, jeden Aspekt des realen Fortschritts grundlegend verändern kann – vom persönlichen Wachstum bis hin zum Wachstum von Unternehmen weltweit.“',
 
+    'journey.heading': 'Mein Weg',
+    'journey.title': 'Zeitleiste',
+    'journey.mim': 'Master in Betriebswirtschaft',
+    'journey.msc': 'MSc in Data Analytics &amp; KI',
     'exp.heading': 'Werdegang',
     'exp.title': 'Berufserfahrung',
     'edu.heading': 'Akademischer Hintergrund',
@@ -110,6 +114,10 @@ window.I18N_PAGE = {
     'social.email': 'E-mail',
     'quote': '« Je suis convaincu que la capacité à exploiter l’information et à l’organiser de manière pertinente peut transformer en profondeur chaque aspect du progrès – de l’épanouissement personnel à la croissance des entreprises à travers le monde. »',
 
+    'journey.heading': 'Mon parcours',
+    'journey.title': 'Chronologie',
+    'journey.mim': 'Master en management des entreprises',
+    'journey.msc': 'MSc en Data Analytics &amp; IA',
     'exp.heading': 'Parcours professionnel',
     'exp.title': 'Expérience professionnelle',
     'edu.heading': 'Parcours académique',

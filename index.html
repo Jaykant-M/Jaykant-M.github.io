@@ -732,6 +732,133 @@ window.addEventListener('scroll', function() {
       gap: 0.3rem;
     }
 
+    /* ─── Journey timeline ─────────────────────────────────────── */
+    /* Desktop: one row of milestones; text alternates above and below a dashed line
+       that waves through the logo circles. Narrower screens: a vertical list. The line
+       is an SVG path drawn by the script from the circles' positions. */
+    .jr-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-rows: auto auto;
+      column-gap: 1rem;
+    }
+    .jr-item { display: contents; }
+    /* Desktop: the timeline spans almost the whole screen width, wider than the 80%
+       content column (the section heading stays aligned with the other sections) */
+    @media (min-width: 1151px) {
+      .jr-track { width: 96vw; margin-left: calc(50% - 48vw); }
+    }
+    .jr-text, .jr-logo { grid-column: var(--c); position: relative; z-index: 1; }
+    .jr-up .jr-text   { grid-row: 1; align-self: end;   padding-bottom: 1.25rem; }
+    .jr-up .jr-logo   { grid-row: 2; align-self: start; }
+    .jr-down .jr-logo { grid-row: 1; align-self: end; }
+    .jr-down .jr-text { grid-row: 2; align-self: start; padding-top: 1.25rem; }
+    .jr-text { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.55rem; }
+    .jr-logo { display: flex; justify-content: center; }
+
+    .jr-year {
+      display: inline-block;
+      padding: 0.3rem 1.1rem;
+      border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+    }
+    /* The current role's year stands out: filled with the accent colour */
+    .jr-year--current {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #111827;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent),
+                  0 0 18px color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .jr-label { font-size: 0.9rem; font-weight: 600; color: var(--text-body); line-height: 1.35; margin: 0; }
+    .jr-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
+    .jr-chips span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .jr-circle {
+      width: clamp(104px, 6.8vw, 130px);
+      height: clamp(104px, 6.8vw, 130px);
+      border-radius: 50%;
+      background: #ffffff;
+      border: 6px solid color-mix(in srgb, var(--accent) 30%, var(--dark));
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 10%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    a.jr-circle { cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+    a.jr-circle:hover, a.jr-circle:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent);
+      outline: none;
+    }
+    a.jr-circle img { transition: transform 0.25s ease; }
+    a.jr-circle:hover img, a.jr-circle:focus-visible img { transform: scale(1.07); }
+    /* Cards the timeline links to: land below the fixed header, then glow briefly */
+    .exp-card[id], .edu-card[id] { scroll-margin-top: 90px; }
+    .exp-card:target, .edu-card:target { animation: jr-landed 1.8s ease-out; }
+    @keyframes jr-landed {
+      0%, 35% { box-shadow: 0 0 0 2px var(--accent), 0 0 28px color-mix(in srgb, var(--accent) 40%, transparent); }
+      100%    { box-shadow: 0 0 0 2px transparent; }
+    }
+    .jr-circle img { width: 94%; height: 94%; object-fit: contain; }   /* logo files carry their own margins */
+
+    .jr-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+    .jr-line path {
+      fill: none;
+      stroke: color-mix(in srgb, var(--accent) 55%, transparent);
+      stroke-width: 2;
+      stroke-dasharray: 5 6;
+      stroke-linecap: round;
+    }
+
+    /* Narrower screens: vertical list, logo on the left and text beside it */
+    @media (max-width: 1150px) {
+      .jr-track { grid-template-columns: 88px minmax(0, 1fr); grid-template-rows: none; column-gap: 1.25rem; row-gap: 1.75rem; }
+      .jr-up .jr-text, .jr-down .jr-text { grid-column: 2; grid-row: var(--c); align-self: center; padding: 0; }
+      .jr-up .jr-logo, .jr-down .jr-logo { grid-column: 1; grid-row: var(--c); align-self: center; }
+      .jr-text { text-align: left; align-items: flex-start; }
+      .jr-chips { justify-content: flex-start; }
+      .jr-circle { width: 80px; height: 80px; border-width: 5px; }
+    }
+
+    /* Scroll animation (class added by the script, so without JS everything shows): the line
+       draws through, each milestone appears as the line reaches it, and it all covers again
+       when the timeline leaves the screen */
+    .jr-track.jr-anim { --jr-total: 1.8s; --jr-step: 0.24s; }
+    .jr-track.jr-anim .jr-line { clip-path: inset(0 100% 0 0); transition: clip-path var(--jr-total) linear; }
+    .jr-track.jr-anim .jr-circle { opacity: 0; transform: scale(0.55); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(.34,1.56,.64,1); }
+    .jr-track.jr-anim .jr-text { opacity: 0; transition: opacity 0.45s ease, transform 0.45s ease; }
+    .jr-track.jr-anim .jr-up .jr-text { transform: translateY(12px); }
+    .jr-track.jr-anim .jr-down .jr-text { transform: translateY(-12px); }
+    .jr-track.jr-anim.on .jr-line { clip-path: inset(0 0 0 0); }
+    .jr-track.jr-anim.on .jr-circle,
+    .jr-track.jr-anim.on .jr-text { opacity: 1; transform: none; }
+    /* --jr-at: when the line reaches this milestone (set by the script from its position) */
+    .jr-track.jr-anim.on .jr-circle { transition-delay: var(--jr-at, calc((var(--c) - 1) * var(--jr-step))); }
+    .jr-track.jr-anim.on .jr-text { transition-delay: calc(var(--jr-at, calc((var(--c) - 1) * var(--jr-step))) + 0.12s); }
+    /* Leaving the screen resets everything instantly (nobody sees it), so on every return
+       the line draws from the start with each logo appearing as the line reaches it */
+    .jr-track.jr-anim:not(.on) .jr-line,
+    .jr-track.jr-anim:not(.on) .jr-circle,
+    .jr-track.jr-anim:not(.on) .jr-text { transition: none; }
+    @media (max-width: 1150px) {
+      .jr-track.jr-anim .jr-line { clip-path: inset(0 0 100% 0); }
+      .jr-track.jr-anim .jr-up .jr-text, .jr-track.jr-anim .jr-down .jr-text { transform: translateX(-12px); }
+    }
+
     /* ─── Skills ───────────────────────────────────────────────── */
     .skills-grid {
       display: grid;
@@ -973,6 +1100,74 @@ window.addEventListener('scroll', function() {
 
   </div><!-- end .intro-viewport -->
 
+  <!-- ── Journey timeline ───────────────────────────────────── -->
+  <!-- No id on purpose: the header keeps "About" highlighted while this is on screen -->
+  <section class="section section--dark journey" aria-labelledby="journey-title">
+    <div class="section-inner">
+      <p class="section-heading" data-i18n="journey.heading">My Journey</p>
+      <h2 class="section-title" id="journey-title" data-i18n="journey.title">Career Timeline</h2>
+      <div class="jr-track">
+        <svg class="jr-line" aria-hidden="true"><path /></svg>
+        <div class="jr-item jr-up" style="--c:1">
+          <div class="jr-text">
+            <span class="jr-year">2017</span>
+            <p class="jr-label">Systems Engineer</p>
+            <div class="jr-chips"><span>Jira</span><span>TIBCO</span><span>Bitbucket</span><span>Confluence</span><span>Oracle</span></div>
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#exp-tcs" aria-label="Tata Consultancy Services – Experience"><img src="images/Logo/TCS.png" alt="Tata Consultancy Services" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-down" style="--c:2">
+          <div class="jr-text">
+            <span class="jr-year">2020</span>
+            <p class="jr-label" data-i18n="journey.mim">Master in Business Management</p>
+            
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#edu-edhec" aria-label="EDHEC Business School – Education"><img src="images/Logo/Edhec_logo.jpg" alt="EDHEC Business School" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-up" style="--c:3">
+          <div class="jr-text">
+            <span class="jr-year">2021</span>
+            <p class="jr-label">Digital Data Analyst</p>
+            <div class="jr-chips"><span>Google Analytics</span><span>Tag Manager</span><span>Looker Studio</span><span>Tealium</span><span>Python</span></div>
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#exp-ow" aria-label="Optimal Ways – Experience"><img src="images/Logo/OW.png" alt="Optimal Ways" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-down" style="--c:4">
+          <div class="jr-text">
+            <span class="jr-year">2022</span>
+            <p class="jr-label">Ops Strategy &amp; Performance Analyst</p>
+            <div class="jr-chips"><span>BigQuery</span><span>Cluvio</span><span>Salesforce</span><span>Google Sheets</span><span>dbt</span></div>
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#exp-ankorstore" aria-label="Ankorstore – Experience"><img src="images/Logo/AS.png" alt="Ankorstore" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-up" style="--c:5">
+          <div class="jr-text">
+            <span class="jr-year">2022</span>
+            <p class="jr-label" data-i18n="journey.msc">MSc in Data Analytics &amp; AI</p>
+            
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#edu-edhec" aria-label="EDHEC Business School – Education"><img src="images/Logo/Edhec_logo.jpg" alt="EDHEC Business School" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-down" style="--c:6">
+          <div class="jr-text">
+            <span class="jr-year">2023</span>
+            <p class="jr-label">Business Insight Manager</p>
+            <div class="jr-chips"><span>eCommerce</span><span>A/B Testing</span><span>Machine Learning</span></div>
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#exp-esprit" aria-label="ESPRIT – Experience"><img src="images/Logo/ESPRIT.png" alt="ESPRIT" loading="lazy" /></a></div>
+        </div>
+        <div class="jr-item jr-up" style="--c:7">
+          <div class="jr-text">
+            <span class="jr-year jr-year--current">2024</span>
+            <p class="jr-label">Customer &amp; CRM Analyst</p>
+            <div class="jr-chips"><span>CRM Segmentation</span><span>A/B Testing</span><span>Python</span><span>GCP</span></div>
+          </div>
+          <div class="jr-logo"><a class="jr-circle" href="#exp-hm" aria-label="H&amp;M – Experience"><img src="images/Logo/H&M.png" alt="H&amp;M" loading="lazy" /></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Experience ─────────────────────────────────────────── -->
   <section id="experience" class="section section--dark">
     <div class="section-inner">
@@ -980,7 +1175,7 @@ window.addEventListener('scroll', function() {
       <h2 class="section-title" data-i18n="exp.title">Professional Experience</h2>
 
       <!-- H&M -->
-      <div class="exp-card reveal">
+      <div class="exp-card reveal" id="exp-hm">
         <div class="exp-logo-panel"><img src="images/Logo/H&M.png" alt="H&M" /></div>
         <div class="exp-content">
           <div class="exp-meta">
@@ -1003,7 +1198,7 @@ window.addEventListener('scroll', function() {
       </div>
 
       <!-- ESPRIT -->
-      <div class="exp-card reveal">
+      <div class="exp-card reveal" id="exp-esprit">
         <div class="exp-logo-panel"><img src="images/Logo/ESPRIT.png" alt="ESPRIT" /></div>
         <div class="exp-content">
           <div class="exp-meta">
@@ -1026,7 +1221,7 @@ window.addEventListener('scroll', function() {
       </div>
 
       <!-- Ankorstore -->
-      <div class="exp-card reveal">
+      <div class="exp-card reveal" id="exp-ankorstore">
         <div class="exp-logo-panel"><img src="images/Logo/AS.png" alt="Ankorstore" /></div>
         <div class="exp-content">
           <div class="exp-meta">
@@ -1046,7 +1241,7 @@ window.addEventListener('scroll', function() {
       </div>
 
       <!-- Optimal Ways -->
-      <div class="exp-card reveal">
+      <div class="exp-card reveal" id="exp-ow">
         <div class="exp-logo-panel"><img src="images/Logo/OW.png" alt="Optimal Ways" /></div>
         <div class="exp-content">
           <div class="exp-meta">
@@ -1067,7 +1262,7 @@ window.addEventListener('scroll', function() {
       </div>
 
       <!-- TCS -->
-      <div class="exp-card reveal">
+      <div class="exp-card reveal" id="exp-tcs">
         <div class="exp-logo-panel"><img src="images/Logo/TCS.png" alt="TCS" /></div>
         <div class="exp-content">
           <div class="exp-meta">
@@ -1096,7 +1291,7 @@ window.addEventListener('scroll', function() {
       <div class="edu-grid">
 
         <!-- EDHEC -->
-        <div class="edu-card reveal">
+        <div class="edu-card reveal" id="edu-edhec">
           <div class="edu-logo-panel"><img src="images/Logo/Edhec_logo.jpg" alt="EDHEC Business School" /></div>
           <div class="edu-content">
             <div class="edu-row"><h3>EDHEC Business School</h3><span class="location" data-i18n="loc.lille">Lille, France</span></div>
@@ -1427,6 +1622,53 @@ window.addEventListener('scroll', function() {
       });
     });
   });
+
+  // Journey timeline: draw the dashed line through the logo circles (a wave on desktop,
+  // straight down on narrow screens), and play the draw-in animation on scroll
+  (function () {
+    const track = document.querySelector('.jr-track');
+    if (!track) return;
+    const path = track.querySelector('.jr-line path');
+    const circles = [...track.querySelectorAll('.jr-circle')];
+    function drawLine() {
+      const box = track.getBoundingClientRect();
+      const pts = circles.map(c => {
+        const r = c.getBoundingClientRect();
+        return [r.left - box.left + r.width / 2, r.top - box.top + r.height / 2];
+      });
+      if (pts.length < 2) return;
+      const vertical = Math.abs(pts[1][0] - pts[0][0]) < 2;
+      const lead = 34;   // short tails beyond the first and last milestone (vertical list)
+      // Desktop: the line runs right to both edges of the timeline
+      const first = vertical ? [pts[0][0], pts[0][1] - lead] : [0, pts[0][1]];
+      const last = pts[pts.length - 1];
+      const end = vertical ? [last[0], last[1] + lead] : [box.width, last[1]];
+      let d = `M${first[0]},${first[1]} L${pts[0][0]},${pts[0][1]}`;
+      for (let i = 1; i < pts.length; i++) {
+        const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+        d += vertical ? ` L${x1},${y1}` : ` C${(x0 + x1) / 2},${y0} ${(x0 + x1) / 2},${y1} ${x1},${y1}`;
+      }
+      d += ` L${end[0]},${end[1]}`;
+      path.setAttribute('d', d);
+
+      // Time each milestone to the moment the line (revealed at a steady pace across
+      // the track) reaches its circle
+      const total = parseFloat(getComputedStyle(track).getPropertyValue('--jr-total')) || 1.8;
+      circles.forEach((c, i) => {
+        const frac = vertical ? pts[i][1] / box.height : pts[i][0] / box.width;
+        c.closest('.jr-item').style.setProperty('--jr-at', (Math.max(0, frac) * total).toFixed(2) + 's');
+      });
+    }
+    drawLine();
+    new ResizeObserver(drawLine).observe(track);
+    circles.forEach(c => c.querySelector('img').addEventListener('load', drawLine));
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    track.classList.add('jr-anim');
+    new IntersectionObserver(entries => {
+      entries.forEach(e => e.target.classList.toggle('on', e.isIntersecting));
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.25 }).observe(track);
+  })();
 
 // Project carousel: arrows step one card; each arrow disables at its end
   (function () {
