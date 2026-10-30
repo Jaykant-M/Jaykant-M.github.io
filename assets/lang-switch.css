@@ -21,15 +21,15 @@
 /* How far a [data-sweep] ring is drawn; lang-switch.js animates it in step with the stripe */
 @property --sweep       { syntax: '<angle>'; inherits: true; initial-value: 360deg; }
 
-/* UK: neutral near-black (the darkest of the three) with red */
+/* UK: near-black with a faint navy tint, and red */
 :root[data-theme="en"] {
-  --dark:       #0e0e10;
-  --dark-card:  #18181b;
-  --dark-border:#2c2c31;
+  --dark:       #0d1020;
+  --dark-card:  #161a2c;
+  --dark-border:#2a3150;
   --accent:     #ff6b7d;
   --accent-soft:#c8102e;
-  --text-body:  #dcdde1;
-  --text-muted: #b3b5bc;
+  --text-body:  #d3d9ea;
+  --text-muted: #aab4cf;
   /* Red | white | blue, the reverse of France's, so the two stripes differ.
      Blue is brighter than the flag's #012169, which vanishes on a dark page. */
   --flag-1:     #C8102E;
