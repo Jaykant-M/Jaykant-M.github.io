@@ -261,9 +261,16 @@ window.addEventListener('scroll', function() {
     .photo-flip.ready { cursor: pointer; }
     .photo-flip:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
     /* pointer-events: none: the turning faces are never hit-tested, only the stable frame */
-    .photo-flip-inner { position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+    .photo-flip-inner { position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(.45,.05,.55,.95); pointer-events: none; }
     .photo-flip.flipped .photo-flip-inner { transform: rotateY(180deg); }
     .photo-face { border-radius: 50%; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+    /* Some phone browsers (notably Safari on iPhone) ignore backface-visibility and show the
+       photo mirrored instead of the map. So the faces also swap outright at the halfway point
+       of the turn (0.4s of the symmetric 0.8s flip), when the photo is edge-on. */
+    .photo-front { opacity: 1; transition: opacity 0s linear 0.4s; }
+    .photo-back  { opacity: 0; transition: opacity 0s linear 0.4s; }
+    .photo-flip.flipped .photo-front { opacity: 0; }
+    .photo-flip.flipped .photo-back  { opacity: 1; }
     .photo-front { position: relative; }
     .photo-back {
       position: absolute;
@@ -291,7 +298,7 @@ window.addEventListener('scroll', function() {
     /* Accent while the map side is showing (or the frame is hovered) */
     .hero-photo-wrap:hover .photo-flip-hint,
     .photo-flip.flipped ~ .photo-flip-hint { color: var(--accent); opacity: 1; }
-    @media (prefers-reduced-motion: reduce) { .photo-flip-inner { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .photo-flip-inner, .photo-front, .photo-back { transition: none; } }
     @media (max-width: 768px) {
       .photo-flip-hint { font-size: 1.2rem; }
     }
