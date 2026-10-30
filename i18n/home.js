@@ -2,7 +2,7 @@
 window.I18N_PAGE = {
   de: {
 
-    'hero.role': 'Data Analyst &amp; CRM-Spezialist',
+    'hero.role': 'Erfahrener Data Analyst &amp; CRM-Spezialist',
     'hero.bio1': 'Analytisch versierter und ergebnisorientierter Data Professional mit über 6 Jahren Erfahrung in Datenanalyse, Datenvisualisierung und Datenmanagement. Fundierte Kenntnisse in SQL, Python und Power BI sowie ausgeprägte Expertise in der Automatisierung analytischer Prozesse zur Steigerung von Effizienz und Produktivität.',
     'hero.bio2': 'Derzeit als Customer &amp; CRM Analyst bei H&amp;M tätig, wo ich datengetriebene Entscheidungen in den Bereichen Kundengewinnung, Kundenbindung und Omnichannel-Performance vorantreibe.',
     'social.email': 'E-Mail',
@@ -104,7 +104,7 @@ window.I18N_PAGE = {
   },
   fr: {
 
-    'hero.role': 'Data Analyst &amp; Spécialiste CRM',
+    'hero.role': 'Data Analyst confirmé &amp; Spécialiste CRM',
     'hero.bio1': 'Professionnel de la data rigoureux et orienté résultats, fort de plus de 6 ans d’expérience en analyse, visualisation et gestion de données. Maîtrise de SQL, Python et Power BI, avec une solide expertise dans l’automatisation des processus analytiques pour gagner en efficacité et en productivité.',
     'hero.bio2': 'Actuellement Customer &amp; CRM Analyst chez H&amp;M, je pilote la prise de décision fondée sur les données en matière d’acquisition, de fidélisation client et de performance omnicanale.',
     'social.email': 'E-mail',
