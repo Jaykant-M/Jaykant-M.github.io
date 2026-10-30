@@ -77,6 +77,12 @@
               --text-body 0.95s ease-in-out, --text-muted 0.95s ease-in-out,
               --accent 0.95s ease-in-out, --accent-soft 0.95s ease-in-out;
 }
+/* Until a [data-sweep] photo has loaded, it stays hidden along with the header
+   stripe and its rings; lang-switch.js then fades it in and starts the intro */
+:root.photo-wait [data-sweep] img { opacity: 0; }
+:root.photo-wait [data-sweep]     { --sweep: 0deg; }
+:root.photo-wait nav::after       { transform: scaleX(0); }
+
 /* Applied only while a switch runs. filter: opacity() rather than opacity, so the
    pages' own opacity effects (e.g. scroll reveal) are left alone. A [data-i18n-fade]
    group fades as one piece, so translated items inside it aren't faded twice. */

@@ -59,6 +59,11 @@
   root.lang = current;
   root.dataset.theme = current;
 
+  // A [data-sweep] photo stays hidden (with the stripe and rings) until it has loaded;
+  // init() then fades it in and starts the intro, so nothing animates over a
+  // half-loaded image. Skipped for reduced motion, where nothing animates anyway.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('photo-wait');
+
   // The site translates itself; stop browser auto-translate (Chrome, Edge) from
   // re-translating it on top, which garbles names (e.g. "Tableau" → "Painting")
   root.setAttribute('translate', 'no');
@@ -271,18 +276,55 @@
     setLanguage(current);
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('theme-ready')));
 
-    // On every page load the stripe grows out from the centre and rings draw in,
-    // like the second half of a language switch
+    // On every page load: a [data-sweep] photo fades in once it has loaded, then the
+    // stripe grows out from the centre and the rings draw in, like the second half of
+    // a language switch. Pages without such a photo start straight away.
+    const photos = sweepEls.flatMap(el => [...el.querySelectorAll('img')]);
+    const PHOTO_FADE_MS = 300;
+    function whenPhotosReady(cb) {
+      const pending = photos.filter(img => !img.complete);
+      if (!pending.length) return cb();
+      let left = pending.length, fired = false;
+      const go = () => { if (!fired) { fired = true; cb(); } };
+      pending.forEach(img => {
+        const one = () => { if (--left === 0) go(); };
+        img.addEventListener('load', one, { once: true });
+        img.addEventListener('error', one, { once: true });
+      });
+      setTimeout(go, 4000);   // don't hold the page back forever on a slow connection
+    }
+
     if (nav && nav.animate && !reduceMotion) {
       const holdAt = HOLD_MS / (HOLD_MS + IN_MS);
+      // Created paused at their start, so the stripe and rings stay hidden while waiting
       const intro = nav.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: holdAt, easing: 'ease-out' }, {}],
         { duration: HOLD_MS + IN_MS, pseudoElement: '::after' });
-      setTimeout(() => intro.finish(), HOLD_MS + IN_MS + 100);   // backstop if frames stall
-      sweep([
-        { '--sweep': '0deg' },
-        { '--sweep': '0deg', offset: holdAt, easing: 'ease-out' },
-        { '--sweep': '360deg' }
-      ], HOLD_MS + IN_MS);
+      stripeAnim = intro;   // so a language switch during the wait cancels it
+      const rings = sweepEls.map(el => {
+        const a = el.animate([
+          { '--sweep': '0deg' },
+          { '--sweep': '0deg', offset: holdAt, easing: 'ease-out' },
+          { '--sweep': '360deg' }
+        ], { duration: HOLD_MS + IN_MS });
+        sweepAnims.set(el, a);
+        return a;
+      });
+      const introAnims = [intro, ...rings];
+      introAnims.forEach(a => a.pause());
+      whenPhotosReady(() => {
+        root.classList.remove('photo-wait');
+        photos.forEach(img => {
+          const a = img.animate([{ opacity: 0 }, { opacity: 1 }], { duration: PHOTO_FADE_MS, easing: 'ease-out' });
+          setTimeout(() => a.finish(), PHOTO_FADE_MS + 100);   // backstop if frames stall
+        });
+        setTimeout(() => introAnims.forEach(a => {
+          if (a.playState !== 'paused') return;   // cancelled by a language switch meanwhile
+          a.play();
+          setTimeout(() => a.finish(), HOLD_MS + IN_MS + 100);   // backstop if frames stall
+        }), photos.length ? PHOTO_FADE_MS : 0);
+      });
+    } else {
+      root.classList.remove('photo-wait');
     }
   }
 

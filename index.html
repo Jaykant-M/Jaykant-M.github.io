@@ -240,13 +240,19 @@ window.addEventListener('scroll', function() {
       position: absolute;
       border-radius: 50%;
     }
+    /* Each is masked to a thin ring, so nothing shows behind the photo
+       (e.g. while it is still loading) */
     .photo-aura::before {   /* soft aura, 8px outside the photo */
       inset: -8px;
       background: conic-gradient(color-mix(in srgb, var(--accent) 15%, transparent) var(--sweep), transparent 0);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 8px));
+              mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 calc(100% - 8px));
     }
     .photo-aura::after {    /* 3px border ring, showing through the photo's transparent border */
       inset: 0;
       background: conic-gradient(var(--accent) var(--sweep), transparent 0);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+              mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
     }
 
     /* ─── Quote banner ─────────────────────────────────────────── */
