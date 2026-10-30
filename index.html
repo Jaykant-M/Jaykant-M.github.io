@@ -255,6 +255,57 @@ window.addEventListener('scroll', function() {
               mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
     }
 
+    /* ─── Hero route map ───────────────────────────────────────────── */
+    /* Wide screens: photo | intro | globe. The photo and globe scale with the screen so
+       the intro keeps a comfortable line length. */
+    @media (min-width: 1200px) {
+      .hero-inner { max-width: 1480px; grid-template-columns: auto minmax(0, 1fr) auto; gap: 3rem; padding: 0 2.5rem; }
+      .hero-photo-wrap img { width: clamp(260px, 22vw, 380px); height: clamp(260px, 22vw, 380px); }
+    }
+    .hero-globe { position: relative; width: clamp(280px, 26vw, 440px); aspect-ratio: 1; }
+    /* Tablets: centred under the photo and intro; phones: after the intro */
+    @media (max-width: 1199px) {
+      .hero-globe { grid-column: 1 / -1; justify-self: center; width: min(420px, 90vw); }
+    }
+    .globe { display: block; width: 100%; height: auto; overflow: visible; }
+    .globe-land path { fill: var(--dark-card); stroke: var(--dark-border); stroke-width: 0.6; }
+    .globe-land path.is-lived {
+      fill: color-mix(in srgb, var(--accent) 55%, var(--dark));
+      stroke: color-mix(in srgb, var(--accent) 80%, transparent);
+    }
+    .globe-route { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .globe-stops circle { fill: var(--text-light); stroke: var(--accent); stroke-width: 1.6; }
+    .globe-pin { fill: var(--accent); stroke: #ffffff; stroke-width: 1.8; }
+    .globe-pulse { fill: none; stroke: var(--accent); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; animation: globe-pulse 2s ease-out infinite; }
+    @keyframes globe-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(3.2); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .globe-pulse { animation: none; } }
+    .globe-label {
+      position: absolute;
+      transform: translate(14px, -120%);
+      display: flex; flex-direction: column; gap: 0.05rem;
+      padding: 0.35rem 0.6rem;
+      background: color-mix(in srgb, var(--dark) 85%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+      border-radius: 8px;
+      pointer-events: none;
+      white-space: nowrap;
+      text-align: left;
+    }
+    .globe-label strong { font-size: 0.8rem; color: var(--text-light); }
+    .globe-label span { font-size: 0.66rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em; }
+
+    /* Animation (class added by the script): the route draws stop by stop, each dot appears
+       as the line reaches it, then Hamburg lights up. Leaving the screen resets it. */
+    .hero-globe.globe-anim { --globe-total: 3.6s; }
+    .globe-anim .globe-route { stroke-dashoffset: var(--route-len); transition: stroke-dashoffset var(--globe-total) linear; }
+    .globe-anim .globe-stops circle { opacity: 0; transform: scale(0); transform-box: fill-box; transform-origin: center; transition: opacity 0.3s ease, transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+    .globe-anim .globe-home, .globe-anim .globe-label { opacity: 0; transition: opacity 0.5s ease; }
+    .globe-anim.on .globe-route { stroke-dashoffset: 0; }
+    .globe-anim.on .globe-stops circle { opacity: 1; transform: none; transition-delay: var(--at); }
+    .globe-anim.on .globe-home, .globe-anim.on .globe-label { opacity: 1; transition-delay: var(--globe-total); }
+    .globe-anim:not(.on) .globe-route, .globe-anim:not(.on) .globe-stops circle,
+    .globe-anim:not(.on) .globe-home, .globe-anim:not(.on) .globe-label { transition: none; }
+
     /* ─── Quote banner ─────────────────────────────────────────── */
     .quote-banner {
       background: var(--dark-card);
@@ -1086,6 +1137,32 @@ window.addEventListener('scroll', function() {
           </a>
         </div>
       </div>
+      <!-- Route map: every place lived, in order, ending in Hamburg (only Hamburg is labelled);
+           India, France and Germany are highlighted -->
+      <div class="hero-globe" hidden>
+        <svg class="globe" viewBox="0 0 400 400" role="img"
+             aria-label="Globe showing the route from Vadodara, India through Ahmedabad, Jamnagar, Panipat, Chennai, Thiruvananthapuram, Pune and Vadodara, then Lille in France and Düsseldorf, to Hamburg, Germany">
+          <!-- Round, softly faded outline: the land fades out towards a circle -->
+          <defs>
+            <radialGradient id="globe-fade" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0.6" stop-color="#fff" />
+              <stop offset="1" stop-color="#000" />
+            </radialGradient>
+            <mask id="globe-mask"><rect width="400" height="400" fill="url(#globe-fade)" /></mask>
+          </defs>
+          <g class="globe-land" mask="url(#globe-mask)"></g>
+          <path class="globe-route" />
+          <g class="globe-stops"></g>
+          <g class="globe-home">
+            <circle class="globe-pulse" r="7" />
+            <circle class="globe-pin" r="5.5" />
+          </g>
+        </svg>
+        <div class="globe-label">
+          <strong data-i18n="journey.map.city">Hamburg, Germany</strong>
+          <span data-i18n="journey.map.now">Currently based here</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1668,6 +1745,111 @@ window.addEventListener('scroll', function() {
     new IntersectionObserver(entries => {
       entries.forEach(e => e.target.classList.toggle('on', e.isIntersecting));
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.25 }).observe(track);
+  })();
+
+  // Hero globe: loads the map libraries after the page, draws a globe facing India and
+  // Europe with India, France and Germany highlighted, the route through every place lived
+  // (great-circle hops) and only Hamburg labelled, then animates like the timeline.
+  (function () {
+    const wrap = document.querySelector('.hero-globe');
+    if (!wrap) return;
+    const svg = wrap.querySelector('.globe');
+    const SIZE = 400;
+    // [longitude, latitude], in the order lived
+    const STOPS = [
+      [73.1812, 22.3072],   // Vadodara
+      [72.5714, 23.0225],   // Ahmedabad
+      [70.0577, 22.4707],   // Jamnagar
+      [76.9635, 29.3909],   // Panipat
+      [80.2707, 13.0827],   // Chennai
+      [76.9366, 8.5241],    // Thiruvananthapuram
+      [73.8567, 18.5204],   // Pune
+      [73.1812, 22.3072],   // Vadodara
+      [3.0573, 50.6292],    // Lille
+      [6.7735, 51.2277],    // Düsseldorf
+      [9.9937, 53.5511]     // Hamburg
+    ];
+    const LIVED = ['356', '250', '276'];   // India, France, Germany (ISO numeric ids)
+    const LIBS = [
+      'https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js',
+      'https://cdn.jsdelivr.net/npm/d3-geo@3.1.0/dist/d3-geo.min.js',
+      'https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js'
+    ];
+    const WORLD = 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json';
+    const NS = 'http://www.w3.org/2000/svg';
+
+    const loadScript = src => new Promise((ok, fail) => {
+      const el = document.createElement('script');
+      el.src = src; el.onload = ok; el.onerror = fail;
+      document.head.appendChild(el);
+    });
+
+    async function build() {
+      for (const src of LIBS) await loadScript(src);
+      const world = await (await fetch(WORLD)).json();
+
+      // Flat map framing Western Europe and India (as on the earlier route map)
+      const frame = { type: 'MultiPoint', coordinates: [...STOPS, [-10, 60], [92, 2]] };
+      const projection = d3.geoMercator().fitExtent([[24, 24], [SIZE - 24, SIZE - 24]], frame);
+      const geoPath = d3.geoPath(projection);
+      const land = svg.querySelector('.globe-land');
+      topojson.feature(world, world.objects.countries).features.forEach(f => {
+        const d = geoPath(f);
+        if (!d) return;
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', d);
+        if (LIVED.includes(String(f.id))) p.classList.add('is-lived');
+        land.appendChild(p);
+      });
+
+      // Route: great-circle hops between consecutive places
+      const hops = STOPS.slice(1).map((c, i) => geoPath({ type: 'LineString', coordinates: [STOPS[i], c] }));
+      const route = svg.querySelector('.globe-route');
+      route.setAttribute('d', hops.join(' '));
+
+      // Timing: each place appears when the line reaches it (by length along the route)
+      const measure = document.createElementNS(NS, 'path');
+      svg.appendChild(measure);
+      const lengths = hops.map(h => { measure.setAttribute('d', h); return measure.getTotalLength(); });
+      measure.remove();
+      const total = lengths.reduce((a, b) => a + b, 0);
+      route.style.setProperty('--route-len', total);
+      route.style.strokeDasharray = total;
+      const T = parseFloat(getComputedStyle(wrap).getPropertyValue('--globe-total')) || 3.6;
+
+      const pts = STOPS.map(c => projection(c));
+      const stops = svg.querySelector('.globe-stops');
+      let run = 0;
+      pts.slice(0, -1).forEach((p, i) => {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]); c.setAttribute('r', 3.6);
+        c.style.setProperty('--at', (run / total * T).toFixed(2) + 's');
+        stops.appendChild(c);
+        run += lengths[i];
+      });
+
+      // Hamburg: pin, pulse and the only label
+      const home = pts[pts.length - 1];
+      svg.querySelectorAll('.globe-home circle').forEach(c => { c.setAttribute('cx', home[0]); c.setAttribute('cy', home[1]); });
+      const label = wrap.querySelector('.globe-label');
+      label.style.left = (home[0] / SIZE * 100) + '%';
+      label.style.top = (home[1] / SIZE * 100) + '%';
+
+      wrap.hidden = false;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      wrap.classList.add('globe-anim');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => wrap.classList.toggle('on', e.isIntersecting));
+        }, { threshold: 0.4 }).observe(wrap);
+      }));
+    }
+
+    // After the page has loaded, so it never delays the rest; if the map can't load
+    // (offline, CDN blocked) the globe simply stays hidden
+    const start = () => build().catch(() => { wrap.hidden = true; });
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
   })();
 
 // Project carousel: arrows step one card; each arrow disables at its end

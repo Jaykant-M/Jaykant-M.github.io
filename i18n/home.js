@@ -10,6 +10,8 @@ window.I18N_PAGE = {
 
     'journey.heading': 'Mein Weg',
     'journey.title': 'Zeitleiste',
+    'journey.map.city': 'Hamburg, Deutschland',
+    'journey.map.now': 'Aktueller Wohnort',
     'journey.mim': 'Master in Betriebswirtschaft',
     'journey.msc': 'MSc in Data Analytics &amp; KI',
     'exp.heading': 'Werdegang',
@@ -116,6 +118,8 @@ window.I18N_PAGE = {
 
     'journey.heading': 'Mon parcours',
     'journey.title': 'Chronologie',
+    'journey.map.city': 'Hambourg, Allemagne',
+    'journey.map.now': 'Ma base actuelle',
     'journey.mim': 'Master en management des entreprises',
     'journey.msc': 'MSc en Data Analytics &amp; IA',
     'exp.heading': 'Parcours professionnel',
