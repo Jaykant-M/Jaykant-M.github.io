@@ -4,7 +4,7 @@ window.I18N_PAGE = {
   de: {
     t1: `Automatisierung in der Analytik: Eine Entscheidung, kein Standard — Jaykant Mendapara`,
     t2: `Analytics &nbsp;·&nbsp; Fachbeitrag`,
-    t3: `Automatisierung in der Analytik:<br>Eine Entscheidung, <span>kein Standard</span>`,
+    t3: `Automatisierung in der Analytik: Eine Entscheidung, <span>kein Standard</span>`,
     t4: `Nicht alles, was sich automatisieren lässt, sollte auch automatisiert werden. KI verändert den Werkzeugkasten von Analysten schneller, als Governance mithalten kann – ein Plädoyer aus der Praxis dafür, das Urteilsvermögen im Zentrum des Workflows zu halten.`,
     t5: `7 Min. Lesezeit`,
     t6: `Fachbeitrag`,
@@ -92,7 +92,7 @@ window.I18N_PAGE = {
   fr: {
     t1: `L’automatisation en analytique : un choix, pas un réflexe — Jaykant Mendapara`,
     t2: `Analytique &nbsp;·&nbsp; Tribune`,
-    t3: `L’automatisation en analytique :<br>un choix, <span>pas un réflexe</span>`,
+    t3: `L’automatisation en analytique : un choix, <span>pas un réflexe</span>`,
     t4: `Tout ce qui peut être automatisé ne doit pas forcément l’être. Alors que l’IA transforme la boîte à outils de l’analyste plus vite que la gouvernance ne peut suivre, le plaidoyer d’un praticien pour garder le jugement au cœur du workflow.`,
     t5: `7 min de lecture`,
     t6: `Tribune`,

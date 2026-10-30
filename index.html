@@ -578,10 +578,71 @@ window.addEventListener('scroll', function() {
     }
 
     /* ─── Projects ─────────────────────────────────────────────── */
+    /* Project cards sit in one row that scrolls sideways; the arrow buttons step
+       one card at a time (swipe and trackpad scrolling work too) */
+    /* The arrows sit outside the row, in the page margin, so cards keep their full width */
+    .projects-carousel { position: relative; }
     .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      display: flex;
       gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      /* room for the cards' hover lift and shadow inside the scroll area */
+      padding: 8px 2px 14px;
+      margin: -8px -2px -14px;
+    }
+    .projects-grid::-webkit-scrollbar { display: none; }
+    .projects-grid .project-card {
+      flex: 0 0 calc((100% - 3 * 1.5rem) / 4);   /* four visible on desktop */
+      scroll-snap-align: start;
+    }
+    @media (max-width: 1100px) {
+      .projects-grid .project-card { flex-basis: calc((100% - 1.5rem) / 2); }
+    }
+    @media (max-width: 600px) {
+      .projects-grid .project-card { flex-basis: 85%; }
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--dark-border);
+      background: color-mix(in srgb, var(--dark-card) 92%, transparent);
+      color: var(--text-light);
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      transition: border-color 0.2s, color 0.2s, opacity 0.2s;
+    }
+    .carousel-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .carousel-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .carousel-btn:disabled { opacity: 0.3; cursor: default; border-color: var(--dark-border); color: var(--text-light); }
+    .carousel-btn--prev { left: -64px; }
+    .carousel-btn--next { right: -64px; }
+    /* Tablets and phones: the page margin is too narrow for the arrows, so they
+       sit side by side underneath the row */
+    @media (max-width: 768px) {
+      .projects-carousel {
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0.75rem;
+        row-gap: 1.25rem;
+      }
+      .projects-grid { grid-column: 1 / -1; grid-row: 1; }
+      .carousel-btn { position: static; transform: none; grid-row: 2; }
+      .carousel-btn--prev { justify-self: end; }
+      .carousel-btn--next { justify-self: start; }
     }
 
     .project-card {
@@ -618,6 +679,9 @@ window.addEventListener('scroll', function() {
       object-position: center top;
       display: block;
     }
+    /* Thumbnail made of a row of small icons on white (no single cover image) */
+    .project-card-thumb--icons { background: #ffffff; gap: 2.25rem; }
+    .project-card-thumb--icons img { width: 76px; height: 76px; object-fit: contain; }
 
     .project-card-body {
       padding: 1.25rem 1.5rem 1.5rem;
@@ -666,20 +730,6 @@ window.addEventListener('scroll', function() {
       display: flex;
       align-items: center;
       gap: 0.3rem;
-    }
-
-    .wip-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(251,191,36,0.1);
-      color: #fbbf24;
-      border: 1px solid rgba(251,191,36,0.25);
-      font-size: 0.875rem;
-      font-weight: 600;
-      padding: 0.35rem 0.8rem;
-      border-radius: 6px;
-      margin-bottom: 2rem;
     }
 
     /* ─── Skills ───────────────────────────────────────────────── */
@@ -846,7 +896,7 @@ window.addEventListener('scroll', function() {
         gap: 0 1rem;
       }
 
-      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1201,9 +1251,8 @@ window.addEventListener('scroll', function() {
     <div class="section-inner">
       <p class="section-heading" data-i18n="projects.heading">Selected Work</p>
       <h2 class="section-title" data-i18n="projects.title">Projects</h2>
-      <div class="wip-badge">
-        <i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="projects.wip">This section is a work in progress</span>
-      </div>
+      <div class="projects-carousel">
+      <button class="carousel-btn carousel-btn--prev" type="button" aria-label="Previous projects"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="projects-grid">
 
         <!-- Card 1 -->
@@ -1266,6 +1315,27 @@ window.addEventListener('scroll', function() {
           </div>
         </a>
 
+        <!-- Card 5 -->
+        <a href="Projects/behavioral-segmentation-case-study.html" class="project-card reveal">
+          <div class="project-card-thumb project-card-thumb--icons">
+            <img src="images/Projects/BehaviouralSegmentation/icon-route.png" alt="" />
+            <img src="images/Projects/BehaviouralSegmentation/icon-refresh.png" alt="" />
+            <img src="images/Projects/BehaviouralSegmentation/icon-dart.png" alt="" />
+          </div>
+          <div class="project-card-body">
+            <div class="project-tags">
+              <span class="project-tag">CRM Analytics</span>
+              <span class="project-tag">Lifecycle Segmentation</span>
+              <span class="project-tag">Design Thinking</span>
+            </div>
+            <h3>Behavioural Segmentation</h3>
+            <p data-i18n="projects.segmentation.desc">A practitioner's framework for turning overlapping customer definitions into one segmentation CRM can act on from day one — approached as a design problem, not a modelling exercise.</p>
+            <div class="project-card-footer"><span data-i18n="projects.readMore">Read more</span> <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </a>
+
+      </div>
+      <button class="carousel-btn carousel-btn--next" type="button" aria-label="Next projects"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -1357,6 +1427,32 @@ window.addEventListener('scroll', function() {
       });
     });
   });
+
+// Project carousel: arrows step one card; each arrow disables at its end
+  (function () {
+    const track = document.querySelector('.projects-grid');
+    const prev = document.querySelector('.carousel-btn--prev');
+    const next = document.querySelector('.carousel-btn--next');
+    if (!track || !prev || !next) return;
+    const step = () => {
+      const card = track.querySelector('.project-card');
+      return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth;
+    };
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    };
+    const go = dir => {
+      track.scrollBy({ left: dir * step() });
+      setTimeout(update, 450);   // after the smooth scroll, in case no scroll event arrives
+    };
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 
 // Project card clicks
   document.querySelectorAll('a.project-card').forEach(link => {

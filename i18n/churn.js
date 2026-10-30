@@ -3,7 +3,7 @@
 window.I18N_PAGE = {
   de: {
     t1: `Kundenabwanderung im E-Commerce`,
-    t2: `Kunden<span>abwanderung</span><br>im E-Commerce`,
+    t2: `Kunden<span>abwanderung</span> im E-Commerce`,
     t3: `Eine End-to-End-Analyse zur Vorhersage von Kundenabwanderung – von den Herausforderungen der Datenbeschaffung über Modellauswahl und Segmentierung bis zu umsetzbaren Geschäftsempfehlungen.`,
     t6: `CRM &amp; Segmentierung`,
     t7: `In diesem Projekt`,
@@ -175,7 +175,7 @@ window.I18N_PAGE = {
   },
   fr: {
     t1: `L’attrition client dans l’e-commerce`,
-    t2: `L’<span>attrition</span> client<br>dans l’e-commerce`,
+    t2: `L’<span>attrition</span> client dans l’e-commerce`,
     t3: `Une analyse de bout en bout de la prédiction de l’attrition client – des difficultés d’acquisition des données au choix du modèle, à la segmentation et aux recommandations business concrètes.`,
     t5: `Machine learning`,
     t6: `CRM &amp; segmentation`,

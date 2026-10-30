@@ -6,7 +6,7 @@
   <title data-i18n="t1">Customer Churn in E-Commerce</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../../assets/lang-switch.css" />
   <script src="../../i18n/churn.js"></script>
@@ -61,9 +61,9 @@
       display: flex; flex-direction: column; justify-content: center;
     }
     .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
+    .hero-title { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; }
     .hero-title span { color: var(--accent); }
-    .hero-desc { color: var(--text-body); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.25rem; max-width: 420px; }
+    .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; max-width: 420px; }
     .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
     .hero-meta span { display: flex; align-items: center; gap: 0.4rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
     .hero-intro-col {
@@ -114,7 +114,7 @@
     /* ── Chapter opener ── */
     .chapter { display: flex; align-items: center; gap: 1.25rem; padding: 3.5rem 0 1.75rem; border-top: 1px solid var(--dark-border); margin-top: 2rem; }
     .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
-    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); }
+    .chapter-title { font-family: 'Inter', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-light); }
     .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
 
     /* ── Split section ── */
@@ -244,6 +244,23 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── Hero layout: title on its own row; description + stats box below,
+       centred against each other. If only one of them exists it takes the full row. ── */
+    .page-hero { display: block; }
+    .hero-head { padding: 3rem 0 1.25rem; }
+    .hero-head .hero-title { margin-bottom: 0; }
+    .hero-body { display: flex; align-items: center; gap: 3rem; padding-bottom: 2.5rem; }
+    .hero-body .hero-text-col { flex: 1; min-width: 0; padding: 0; }
+    .hero-body .hero-intro-col { flex: 0 0 60%; min-width: 0; margin: 0; }
+    .hero-body > :only-child { flex: 1 1 100%; }
+    .hero-body .hero-desc { max-width: none; }
+    .hero-body .hero-meta { margin-top: 0; }
+    @media (max-width: 900px) {
+      .hero-head { padding: 2.5rem 0 1rem; }
+      .hero-body { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+      .hero-body .hero-text-col { padding: 0; }
+    }
+
     @media (max-width: 900px) {
       .page-hero { grid-template-columns: 1fr; }
       .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
@@ -282,15 +299,17 @@
 
   <!-- ── Hero - text left, image right ── -->
   <div class="page-hero">
-    <div class="hero-text-col">
-      <h1 class="hero-title" data-i18n="t2">Customer <span>Churn</span><br>in E-Commerce</h1>
+    <div class="hero-head">
+      <h1 class="hero-title" data-i18n="t2">Customer <span>Churn</span> in E-Commerce</h1>
     </div>
-    <div class="hero-intro-col">
-      <p data-i18n="t3">An end-to-end analysis of customer churn prediction - from data acquisition challenges to model selection, segmentation, and actionable business recommendations.</p>
-      <div class="hero-meta" style="margin-top:1.25rem;">
+    <div class="hero-body">
+      <div class="hero-text-col">
+        <p class="hero-desc" data-i18n="t3">An end-to-end analysis of customer churn prediction - from data acquisition challenges to model selection, segmentation, and actionable business recommendations.</p>
+      <div class="hero-meta">
         <span data-i18n="t4"><i class="fa-brands fa-python"></i> Python</span>
         <span data-i18n="t5"><i class="fa-solid fa-brain"></i> Machine Learning</span>
         <span data-i18n="t6"><i class="fa-solid fa-users"></i> CRM &amp; Segmentation</span>
+      </div>
       </div>
     </div>
   </div>

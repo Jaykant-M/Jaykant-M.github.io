@@ -95,12 +95,12 @@ window.I18N_PAGE = {
     'lang.french': 'Französisch (Mittelstufe)',
     'lang.gujarati': 'Gujarati (Muttersprache)',
 
-    'projects.wip': 'Dieser Bereich befindet sich noch im Aufbau',
     'projects.readMore': 'Mehr lesen',
     'projects.tableau.desc': 'Visual-Storytelling-Projekt, das UNICEF-Daten mit interaktiven Tableau-Dashboards erschließt – entstanden im Rahmen des Data-Analytics-Programms der EDHEC.',
     'projects.churn.desc': 'End-to-End-Analyse und prädiktive Modellierung zur Identifikation abwanderungsgefährdeter Kunden im E-Commerce mit Python und Machine-Learning-Methoden.',
     'projects.automation.desc': 'Nicht alles, was sich automatisieren lässt, sollte auch automatisiert werden. Ein Plädoyer aus der Praxis dafür, das eigene Urteilsvermögen ins Zentrum des Analytics-Workflows zu stellen, während KI den Werkzeugkasten neu gestaltet.',
-    'projects.maturity.desc': 'Vier Bereiche, in denen analytische Fähigkeiten regelmäßig nicht in geschäftlichen Mehrwert münden – von Entscheidungen zum Data Stack bis zu Segmentierung, A/B-Tests und CLV-Strategie.'
+    'projects.maturity.desc': 'Vier Bereiche, in denen analytische Fähigkeiten regelmäßig nicht in geschäftlichen Mehrwert münden – von Entscheidungen zum Data Stack bis zu Segmentierung, A/B-Tests und CLV-Strategie.',
+    'projects.segmentation.desc': 'Ein Praxis-Framework, um sich überlappende Kundendefinitionen in eine einzige Segmentierung zu überführen, mit der das CRM ab dem ersten Tag arbeiten kann – als Design-Problem statt als Modellierungsübung.'
   },
   fr: {
 
@@ -197,11 +197,11 @@ window.I18N_PAGE = {
     'lang.french': 'Français (intermédiaire)',
     'lang.gujarati': 'Gujarati (langue maternelle)',
 
-    'projects.wip': 'Cette section est en cours de construction',
     'projects.readMore': 'Lire la suite',
     'projects.tableau.desc': 'Projet de data storytelling explorant les données de l’UNICEF à travers des tableaux de bord Tableau interactifs, réalisé dans le cadre du programme Data Analytics de l’EDHEC.',
     'projects.churn.desc': 'Analyse de bout en bout et modélisation prédictive pour identifier les clients à risque de churn dans un contexte e-commerce, avec Python et des techniques de machine learning.',
     'projects.automation.desc': 'Tout ce qui peut être automatisé ne doit pas forcément l’être. Le plaidoyer d’un praticien pour garder le jugement au cœur du workflow analytique, alors que l’IA redéfinit la boîte à outils.',
-    'projects.maturity.desc': 'Quatre domaines où les capacités analytiques peinent systématiquement à se traduire en impact business – des choix de data stack à la segmentation, aux tests A/B et à la stratégie CLV.'
+    'projects.maturity.desc': 'Quatre domaines où les capacités analytiques peinent systématiquement à se traduire en impact business – des choix de data stack à la segmentation, aux tests A/B et à la stratégie CLV.',
+    'projects.segmentation.desc': 'Un cadre de praticien pour transformer des définitions clients qui se chevauchent en une segmentation unique, exploitable par le CRM dès le premier jour – abordée comme un problème de design plutôt que comme un exercice de modélisation.'
   }
 };

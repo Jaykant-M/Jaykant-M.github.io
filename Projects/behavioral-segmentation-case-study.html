@@ -6,7 +6,7 @@
   <title data-i18n="t1">Behavioural Segmentation for Lifecycle Targeting — Jaykant Mendapara</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../assets/lang-switch.css" />
   <script src="../i18n/segmentation.js"></script>
@@ -60,7 +60,7 @@
       border-radius: var(--radius); margin: 2.5rem 0;
     }
     .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; hyphens: auto; overflow-wrap: break-word; }
+    .hero-title { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--text-light); line-height: 1.1; margin-bottom: 1rem; hyphens: auto; overflow-wrap: break-word; }
     .hero-title span { color: var(--accent); }
     .hero-desc { color: var(--text-body); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1rem; }
     .hero-meta { display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
@@ -83,7 +83,7 @@
     .metric-item { min-width: 0; }   /* lets the grid columns shrink below long German words */
     .metric-item .val { font-size: 1.6rem; font-weight: 700; color: var(--text-light); line-height: 1.1; hyphens: auto; overflow-wrap: break-word; }
     .metric-item .val span { color: var(--accent); }
-    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.5; }
+    .metric-item .lbl { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
 
     /* ── Chapter opener ── */
     .chapter {
@@ -91,7 +91,7 @@
       padding: 3.5rem 0 1.75rem; border-top: 1px solid var(--dark-border); margin-top: 2rem;
     }
     .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
-    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
+    .chapter-title { font-family: 'Inter', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
     .chapter-title i { font-size: 1.2rem; color: var(--accent); font-family: 'Font Awesome 6 Free'; }
     .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
 
@@ -104,7 +104,7 @@
     .sub { font-size: 1.05rem; font-weight: 600; color: var(--text-light); margin: 1.75rem 0 0.6rem; }
 
     /* ── Pull quote ── */
-    .pull { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; color: var(--text-light); border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; margin: 1.75rem 0; line-height: 1.5; }
+    .pull { font-family: 'Inter', sans-serif; font-style: italic; font-size: 1.25rem; color: var(--text-light); border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.25rem; margin: 1.75rem 0; line-height: 1.5; }
 
     /* ── Icon row / card ── */
     .icon-row { display: flex; gap: 1rem; margin: 0.5rem 0 1.75rem; flex-wrap: wrap; }
@@ -145,8 +145,8 @@
     /* ── Two-card grid (2 columns) ── */
     .two-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.75rem 0 1.75rem; }
     .card { background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 1.4rem; }
-    .card h3 { font-size: 0.98rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.55rem; display: flex; align-items: center; }
-    .card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.55rem; display: flex; align-items: center; }
+    .card p { font-size: 0.92rem; color: var(--text-body); line-height: 1.75; margin: 0; }
 
     /* highlighted step 2 + its connected detail group */
     .card.step-highlight { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent); }
@@ -189,7 +189,7 @@
     .checklist .mark { color: var(--accent); font-weight: 700; flex-shrink: 0; }
 
     /* ── Closing ── */
-    .closing { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; margin: 1.75rem 0 0; color: var(--text-light); line-height: 1.45; }
+    .closing { font-family: 'Inter', sans-serif; font-size: 1.35rem; font-style: italic; margin: 1.75rem 0 0; color: var(--text-light); line-height: 1.45; }
 
     /* ── Tags ── */
     .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -209,6 +209,23 @@
     /* ── Reveal ── */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Hero layout: title on its own row; description + stats box below,
+       centred against each other. If only one of them exists it takes the full row. ── */
+    .page-hero { display: block; }
+    .hero-head { padding: 3rem 0 1.25rem; }
+    .hero-head .hero-title { margin-bottom: 0; }
+    .hero-body { display: flex; align-items: center; gap: 3rem; padding-bottom: 2.5rem; }
+    .hero-body .hero-text-col { flex: 1; min-width: 0; padding: 0; }
+    .hero-body .hero-intro-col { flex: 0 0 60%; min-width: 0; margin: 0; }
+    .hero-body > :only-child { flex: 1 1 100%; }
+    .hero-body .hero-desc { max-width: none; }
+    .hero-body .hero-meta { margin-top: 0; }
+    @media (max-width: 900px) {
+      .hero-head { padding: 2.5rem 0 1rem; }
+      .hero-body { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+      .hero-body .hero-text-col { padding: 0; }
+    }
 
     @media (max-width: 900px) {
       .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
@@ -240,6 +257,16 @@
     .pf-title { font-size: 1rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem; }
     .pf-title i { color: var(--accent); font-size: 0.9rem; }
     .pf-desc { font-size: 0.9rem; color: var(--text-body); line-height: 1.65; }
+    /* Scroll-driven steps (class added by the script below, so without JS every step shows):
+       each step uncovers as it enters the screen and covers again when it leaves */
+    .process.pf-scroll .pf-node { opacity: 0; transform: scale(0.5); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.34,1.56,.64,1); }
+    .process.pf-scroll .pf-line { transform: scaleY(0); transform-origin: top; transition: transform 0.6s ease 0.2s; }
+    .process.pf-scroll .pf-body { opacity: 0; transform: translateX(-14px); transition: opacity 0.45s ease 0.1s, transform 0.45s ease 0.1s; }
+    .process.pf-scroll .pf-phase.on .pf-node { opacity: 1; transform: none; }
+    .process.pf-scroll .pf-phase.on .pf-line { transform: none; }
+    .process.pf-scroll .pf-phase.on .pf-body { opacity: 1; transform: none; }
+    .process.pf-scroll .pf-loop { opacity: 0; transition: opacity 0.45s ease; }
+    .process.pf-scroll .pf-loop.on { opacity: 1; }
     .pf-loop { font-size: 0.82rem; color: var(--accent); font-style: italic; margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
 
     /* ── Confidentiality / disclaimer block (added) ── */
@@ -255,10 +282,21 @@
     .dt-step { background: var(--dark-card); border: 1px solid var(--dark-border); border-top: 2px solid var(--accent); border-radius: var(--radius); padding: 1rem 0.9rem; }
     .dt-step .n { font-size: 0.7rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.4rem; }
     .dt-step .n i { font-size: 0.9rem; }
-    .dt-step .st { font-family: 'Playfair Display', serif; font-size: 1.02rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.4rem; line-height: 1.25; }
+    .dt-step .st { font-family: 'Inter', sans-serif; font-size: 1.02rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.4rem; line-height: 1.25; }
     .dt-step .sd { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
     .chapter-eyebrow .dt-stage { background: color-mix(in srgb, var(--accent) 16%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 4px; padding: 0.05rem 0.45rem; margin-right: 0.35rem; }
     .dt-chip { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 10px; padding: 0.1rem 0.5rem; margin-left: 0.5rem; vertical-align: middle; }
+    /* Scroll-driven band (class added by the script, so without JS every box shows): the boxes
+       wipe in from left to right one after another, and cover again when the band leaves view */
+    .approach.ap-scroll .dt-step {
+      clip-path: inset(0 100% 0 0 round var(--radius));
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: clip-path 0.6s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease, transform 0.6s ease;
+      transition-delay: calc(var(--k, 0) * 0.16s);
+    }
+    .approach.ap-scroll.on .dt-step { clip-path: inset(0 0 0 0 round var(--radius)); opacity: 1; transform: none; }
+    .approach.ap-scroll:not(.on) .dt-step { transition-delay: 0s; }   /* cover all at once */
     @media (max-width: 900px) { .approach { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .approach { grid-template-columns: 1fr; } }
   </style>
@@ -281,17 +319,20 @@
 
   <!-- ── Hero ── -->
   <div class="page-hero">
-    <div class="hero-text-col">
-      <div class="hero-eyebrow" data-i18n="t2">Design-Thinking Approach &nbsp;·&nbsp; CRM &amp; Lifecycle Analytics</div>
+    <div class="hero-head">
+      <div class="hero-eyebrow" data-i18n="t2">Thought Leadership &nbsp;·&nbsp; CRM &amp; Lifecycle Analytics</div>
       <h1 class="hero-title" data-i18n="t3">Behavioural Segmentation for <span>Lifecycle Targeting</span></h1>
-      <p class="hero-desc" data-i18n="t4">A mobility / ride-sharing case study: turning overlapping customer definitions into one mutually-exclusive segmentation - actionable from day one, and framed as a design-thinking problem rather than a modelling exercise.</p>
+    </div>
+    <div class="hero-body">
+      <div class="hero-text-col">
+        <p class="hero-desc" data-i18n="t4">A practitioner's framework for turning overlapping customer definitions into one mutually exclusive segmentation that CRM can act on from day one - approached as a design problem rather than a modelling exercise, with a ride-hailing app as the running example.</p>
       <div class="hero-meta">
         <span data-i18n="t5"><i class="fa-solid fa-clock"></i> 11 min read</span>
         <span data-i18n="t6"><i class="fa-solid fa-compass-drafting"></i> Design Thinking</span>
         <span><i class="fa-solid fa-calendar"></i> 2026</span>
       </div>
-    </div>
-    <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem; align-items:start;">
+      </div>
+      <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem; align-items:start;">
       <div class="metric-item">
         <div class="val" data-i18n="t7">Day <span>1</span></div>
         <div class="lbl" data-i18n="t8">a customer should get one clear CRM treatment from their first session - not after months of accumulated history</div>
@@ -301,9 +342,10 @@
         <div class="lbl" data-i18n="t10">every customer maps to exactly one segment, with a traceable reason why - no overlaps, no leftover bucket</div>
       </div>
       <div class="metric-item">
-        <div class="val" data-i18n="t11">Self-<span>Correcting</span></div>
+        <div class="val" data-i18n="t11">Self-<span>Cor&shy;rect&shy;ing</span></div>
         <div class="lbl" data-i18n="t12">segments stay fixed; what evolves is the confidence behind each one, as more behaviour arrives</div>
       </div>
+    </div>
     </div>
   </div>
 
@@ -338,7 +380,7 @@
     <!-- ADDED: design-thinking approach band (5 stages, honest empathy framing) -->
     <div id="approach" class="body-text reveal">
       <h3 class="sub" style="margin-top:0.5rem" data-i18n="t27">A design-thinking approach, not a model-first one</h3>
-      <p data-i18n="t28">The hard part of this project wasn't the maths - it was resisting the fancier model in favour of something a person could actually act on. That's a design problem, so I ran it as one: empathise, define, ideate, prototype, test - as a loop, not a line.</p>
+      <p data-i18n="t28">The hard part of behavioural segmentation is rarely the maths - it's resisting the fancier model in favour of something a person can actually act on. That makes it a design problem, so it's worth running as one: empathise, define, ideate, prototype, test - as a loop, not a line.</p>
     </div>
     <div class="approach reveal">
       <div class="dt-step">
@@ -364,7 +406,7 @@
       <div class="dt-step">
         <div class="n" data-i18n="t41"><i class="fa-solid fa-vial-circle-check"></i>05 Test</div>
         <div class="st" data-i18n="t42">Prove it, then iterate</div>
-        <div class="sd" data-i18n="t43">Validated against real value and a held-out slice of new customers, then stress-tested for what it still can't see.</div>
+        <div class="sd" data-i18n="t43">Validate against real value outcomes and a held-out slice of new customers, then stress-test for what it still can't see.</div>
       </div>
     </div>
 
@@ -377,10 +419,10 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t46">The starting point for this project was a familiar kind of mess: a CRM strategy running on multiple, overlapping definitions of who counts as an engaged customer - each one built for a different campaign, by a different team, at a different time. No single source of truth existed for the one decision that mattered most: what treatment does this customer get, right now?</p>
-      <p data-i18n="t47">The goal was to replace that patchwork with one actionable segmentation - a system that assigns every customer to exactly one segment, from the earliest point in their lifecycle, and gets more confident about that assignment as real behaviour accumulates rather than waiting for it.</p>
+      <p data-i18n="t46">Most CRM teams will recognise the starting point: a strategy running on multiple, overlapping definitions of who counts as an engaged customer - each built for a different campaign, by a different team, at a different time. What's usually missing is a single source of truth for the one decision that matters most: what treatment does this customer get, right now?</p>
+      <p data-i18n="t47">The goal is to replace that patchwork with one actionable segmentation - a system that assigns every customer to exactly one segment from the earliest point in their lifecycle, and grows more confident in that assignment as real behaviour accumulates, rather than waiting for it.</p>
       <p class="pull" data-i18n="t48">A customer should receive one clear CRM treatment from day one, with the segmentation evolving automatically as more behavioural evidence arrives - not the other way around.</p>
-      <p data-i18n="t49">That constraint - usable from day one, not just eventually accurate - shaped almost every methodological choice that followed.</p>
+      <p data-i18n="t49">That constraint - usable from day one, not just eventually accurate - shapes almost every methodological choice that follows.</p>
     </div>
 
     <!-- Chapter 02 -->
@@ -388,18 +430,18 @@
       <div class="chapter-num">02</div>
       <div>
         <div class="chapter-eyebrow" data-i18n="t50"><span class="dt-stage">Empathise</span> · Data Understanding</div>
-        <div class="chapter-title" data-i18n="t51"><i class="fa-solid fa-magnifying-glass-chart"></i>Reading the Data Before Modelling It</div>
+        <div class="chapter-title" data-i18n="t51"><i class="fa-solid fa-magnifying-glass-chart"></i>Four Data Traps to Check Before Modelling</div>
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t52">Before building anything, the dataset needed a proper interrogation - not just a null-count and a shrug. A few patterns turned out to matter a lot more than they first appeared to:</p>
+      <p data-i18n="t52">Before building anything, the data deserves a proper interrogation - not just a null-count and a shrug. Four patterns tend to matter far more than they first appear to:</p>
       <ul>
-        <li data-i18n="t53"><strong>Structural nulls aren't missing data.</strong> A blank "days since payment method added" field wasn't a data gap to impute - it meant the customer had never registered a payment method at all. Imputing a value there would have manufactured a signal that didn't exist. It stayed in as a categorical flag instead.</li>
-        <li data-i18n="t54"><strong>Some fields were logically impossible, and that's useful.</strong> A subset of customers showed a route-repetition score higher than either of its own component scores - a mathematical impossibility given how the fields were defined. That's not an insight; it's a pipeline defect, and worth flagging to the data owner rather than modelling around.</li>
-        <li data-i18n="t55"><strong>The mean lies when a market has whales.</strong> A handful of extreme values pulled the average value per customer well above what a typical customer actually looks like. Comparing the maximum against a high percentile, rather than trusting the mean at face value, exposed how concentrated that risk was.</li>
-        <li data-i18n="t56"><strong>Outcome variables need to stay outcome variables.</strong> Value, maturity, and churn were kept strictly separate from the behavioural fields used to predict them throughout - mixing the two is the fastest way to build a segmentation that's secretly just circular.</li>
+        <li data-i18n="t53"><strong>Structural nulls aren't missing data.</strong> In a ride-hailing app, a blank "days since payment method added" field usually isn't a gap to impute - it means the customer never registered a payment method. Imputing a value would manufacture a signal that doesn't exist; it belongs in the model as a categorical flag instead.</li>
+        <li data-i18n="t54"><strong>Logically impossible values are useful.</strong> If a combined score comes out higher than both of the components it's built from, that's not an insight - it's a pipeline defect, worth flagging to the data owner rather than modelling around.</li>
+        <li data-i18n="t55"><strong>The mean lies when a market has whales.</strong> A handful of extreme customers can pull the average value per customer far above what a typical customer looks like. Comparing the maximum against a high percentile, rather than trusting the mean, shows how concentrated that risk really is.</li>
+        <li data-i18n="t56"><strong>Outcome variables need to stay outcome variables.</strong> Value, maturity and churn should be kept strictly separate from the behavioural fields used to predict them - mixing the two is the fastest way to build a segmentation that's secretly circular.</li>
       </ul>
-      <p data-i18n="t57">The base itself was heavily front-loaded: a large share of customers churned out after a single interaction, and only a minority ever reached the point where "lifetime behaviour" was a meaningful concept. That single fact - most of the base never accumulates much history - became the central design problem for everything downstream.</p>
+      <p data-i18n="t57">Many consumer bases are also heavily front-loaded: a large share of customers leave after a single interaction, and only a minority ever reach the point where "lifetime behaviour" means anything. Where that's true - most customers never accumulate much history - it becomes the central design problem for everything downstream.</p>
     </div>
 
     <!-- Chapter 03 -->
@@ -407,21 +449,21 @@
       <div class="chapter-num">03</div>
       <div>
         <div class="chapter-eyebrow" data-i18n="t58"><span class="dt-stage">Define</span> · Differentiation</div>
-        <div class="chapter-title" data-i18n="t59"><i class="fa-solid fa-arrows-split-up-and-left"></i>What Actually Drives Long-Term Value</div>
+        <div class="chapter-title" data-i18n="t59"><i class="fa-solid fa-arrows-split-up-and-left"></i>Signals Worth Testing Before You Segment</div>
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t60">Before building a segmentation, it's worth checking what actually separates a long-term, high-value customer from one who activates fast and disappears just as quickly. Comparing the two groups - plus the much larger group that never builds a habit at all - surfaced one dominant pattern and several genuinely counterintuitive ones.</p>
-      <p class="pull" data-i18n="t61">Long-term value is created by habit formation, not by isolated high-intent transactions.</p>
-      <p data-i18n="t62">Customers who develop a stable, repeatable usage pattern go on to generate dramatically more long-run value than customers who show up with obvious purchase intent - a pre-booked, high-context, "clearly a real need" interaction - but never come back. High intent looks valuable in the moment. Routine is what actually pays off.</p>
+      <p data-i18n="t60">Before building a segmentation, check what actually separates a long-term, high-value customer from one who activates fast and disappears just as quickly. Comparing the two groups - plus the usually much larger group that never builds a habit at all - tends to surface one dominant pattern and several counterintuitive ones. Treat the ones below as hypotheses to test on your own data, not universal facts.</p>
+      <p class="pull" data-i18n="t61">Long-term value is usually created by habit formation, not by isolated high-intent transactions.</p>
+      <p data-i18n="t62">Customers who develop a stable, repeatable usage pattern typically generate far more long-run value than customers who arrive with obvious purchase intent - a pre-booked, high-context, "clearly a real need" interaction - but never come back. High intent looks valuable in the moment; routine is what tends to pay off.</p>
       <h3 class="sub" data-i18n="t63">Vouchers &ne; price sensitivity</h3>
-      <p data-i18n="t64">The highest-value, longest-retained customers redeemed the most vouchers - but relied the least on discounted service tiers. The group that never built a habit showed the opposite: light voucher use, heavy reliance on the cheapest available tier. The implication: voucher redemption reinforces already-valuable customers, while a structural preference for the discounted tier is the real price-sensitivity signal. Conflating the two into one "discount-seeker" segment would have hidden both findings.</p>
-      <h3 class="sub" data-i18n="t65">The starting point matters more than the destination</h3>
-      <p data-i18n="t66">Across every segment, repetition at the point where a customer <em>starts</em> an interaction was a stronger signal than repetition at where they end it. The practical implication is a targeting one: build routine-forming nudges around a customer's starting context, not their destination.</p>
-      <h3 class="sub" data-i18n="t67">Satisfaction isn't a churn predictor here</h3>
-      <p data-i18n="t68">The group that never built a habit rated their experience the most positively and rated it most often. The long-term, high-value group rated the least. Sentiment and retention pointed in opposite directions - which meant behaviour, not stated satisfaction, had to carry the segmentation.</p>
-      <h3 class="sub" data-i18n="t69">Timing patterns don't differentiate</h3>
-      <p data-i18n="t70">Rush-hour share and weekend share were nearly identical across every segment. Whatever separates a long-term customer from a one-off, it isn't when they show up.</p>
+      <p data-i18n="t64">Voucher redemption and price sensitivity are easy to conflate. Loyal, valuable customers can redeem plenty of vouchers while rarely choosing the cheapest service tier, and customers who never build a habit can show the opposite pattern. If so, vouchers are reinforcing already-valuable customers, while a structural preference for the discounted tier is the real price-sensitivity signal. Folding both into one "discount-seeker" segment would hide both.</p>
+      <h3 class="sub" data-i18n="t65">Where customers start can matter more than where they go</h3>
+      <p data-i18n="t66">Repetition in where a customer <em>starts</em> an interaction - a regular pickup point, for example - can be a stronger habit signal than repetition in where they end it. If that holds in your data, build routine-forming nudges around a customer's starting context, not their destination.</p>
+      <h3 class="sub" data-i18n="t67">Satisfaction may not predict churn</h3>
+      <p data-i18n="t68">It's tempting to assume happy customers stay. But customers who never build a habit can rate their experience the most positively and the most often, while long-term, high-value customers rate the least. When sentiment and retention point in different directions, behaviour - not stated satisfaction - has to carry the segmentation.</p>
+      <h3 class="sub" data-i18n="t69">Timing patterns rarely differentiate</h3>
+      <p data-i18n="t70">Rush-hour share and weekend share often look much the same across very different customers. Check before assuming: whatever separates a long-term customer from a one-off frequently isn't when they show up.</p>
     </div>
 
     <!-- Chapter 04 -->
@@ -433,12 +475,12 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t73">With the drivers understood, the next question was purely methodological: how do you turn "routine formation matters most" into a segmentation every customer can be run through, that a non-technical stakeholder can actually explain?</p>
-      <p data-i18n="t74">The answer was an <strong>ordered rule hierarchy</strong> - ranked threshold rules evaluated top to bottom, first match wins, output is a plain IF/THEN/ELSE. Every customer lands in exactly one segment, and every assignment has a rule behind it that a stakeholder can read and challenge.</p>
+      <p data-i18n="t73">Once the drivers are understood, the next question is purely methodological: how do you turn "routine formation matters most" into a segmentation every customer can be run through - and that a non-technical stakeholder can actually explain?</p>
+      <p data-i18n="t74">The answer proposed here is an <strong>ordered rule hierarchy</strong> - ranked threshold rules evaluated top to bottom, first match wins, output is a plain IF/THEN/ELSE. Every customer lands in exactly one segment, and every assignment has a rule behind it that a stakeholder can read and challenge.</p>
     </div>
     <div class="two-card reveal" style="margin-bottom:0.9rem;">
       <div class="card"><h3 data-i18n="t75"><i class="fa-solid fa-compass-drafting" style="color:var(--accent);margin-right:0.5rem"></i>1. Design constraint<span class="dt-chip">Define</span></h3><p data-i18n="t76">One customer, one segment. No leftover bucket. Actionable from the earliest point possible.</p></div>
-      <div class="card step-highlight"><h3 data-i18n="t77"><i class="fa-solid fa-gears" style="color:var(--accent);margin-right:0.5rem"></i>2. Method, by elimination<span class="dt-chip">Ideate</span></h3><p data-i18n="t78">Four more obvious approaches were ruled out first - clustering, RFM, value deciles, and persona flags (shown below) - which is what left an ordered rule hierarchy.</p></div>
+      <div class="card step-highlight"><h3 data-i18n="t77"><i class="fa-solid fa-gears" style="color:var(--accent);margin-right:0.5rem"></i>2. Method, by elimination<span class="dt-chip">Ideate</span></h3><p data-i18n="t78">Rule out the more obvious approaches first - clustering, RFM, value deciles and persona flags (shown below). What's left standing is an ordered rule hierarchy.</p></div>
     </div>
     <div class="step2-group reveal">
       <div class="group-label" data-i18n="t79"><i class="fa-solid fa-turn-down"></i> Part of Step 2 &middot; the four approaches ruled out<span class="dt-chip">Ideate</span></div>
@@ -450,21 +492,21 @@
       </div>
     </div>
     <div class="two-card reveal">
-      <div class="card"><h3 data-i18n="t88"><i class="fa-solid fa-filter" style="color:var(--accent);margin-right:0.5rem"></i>3. Admissible variables<span class="dt-chip">Prototype</span></h3><p data-i18n="t89">Routine formation, commercial intent (business or premium usage), discount dependence, geographic stability, and planned/high-intent demand. Everything else - acquisition metadata, ratings, redundant fields - excluded by design.</p></div>
-      <div class="card"><h3 data-i18n="t90"><i class="fa-solid fa-arrow-down-wide-short" style="color:var(--accent);margin-right:0.5rem"></i>4. Let the data decide the ranking<span class="dt-chip">Prototype</span></h3><p data-i18n="t91">A shallow decision tree, run on behavioural variables only, was used purely to rank the admissible variables by importance - not to set thresholds. Routine formation dominated everything else combined.</p></div>
-      <div class="card" style="border-color: color-mix(in srgb, var(--accent) 50%, transparent);"><h3 data-i18n="t92"><i class="fa-solid fa-stairs" style="color:var(--accent);margin-right:0.5rem"></i>5. The ladder<span class="dt-chip">Prototype</span></h3><p data-i18n="t93">Routine + commercial intent, then routine alone, then discount dependence, then geographic-only activity, then planned/high-intent demand, with everything else falling to a final catch-all. Discount dependence is deliberately ranked above the geography and intent rules - it's a spending decision that can show up anywhere in the funnel, so it needs to be caught wherever it appears.</p></div>
-      <div class="card"><h3 data-i18n="t94"><i class="fa-solid fa-circle-check" style="color:var(--accent);margin-right:0.5rem"></i>6. Validation<span class="dt-chip">Test</span></h3><p data-i18n="t95">Differences between segments were cross-checked against actual value and maturity outcomes, not just behavioural description - and the rule set was tested on a held-out slice of new customers to confirm it generalised rather than overfitting the data it was built on.</p></div>
+      <div class="card"><h3 data-i18n="t88"><i class="fa-solid fa-filter" style="color:var(--accent);margin-right:0.5rem"></i>3. Admissible variables<span class="dt-chip">Prototype</span></h3><p data-i18n="t89">In the ride-hailing example: routine formation, commercial intent (business or premium usage), discount dependence, geographic stability, and planned/high-intent demand. Everything else - acquisition metadata, ratings, redundant fields - is excluded by design.</p></div>
+      <div class="card"><h3 data-i18n="t90"><i class="fa-solid fa-arrow-down-wide-short" style="color:var(--accent);margin-right:0.5rem"></i>4. Let the data decide the ranking<span class="dt-chip">Prototype</span></h3><p data-i18n="t91">Fit a shallow decision tree on behavioural variables only, and use it purely to rank the admissible variables by importance - not to set thresholds. In a habit-driven business, expect routine formation to dominate.</p></div>
+      <div class="card" style="border-color: color-mix(in srgb, var(--accent) 50%, transparent);"><h3 data-i18n="t92"><i class="fa-solid fa-stairs" style="color:var(--accent);margin-right:0.5rem"></i>5. The ladder<span class="dt-chip">Prototype</span></h3><p data-i18n="t93">In the example, the ladder reads: routine + commercial intent, then routine alone, then discount dependence, then geographic-only activity, then planned/high-intent demand, with everything else falling to a final catch-all. Discount dependence is deliberately ranked above the geography and intent rules - it's a spending decision that can show up anywhere in the funnel, so it needs to be caught wherever it appears.</p></div>
+      <div class="card"><h3 data-i18n="t94"><i class="fa-solid fa-circle-check" style="color:var(--accent);margin-right:0.5rem"></i>6. Validation<span class="dt-chip">Test</span></h3><p data-i18n="t95">Cross-check differences between segments against actual value and maturity outcomes, not just behavioural description - and test the rule set on a held-out slice of new customers to confirm it generalises rather than overfitting the data it was built on.</p></div>
     </div>
 
     <div class="body-text reveal">
-      <h3 class="sub" data-i18n="t96">What came out the other end</h3>
-      <p data-i18n="t97">Six segments, each with a genuinely different profile and a genuinely different value trajectory:</p>
+      <h3 class="sub" data-i18n="t96">An illustrative segment ladder</h3>
+      <p data-i18n="t97">Applied to the ride-hailing example, a hierarchy like this produces six archetypes, each with a different profile and a different value trajectory to look for:</p>
     </div>
     <div class="seg-grid reveal">
-      <div class="seg-card"><span class="tag top" data-i18n="t98">Highest value per customer</span><div class="name" data-i18n="t99">Premium Habit Builders</div><div class="desc" data-i18n="t100">Routine customers who also show commercial intent (business or premium usage). Small in number, outsized in value.</div></div>
-      <div class="seg-card"><span class="tag bulk" data-i18n="t101">Largest value contributor</span><div class="name" data-i18n="t102">Habit Builders</div><div class="desc" data-i18n="t103">Routine customers without the commercial layer. The single biggest driver of total portfolio value.</div></div>
-      <div class="seg-card"><span class="tag warn" data-i18n="t104">Value-destructive</span><div class="name" data-i18n="t105">Promotion Dependent</div><div class="desc" data-i18n="t106">Customers whose discount usage eats through their own margin. Structurally unprofitable, not just low-value.</div></div>
-      <div class="seg-card"><span class="tag neutral" data-i18n="t107">High volume, low depth</span><div class="name" data-i18n="t108">Explorers</div><div class="desc" data-i18n="t109">Active exclusively outside their home market. Real usage, but a fundamentally different relationship to retain.</div></div>
+      <div class="seg-card"><span class="tag top" data-i18n="t98">Often highest value per customer</span><div class="name" data-i18n="t99">Premium Habit Builders</div><div class="desc" data-i18n="t100">Routine customers who also show commercial intent (business or premium usage). Usually small in number, outsized in value.</div></div>
+      <div class="seg-card"><span class="tag bulk" data-i18n="t101">Often the core value contributor</span><div class="name" data-i18n="t102">Habit Builders</div><div class="desc" data-i18n="t103">Routine customers without the commercial layer - often the biggest driver of total portfolio value.</div></div>
+      <div class="seg-card"><span class="tag warn" data-i18n="t104">Margin risk</span><div class="name" data-i18n="t105">Promotion Dependent</div><div class="desc" data-i18n="t106">Customers whose discount usage can eat through their own margin - potentially unprofitable, not just low-value.</div></div>
+      <div class="seg-card"><span class="tag neutral" data-i18n="t107">High volume, low depth</span><div class="name" data-i18n="t108">Explorers</div><div class="desc" data-i18n="t109">Active mainly outside their home market. Real usage, but a fundamentally different relationship to retain.</div></div>
       <div class="seg-card"><span class="tag neutral" data-i18n="t110">Situational demand</span><div class="name" data-i18n="t111">Occasional Utility</div><div class="desc" data-i18n="t112">Pre-booked, high-context usage - the kind that looks like intent but rarely repeats.</div></div>
       <div class="seg-card"><span class="tag neutral" data-i18n="t113">Unproven</span><div class="name" data-i18n="t114">Trialists</div><div class="desc" data-i18n="t115">Everyone left over: no routine, no pre-booking, no high-intent signal yet. The catch-all, by design.</div></div>
     </div>
@@ -476,10 +518,10 @@
       <div class="bar-row"><div class="lab" data-i18n="t119">Explorers</div><div class="bar-track"><div class="bar-fill neutral" style="width:18%"></div></div></div>
       <div class="bar-row"><div class="lab" data-i18n="t120">Occasional Utility</div><div class="bar-track"><div class="bar-fill neutral" style="width:7%"></div></div></div>
       <div class="bar-row"><div class="lab" data-i18n="t121">Trialists</div><div class="bar-track"><div class="bar-fill neutral" style="width:8%"></div></div></div>
-      <div class="bar-caption" data-i18n="t122">Relative share of total value by segment - deliberately unlabelled. The shape of the imbalance is the point: value is heavily concentrated in the two habit-forming segments, and one segment actively subtracts from it.</div>
+      <div class="bar-caption" data-i18n="t122">Illustrative only - not measured data. The pattern to look for: value concentrated in the habit-forming segments, and a promotion-dependent segment that can subtract from it.</div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t123">The two routine-based segments together hold a share of total value wildly out of proportion to their share of the customer base - while the promotion-dependent segment, despite being a modest slice of the base, generates a negative return once discount cost is netted against what it spends. That single comparison did more to justify the segmentation than any behavioural description could.</p>
+      <p data-i18n="t123">The comparison worth running on your own data: do the routine-based segments hold a share of total value out of proportion to their share of the customer base - and does a promotion-dependent segment, once discount cost is netted against spend, generate a negative return? If so, that single comparison justifies the segmentation better than any behavioural description.</p>
     </div>
 
     <!-- Chapter 05 -->
@@ -491,14 +533,14 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t126">A segmentation is only as good as the decisions it changes. Each segment was mapped to a distinct lifecycle treatment - and, just as importantly, to a short list of what <em>not</em> to do:</p>
+      <p data-i18n="t126">A segmentation is only as good as the decisions it changes. Each segment maps to a distinct lifecycle treatment - and, just as importantly, to a short list of what <em>not</em> to do:</p>
       <ul>
-        <li data-i18n="t127"><strong>Premium Habit Builders</strong> - retain, expand, cross-sell into higher-tier and business usage through account-management channels. Deliberately avoid discounting: this segment already shows the lowest discount reliance of any group, and a promotion here would be pure margin giveaway.</li>
-        <li data-i18n="t128"><strong>Habit Builders</strong> - protect the routine with light nudges only when a break in pattern is detected. Avoid aggressive discounting: the data shows no measurable uplift from pushing promotions into an already-loyal segment.</li>
+        <li data-i18n="t127"><strong>Premium Habit Builders</strong> - retain, expand, cross-sell into higher-tier and business usage through account-management channels. Avoid discounting: customers who already rely least on discounts gain little from a promotion, and it gives away margin.</li>
+        <li data-i18n="t128"><strong>Habit Builders</strong> - protect the routine with light nudges only when a break in pattern is detected. Avoid aggressive discounting: pushing promotions into an already-loyal segment rarely produces measurable uplift.</li>
         <li data-i18n="t129"><strong>Promotion Dependent</strong> - withdraw the subsidy. Remove from promotional eligibility, shift to organic-only communication, and monitor for exploiter behaviour (multi-account creation, offer stacking).</li>
-        <li data-i18n="t130"><strong>Explorers</strong> - serve, don't nurture. This segment rides exclusively outside its home market, so domestic retention campaigns are wasted spend; the right moment is around travel and destination context instead.</li>
+        <li data-i18n="t130"><strong>Explorers</strong> - serve, don't nurture. This segment is active mainly outside its home market, so domestic retention campaigns are wasted spend; the right moment is around travel and destination context instead.</li>
         <li data-i18n="t131"><strong>Occasional Utility</strong> - convert the occasion into a routine with a post-interaction prompt to save the frequent context (a location, a route) as a favourite. Avoid mistaking high-intent volume for high value - it isn't the same thing.</li>
-        <li data-i18n="t132"><strong>Trialists</strong> - one time-boxed activation nudge after the first interaction, then stop. This segment shows zero routine, zero pre-booking, and zero high-intent signal - an extended nurture sequence has nothing to build on yet.</li>
+        <li data-i18n="t132"><strong>Trialists</strong> - one time-boxed activation nudge after the first interaction, then stop. With no routine, no pre-booking and no high-intent signal yet, an extended nurture sequence has nothing to build on.</li>
       </ul>
     </div>
 
@@ -511,7 +553,7 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t135">The rule hierarchy above has one obvious hole: it needs behavioural data to run, and a genuinely new customer has none yet. Waiting until enough interactions accumulate to run the real rules isn't a minor edge case - the earlier data-quality work had already shown that a large majority of the base never reaches that point at all. Waiting means never segmenting most of the base, and defaulting them to a generic, non-personalised treatment indefinitely.</p>
+      <p data-i18n="t135">The rule hierarchy above has one obvious hole: it needs behavioural data to run, and a genuinely new customer has none yet. Waiting until enough interactions accumulate isn't a minor edge case - in a front-loaded base, most customers never reach that point. Waiting means never segmenting most of the base, and leaving them on a generic, non-personalised treatment indefinitely.</p>
     </div>
     <div class="icon-row reveal">
       <div class="icon-card"><i class="fa-solid fa-user-plus"></i><div class="t" data-i18n="t136">Signup</div><div class="d" data-i18n="t137">Assign a provisional "cold-start tier" immediately, using only acquisition-based signals available at registration - referral, onboarding voucher, verification status, geography.</div></div>
@@ -532,7 +574,7 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t146">Once segments can shift automatically, a new failure mode appears: reacting to noise. One irregular interaction shouldn't flip a loyal customer's treatment overnight, but a genuine change in circumstance shouldn't sit unaddressed for weeks either. The system needed different reaction speeds for different kinds of evidence.</p>
+      <p data-i18n="t146">Once segments can shift automatically, a new failure mode appears: reacting to noise. One irregular interaction shouldn't flip a loyal customer's treatment overnight, but a genuine change in circumstance shouldn't sit unaddressed for weeks either. The system needs different reaction speeds for different kinds of evidence.</p>
     </div>
     <div class="matrix reveal">
       <div class="rowlabel"></div>
@@ -567,11 +609,11 @@
       <div class="chapter-num">08</div>
       <div>
         <div class="chapter-eyebrow" data-i18n="t168"><span class="dt-stage">Test</span> · Recommendations</div>
-        <div class="chapter-title" data-i18n="t169"><i class="fa-solid fa-puzzle-piece"></i>What's Still Missing</div>
+        <div class="chapter-title" data-i18n="t169"><i class="fa-solid fa-puzzle-piece"></i>Signals Worth Adding</div>
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t170">The segmentation works with what's available today, but three information gaps stood out as the highest-value additions:</p>
+      <p data-i18n="t170">A segmentation like this works with whatever data is available, but three kinds of signal usually add the most value:</p>
     </div>
     <div class="icon-row reveal">
       <div class="icon-card"><i class="fa-solid fa-stopwatch"></i><div class="t" data-i18n="t171">Timing signals</div><div class="d" data-i18n="t172">The gap between a customer's first and second interaction, and how that gap trends. Two customers can look identical after two interactions today, but returning after two days versus two months represents a completely different trajectory - and there's currently no clock on that.</div></div>
@@ -579,7 +621,7 @@
       <div class="icon-card"><i class="fa-solid fa-bullseye"></i><div class="t" data-i18n="t175">Customer intent</div><div class="d" data-i18n="t176">Signals from before the very first completed interaction - conversion from quote to booking, searches, sessions. This would allow segmentation to begin before any behavioural history exists at all.</div></div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t177"><strong>Priority order matters here.</strong> Routine formation is the strongest predictor of long-term value uncovered in this analysis, but it only becomes measurable after multiple interactions. Timing and friction signals are what would let CRM catch a high-risk customer several interactions earlier than the current framework can - before the window to intervene has closed.</p>
+      <p data-i18n="t177"><strong>Priority order matters here.</strong> Routine formation is often the strongest predictor of long-term value, but it only becomes measurable after several interactions. Timing and friction signals are what let CRM catch a high-risk customer several interactions earlier - before the window to intervene has closed.</p>
     </div>
 
     <!-- ADDED SECTION: generic reusable process flow -->
@@ -591,7 +633,7 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t180">The specifics above are one application. The underlying approach is the part that transfers - design thinking applied to a data problem, run as a loop rather than a line. The same sequence carries to any behavioural-segmentation-for-lifecycle problem, whatever the dataset:</p>
+      <p data-i18n="t180">The ride-hailing details above are one application. The underlying approach is the part that transfers - design thinking applied to a data problem, run as a loop rather than a line. The same sequence carries to any behavioural-segmentation-for-lifecycle problem, whatever the dataset:</p>
     </div>
     <div class="process reveal">
       <div class="pf-phase">
@@ -615,7 +657,7 @@
         <div class="pf-body">
           <div class="pf-stage" data-i18n="t187">Differentiation</div>
           <div class="pf-title" data-i18n="t188"><i class="fa-solid fa-arrows-split-up-and-left"></i>Isolate the real value drivers</div>
-          <div class="pf-desc" data-i18n="t189">Compare long-term vs. one-off customers to find what actually predicts value - and discard the intuitive signals that don't (here: satisfaction, timing).</div>
+          <div class="pf-desc" data-i18n="t189">Compare long-term vs. one-off customers to find what actually predicts value - and discard the intuitive signals that don't (often: satisfaction, timing).</div>
         </div>
       </div>
       <div class="pf-phase">
@@ -674,10 +716,10 @@
       </div>
     </div>
     <div class="body-text reveal">
-      <p data-i18n="t209">Nothing in this framework required a more sophisticated model. The hard part - and the actual value delivered - was resisting the more elegant-looking options (clustering, personas, a black-box classifier) in favour of a segmentation a CRM stakeholder could read, trust, and act on immediately, with a clear answer to "why is this customer in this segment" every single time.</p>
+      <p data-i18n="t209">Nothing in this framework requires a more sophisticated model. The hard part - and the real value - is resisting the more elegant-looking options (clustering, personas, a black-box classifier) in favour of a segmentation a CRM stakeholder can read, trust and act on immediately, with a clear answer to "why is this customer in this segment" every single time.</p>
       <ul class="checklist">
         <li data-i18n="t210"><span class="mark">&rarr;</span> An ordered, explainable rule beats a more accurate but opaque model, when the output has to survive a conversation with the person acting on it.</li>
-        <li data-i18n="t211"><span class="mark">&rarr;</span> Cold start isn't an edge case to patch later - for a base this front-loaded, it's the majority case, and it has to be designed for from day one.</li>
+        <li data-i18n="t211"><span class="mark">&rarr;</span> Cold start isn't an edge case to patch later - for a front-loaded base, it's the majority case, and it has to be designed for from day one.</li>
         <li data-i18n="t212"><span class="mark">&rarr;</span> Reacting at different speeds to different kinds of evidence is what keeps an automated system from undermining its own trustworthiness through noise.</li>
       </ul>
       <p class="closing" data-i18n="t213">The best segment isn't the one that best describes a customer today. It's the one that tells CRM exactly what to do about them - and keeps telling the truth as more evidence comes in.</p>
@@ -685,10 +727,10 @@
 
     <!-- ADDED SECTION: data confidentiality + disclaimers -->
     <div id="confidentiality" class="disclaimer reveal">
-      <div class="dh" data-i18n="t214"><i class="fa-solid fa-shield-halved"></i>A note on the data</div>
-      <p data-i18n="t215">This case study is based on a <strong>take-home exercise from an interview process</strong>, built on a <strong>synthetic dataset</strong> provided for that exercise - it contains no real customer records.</p>
-      <p data-i18n="t216">The dataset, the original brief, and any exact figures belong to the company that issued them and are <strong>not reproduced here</strong> - both to respect their process and to keep the exercise fair for other candidates. Everything shown is anonymised and directional; visuals, including the deliberately unlabelled value-share chart, illustrate the shape of the findings rather than exact numbers.</p>
-      <p data-i18n="t217">This is a personal write-up of my own approach and reasoning. Views are my own, and nothing here reproduces proprietary material from the issuing company.</p>
+      <div class="dh" data-i18n="t214"><i class="fa-solid fa-shield-halved"></i>A note on the examples</div>
+      <p data-i18n="t215">This article is a <strong>framework, not a report on a specific dataset</strong>. It draws on my experience in CRM and lifecycle analytics; the ride-hailing setting is a running example to make the ideas concrete.</p>
+      <p data-i18n="t216">The findings and segments described are <strong>illustrative patterns to test, not measured results</strong>, and the value-share chart is deliberately schematic. Your own data may tell a different story - which is exactly why the framework starts by checking it.</p>
+      <p data-i18n="t217">Views are my own.</p>
     </div>
 
   </div>
@@ -709,6 +751,30 @@
       entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
     }, { threshold: 0.08 });
     revealEls.forEach(el => observer.observe(el));
+
+    // Process timeline: each step uncovers as it scrolls into view and covers again
+    // as it scrolls out (either direction), so the walkthrough replays on every pass
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const processEl = document.querySelector('.process');
+    if (processEl && !reduceMotion) {
+      processEl.classList.add('pf-scroll');
+      const steps = processEl.querySelectorAll('.pf-phase, .pf-loop');
+      const stepObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => e.target.classList.toggle('on', e.isIntersecting));
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.35 });
+      steps.forEach(el => stepObserver.observe(el));
+    }
+
+    // Design-thinking band: boxes wipe in left to right, one at a time, as it scrolls into
+    // view, and cover again as it scrolls out
+    const approachEl = document.querySelector('.approach');
+    if (approachEl && !reduceMotion) {
+      approachEl.classList.add('ap-scroll');
+      approachEl.querySelectorAll('.dt-step').forEach((el, i) => el.style.setProperty('--k', i));
+      new IntersectionObserver(entries => {
+        entries.forEach(e => e.target.classList.toggle('on', e.isIntersecting));
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.3 }).observe(approachEl);
+    }
   </script>
 </body>
 </html>

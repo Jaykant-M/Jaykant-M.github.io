@@ -6,7 +6,7 @@
   <title data-i18n="t1">The Analytics Maturity Gap — Jaykant Mendapara</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../assets/lang-switch.css" />
   <script src="../i18n/maturity.js"></script>
@@ -74,7 +74,7 @@
       text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
     }
     .hero-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: -0.02em;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       color: var(--text-light); line-height: 1.1; margin-bottom: 1rem;
     }
@@ -114,7 +114,7 @@
       margin-top: 2rem;
     }
     .chapter-num { font-size: 3.5rem; font-weight: 700; color: var(--dark-border); line-height: 1; flex-shrink: 0; letter-spacing: -0.02em; }
-    .chapter-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
+    .chapter-title { font-family: 'Inter', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-light); display: flex; align-items: center; gap: 0.6rem; }
     .chapter-title i { font-size: 1.2rem; color: var(--accent); font-family: 'Font Awesome 6 Free'; }
     .chapter-eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.25rem; }
 
@@ -190,6 +190,23 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── Hero layout: title on its own row; description + stats box below,
+       centred against each other. If only one of them exists it takes the full row. ── */
+    .page-hero { display: block; }
+    .hero-head { padding: 3rem 0 1.25rem; }
+    .hero-head .hero-title { margin-bottom: 0; }
+    .hero-body { display: flex; align-items: center; gap: 3rem; padding-bottom: 2.5rem; }
+    .hero-body .hero-text-col { flex: 1; min-width: 0; padding: 0; }
+    .hero-body .hero-intro-col { flex: 0 0 60%; min-width: 0; margin: 0; }
+    .hero-body > :only-child { flex: 1 1 100%; }
+    .hero-body .hero-desc { max-width: none; }
+    .hero-body .hero-meta { margin-top: 0; }
+    @media (max-width: 900px) {
+      .hero-head { padding: 2.5rem 0 1rem; }
+      .hero-body { flex-direction: column; align-items: stretch; gap: 1.5rem; }
+      .hero-body .hero-text-col { padding: 0; }
+    }
+
     @media (max-width: 900px) {
       .page-hero { flex-direction: column; align-items: stretch; padding: 60px 5% 0; gap: 0; }
       .hero-intro-col { flex: 1 1 auto; }
@@ -225,17 +242,20 @@
 
   <!-- ── Hero ── -->
   <div class="page-hero">
-    <div class="hero-text-col">
+    <div class="hero-head">
       <div class="hero-eyebrow" data-i18n="t2">Analytics &nbsp;·&nbsp; Thought Leadership</div>
       <h1 class="hero-title" data-i18n="t3">The Analytics <span>Maturity Gap</span></h1>
-      <p class="hero-desc" data-i18n="t4">Most analytics teams have more infrastructure than ever - and are still solving the wrong problems. A practitioner's look at the four places where analytical capability fails to translate into business impact.</p>
+    </div>
+    <div class="hero-body">
+      <div class="hero-text-col">
+        <p class="hero-desc" data-i18n="t4">Most analytics teams have more infrastructure than ever - and are still solving the wrong problems. A practitioner's look at the four places where analytical capability fails to translate into business impact.</p>
       <div class="hero-meta">
         <span data-i18n="t5"><i class="fa-solid fa-clock"></i> 8 min read</span>
         <span data-i18n="t6"><i class="fa-solid fa-lightbulb"></i> Thought Leadership</span>
         <span data-i18n="t7"><i class="fa-solid fa-calendar"></i> July 2025</span>
       </div>
-    </div>
-    <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
+      </div>
+      <div class="hero-intro-col" style="display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; align-items:start; text-align:center;">
       <div class="metric-item" style="border:none; padding:0;">
         <div class="val">32<span>%</span></div>
         <div class="lbl" data-i18n="t8">of executives say their data strategy has been effective - despite heavy investment in analytics infrastructure.</div>
@@ -248,6 +268,7 @@
         <div class="val">70<span>%</span></div>
         <div class="lbl" data-i18n="t10">of analytics and BI initiatives underdeliver - not because the data is wrong, but because the strategy is.</div>
       </div>
+    </div>
     </div>
   </div>
 
