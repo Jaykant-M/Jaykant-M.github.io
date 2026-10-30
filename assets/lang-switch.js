@@ -59,6 +59,14 @@
   root.lang = current;
   root.dataset.theme = current;
 
+  // The site translates itself; stop browser auto-translate (Chrome, Edge) from
+  // re-translating it on top, which garbles names (e.g. "Tableau" → "Painting")
+  root.setAttribute('translate', 'no');
+  const noTranslate = document.createElement('meta');
+  noTranslate.name = 'google';
+  noTranslate.content = 'notranslate';
+  document.head.appendChild(noTranslate);
+
   // Icons at the start/end of a translated element (e.g. "<i …></i> Back")
   // are kept automatically, so translations only need the text.
   function edgeIcons(el) {
@@ -127,28 +135,95 @@
       });
     }
 
-    // Text cross-fades along with the colours instead of snapping. Web Animations
-    // sit on top of the page CSS, so the pages' own opacity transitions are untouched.
+    // One timeline for every switch effect (text, stripe, rings; the theme colours'
+    // 0.95s CSS transition matches OUT_MS + IN_MS), so they all move together
+    const OUT_MS = 400;      // switch: text fades out, stripe collapses, rings un-draw
+    const IN_MS = 550;       // switch and page load: text fades in, stripe grows, rings draw
+    const HOLD_MS = 240;     // page load: hidden briefly while the page settles
+
+    // Text fades out, swaps language while invisible, and fades back in. There is one
+    // animation, of --i18n-fade on <html>; every translated element (and each
+    // [data-i18n-fade] group, e.g. the social links row) reads that same value in CSS,
+    // so they can't drift apart the way separate per-element animations could.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let fades = [], swapTimer, doneTimer;
+    let fadeAnim, swapTimer, doneTimer;
     function fadeText(lang) {
       clearTimeout(swapTimer);
       clearTimeout(doneTimer);
-      fades.forEach(a => a.cancel());
-      fades = i18nEls.map(el => el.animate([{ opacity: 0 }], { duration: 150, easing: 'ease-in', fill: 'forwards' }));
-      swapTimer = setTimeout(() => {
-        swapText(lang);
-        fades.forEach(a => a.cancel());
-        fades = i18nEls.map(el => el.animate([{ opacity: 0, offset: 0 }], { duration: 250, easing: 'ease-out' }));
-        // Backstop: if frames stall (e.g. a background tab), never leave text invisible
-        doneTimer = setTimeout(() => { fades.forEach(a => a.finish()); fades = []; }, 300);
-      }, 150);
+      if (fadeAnim) fadeAnim.cancel();
+      root.classList.add('i18n-fading');
+      fadeAnim = root.animate([
+        { '--i18n-fade': 1, easing: 'ease-in' },
+        { '--i18n-fade': 0, offset: OUT_MS / (OUT_MS + IN_MS), easing: 'ease-out' },
+        { '--i18n-fade': 1 }
+      ], { duration: OUT_MS + IN_MS });
+      swapTimer = setTimeout(() => swapText(lang), OUT_MS);   // swap while invisible
+      const done = () => {
+        clearTimeout(doneTimer);
+        root.classList.remove('i18n-fading');
+      };
+      fadeAnim.onfinish = done;
+      // Backstop: if frames stall (e.g. a background tab), never leave text invisible
+      doneTimer = setTimeout(() => { fadeAnim.finish(); done(); }, OUT_MS + IN_MS + 100);
     }
 
+    // Elements marked [data-sweep] animate a --sweep angle (0deg–360deg) that their
+    // CSS uses to draw a ring clockwise from the top, e.g. the homepage photo ring
+    const sweepEls = [...document.querySelectorAll('[data-sweep]')];
+    const sweepAnims = new Map();
+    function sweep(keyframes, duration) {
+      sweepEls.forEach(el => {
+        if (sweepAnims.has(el)) sweepAnims.get(el).cancel();
+        const a = el.animate(keyframes, { duration });
+        sweepAnims.set(el, a);
+        setTimeout(() => a.finish(), duration + 100);   // backstop if frames stall
+      });
+    }
+
+    // Header flag stripe: collapses into the centre, takes the new flag's
+    // colours while hidden, then grows back out to both sides
+    const FLAG_VARS = ['--flag-1', '--flag-2', '--flag-3'];
+    let stripeAnim, stripeTimer, stripeDoneTimer;
+    function swapStripe() {
+      if (!nav || !nav.animate) return;
+      clearTimeout(stripeTimer);
+      clearTimeout(stripeDoneTimer);
+      if (stripeAnim) stripeAnim.cancel();
+      // Hold the old colours on the nav until the stripe is fully collapsed
+      // (already held if a previous switch is still collapsing)
+      if (!nav.style.getPropertyValue('--flag-1')) {
+        const rootStyle = getComputedStyle(root);
+        FLAG_VARS.forEach(v => nav.style.setProperty(v, rootStyle.getPropertyValue(v)));
+      }
+      stripeAnim = nav.animate([{ transform: 'scaleX(0)' }],
+        { duration: OUT_MS, easing: 'ease-in', fill: 'forwards', pseudoElement: '::after' });
+      stripeTimer = setTimeout(() => {
+        FLAG_VARS.forEach(v => nav.style.removeProperty(v));
+        stripeAnim.cancel();
+        stripeAnim = nav.animate([{ transform: 'scaleX(0)', offset: 0 }],
+          { duration: IN_MS, easing: 'ease-out', pseudoElement: '::after' });
+        // Backstop: if frames stall, don't leave the stripe collapsed
+        stripeDoneTimer = setTimeout(() => stripeAnim.finish(), IN_MS + 100);
+      }, OUT_MS);
+    }
+
+    let switchingTimer;
     function setLanguage(lang) {
       current = lang;
-      if (root.classList.contains('theme-ready') && !reduceMotion) fadeText(lang);
-      else swapText(lang);
+      if (root.classList.contains('theme-ready') && !reduceMotion) {
+        root.classList.add('theme-switching');
+        clearTimeout(switchingTimer);
+        switchingTimer = setTimeout(() => root.classList.remove('theme-switching'), OUT_MS + IN_MS);
+        fadeText(lang);
+        swapStripe();   // before the theme changes, so it can hold the old colours
+        sweep([
+          { '--sweep': '360deg', easing: 'ease-in' },
+          { '--sweep': '0deg', offset: OUT_MS / (OUT_MS + IN_MS), easing: 'ease-out' },
+          { '--sweep': '360deg' }
+        ], OUT_MS + IN_MS);
+      } else {
+        swapText(lang);
+      }
       root.lang = lang;
       root.dataset.theme = lang;
 
@@ -195,6 +270,20 @@
 
     setLanguage(current);
     requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('theme-ready')));
+
+    // On every page load the stripe grows out from the centre and rings draw in,
+    // like the second half of a language switch
+    if (nav && nav.animate && !reduceMotion) {
+      const holdAt = HOLD_MS / (HOLD_MS + IN_MS);
+      const intro = nav.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(0)', offset: holdAt, easing: 'ease-out' }, {}],
+        { duration: HOLD_MS + IN_MS, pseudoElement: '::after' });
+      setTimeout(() => intro.finish(), HOLD_MS + IN_MS + 100);   // backstop if frames stall
+      sweep([
+        { '--sweep': '0deg' },
+        { '--sweep': '0deg', offset: holdAt, easing: 'ease-out' },
+        { '--sweep': '360deg' }
+      ], HOLD_MS + IN_MS);
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

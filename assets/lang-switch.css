@@ -15,19 +15,26 @@
 @property --flag-1      { syntax: '<color>'; inherits: true; initial-value: transparent; }
 @property --flag-2      { syntax: '<color>'; inherits: true; initial-value: transparent; }
 @property --flag-3      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+/* Text fade during a language switch (1 = visible); lang-switch.js animates this one
+   value on <html>, and every translated element reads it, so they all fade as one */
+@property --i18n-fade   { syntax: '<number>'; inherits: true; initial-value: 1; }
+/* How far a [data-sweep] ring is drawn; lang-switch.js animates it in step with the stripe */
+@property --sweep       { syntax: '<angle>'; inherits: true; initial-value: 360deg; }
 
-/* UK: navy with red */
+/* UK: near-black with a faint navy tint, and red */
 :root[data-theme="en"] {
-  --dark:       #0a1330;
-  --dark-card:  #111d42;
-  --dark-border:#22315c;
+  --dark:       #0d1020;
+  --dark-card:  #161a2c;
+  --dark-border:#2a3150;
   --accent:     #ff6b7d;
   --accent-soft:#c8102e;
   --text-body:  #d3d9ea;
   --text-muted: #aab4cf;
-  --flag-1:     #012169;
+  /* Red | white | blue, the reverse of France's, so the two stripes differ.
+     Blue is brighter than the flag's #012169, which vanishes on the navy page. */
+  --flag-1:     #C8102E;
   --flag-2:     #ffffff;
-  --flag-3:     #C8102E;
+  --flag-3:     #3a68d8;
 }
 
 /* Germany: graphite (light enough for the black stripe to show) with red and gold */
@@ -62,15 +69,30 @@
 /* Body and muted text are tinted per theme and kept at 7:1+ on the
    background and cards (body ~11:1); accent buttons use dark text */
 
-/* Added by JS after the first paint, so the initial theme doesn't animate in */
+/* Added by JS after the first paint, so the initial theme doesn't animate in.
+   0.95s = the switch timeline in lang-switch.js (OUT_MS + IN_MS), so the colours
+   finish together with the text fade, header stripe and photo ring. */
 :root.theme-ready {
-  transition: --dark 0.8s ease, --dark-card 0.8s ease, --dark-border 0.8s ease,
-              --text-body 0.8s ease, --text-muted 0.8s ease,
-              --accent 0.8s ease, --accent-soft 0.8s ease,
-              --flag-1 0.8s ease, --flag-2 0.8s ease, --flag-3 0.8s ease;
+  transition: --dark 0.95s ease-in-out, --dark-card 0.95s ease-in-out, --dark-border 0.95s ease-in-out,
+              --text-body 0.95s ease-in-out, --text-muted 0.95s ease-in-out,
+              --accent 0.95s ease-in-out, --accent-soft 0.95s ease-in-out;
 }
+/* Applied only while a switch runs. filter: opacity() rather than opacity, so the
+   pages' own opacity effects (e.g. scroll reveal) are left alone. A [data-i18n-fade]
+   group fades as one piece, so translated items inside it aren't faded twice. */
+:root.i18n-fading [data-i18n],
+:root.i18n-fading [data-i18n-fade] { filter: opacity(var(--i18n-fade)); }
+:root.i18n-fading [data-i18n-fade] [data-i18n] { filter: none; }
 
-/* Flag stripe along the bottom of the header */
+/* While a switch runs, elements' own short colour transitions (hover effects)
+   would trail behind the theme; turn them off so everything changes in step
+   (except the flag bubbles, which slide into their new order) */
+:root.theme-switching *:not(.lang-btn),
+:root.theme-switching *::before,
+:root.theme-switching *::after { transition-duration: 0s !important; }
+
+/* Flag stripe along the bottom of the header. Its colours don't cross-fade:
+   lang-switch.js collapses it into the centre, swaps them, and grows it back. */
 nav::after {
   content: '';
   position: absolute;

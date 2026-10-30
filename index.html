@@ -221,8 +221,32 @@ window.addEventListener('scroll', function() {
       border-radius: 50%;
       object-fit: cover;
       object-position: top;
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 15%, transparent);
+      border: 3px solid transparent;   /* the coloured ring is drawn by .photo-aura::after */
+      position: relative;
+      z-index: 1;                      /* above both rings */
+    }
+
+    /* Border ring and aura around the photo, drawn clockwise from the top up to
+       --sweep; lang-switch.js animates it in step with the header stripe (data-sweep) */
+    .photo-aura {
+      position: relative;
+      display: inline-block;
+      border-radius: 50%;
+      line-height: 0;
+    }
+    .photo-aura::before,
+    .photo-aura::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+    }
+    .photo-aura::before {   /* soft aura, 8px outside the photo */
+      inset: -8px;
+      background: conic-gradient(color-mix(in srgb, var(--accent) 15%, transparent) var(--sweep), transparent 0);
+    }
+    .photo-aura::after {    /* 3px border ring, showing through the photo's transparent border */
+      inset: 0;
+      background: conic-gradient(var(--accent) var(--sweep), transparent 0);
     }
 
     /* ─── Quote banner ─────────────────────────────────────────── */
@@ -847,7 +871,9 @@ window.addEventListener('scroll', function() {
   <section id="about">
     <div class="hero-inner">
       <div class="hero-photo-wrap">
-        <img src="images/Jaykant.png" alt="Jaykant Mendapara" />
+        <div class="photo-aura" data-sweep>
+          <img src="images/Jaykant.png" alt="Jaykant Mendapara" />
+        </div>
       </div>
       <div class="hero-text">
         <p class="role" data-i18n="hero.role">Data Analyst &amp; CRM Specialist</p>
@@ -861,7 +887,7 @@ window.addEventListener('scroll', function() {
           Currently working as a Customer &amp; CRM Analyst at H&amp;M, driving data-driven
           decision-making across customer acquisition, retention, and omnichannel performance.
         </p>
-        <div class="hero-socials">
+        <div class="hero-socials" data-i18n-fade>
           <a href="https://github.com/Jaykant-M/" class="social-link" target="_blank" rel="noopener">
             <i class="fa-brands fa-github"></i> GitHub
           </a>
